@@ -5,7 +5,7 @@ CFLAGS		= -Wall -Werror -Wextra -g
 
 CPPFLAGS	= -Iincludes/ -Ibiglibft/header/ -Imlx -I/usr/include/X11/
 LDFLAGS		= -Lbiglibft/ -Lmlx -L/usr/lib/
-LDLIBS		= -lft -lmlx -lX11 -lXext -lm -lz
+LDLIBS		= -lft -lmlx -lX11 -lXext -lm
 
 LIB			= biglibft/libft.a mlx
 
@@ -35,14 +35,14 @@ $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
 
 clean :
-	rm $(NAME)
-
-fclean :
-	- $(MAKE) clean
 	rm -rf $(TMP_DIR)
+	rm -fr mlx
+	$(MAKE) -C biglibft fclean --silent
 
-re : fclean
-	make
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
 
 update_files :
 	find src -type f | sed 's/src\///g' > .c_files;
@@ -51,7 +51,7 @@ $(TMP_DIRS) :
 	@mkdir -p $(TMP_DIRS)
 
 biglibft/libft.a :
-	@$(MAKE) -C biglibft make
+	@$(MAKE) -C biglibft
 
 mlx :
 	git clone https://github.com/42paris/minilibx-linux.git mlx
