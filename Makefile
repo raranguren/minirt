@@ -3,11 +3,11 @@ NAME		= miniRT
 CC			= cc
 CFLAGS		= -Wall -Werror -Wextra -g
 
-CPPFLAGS	= -Iincludes/ -Ibiglibft/header/ -Imlx -I/usr/include/X11/
-LDFLAGS		= -Lbiglibft/ -Lmlx -L/usr/lib/
+CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
+LDFLAGS		= -Llibft/ -Lmlx -L/usr/lib/
 LDLIBS		= -lft -lmlx -lX11 -lXext -lm
 
-LIB			= biglibft/libft.a mlx
+LIB			= libft/libft.a mlx
 
 SRC_DIR	= src/
 TMP_DIR = tmp/
@@ -37,7 +37,7 @@ $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 clean :
 	rm -rf $(TMP_DIR)
 	rm -fr mlx
-	$(MAKE) -C biglibft fclean --silent
+	$(MAKE) -C libft fclean --silent
 
 fclean : clean
 	rm -f $(NAME)
@@ -50,8 +50,8 @@ update_files :
 $(TMP_DIRS) :
 	@mkdir -p $(TMP_DIRS)
 
-biglibft/libft.a :
-	@$(MAKE) -C biglibft
+libft/libft.a :
+	@$(MAKE) -C libft
 
 mlx :
 	git clone https://github.com/42paris/minilibx-linux.git mlx
