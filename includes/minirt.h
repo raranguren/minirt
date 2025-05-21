@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/21 15:16:41 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:52:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <math.h>
 
 //mlx
 int	set_mlx(t_all *mlx);
