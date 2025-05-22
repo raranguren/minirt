@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/22 09:18:01 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:37:49 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,20 @@ typedef struct s_coord
 	double	z;
 }	t_coord;
 
-typedef union u_color
-{
-	uint32_t	value;
-	struct s_argb
-	{
-		uint8_t		b;
-		uint8_t		g;
-		uint8_t		r;
-		uint8_t		a;
-	}			argb;
-}	t_color;
-
-typedef t_coord	t_vector;
-typedef t_coord	t_point;
+typedef t_coord			t_vector;
+typedef t_coord			t_point;
 
 typedef struct s_ray
 {
 	t_point		start;
 	t_vector	direction;
 }	t_ray;
+
+typedef struct s_obj	t_obj;
+typedef t_obj			t_cam;
+typedef t_obj			t_light;
+typedef t_point			(*t_collision_fn)(t_obj*, t_ray*);
+typedef t_vector		(*t_normal_fn)(t_obj*, t_ray*);
 
 // objects in scene: | A | C | L | sp| pl| cy|
 // -----------------------------------------------
@@ -56,7 +50,16 @@ typedef struct s_obj
 	char			type;
 	t_coord			pos;
 	t_vector		orientation;
-	t_color			color;
+	union
+	{
+		int			color;
+		struct
+		{
+			uint8_t	r;
+			uint8_t	g;
+			uint8_t	b;
+		};
+	};
 	union
 	{
 		double		diameter;
@@ -68,18 +71,18 @@ typedef struct s_obj
 		double		brightness;
 		double		fov;
 	};
-	struct s_obj	*next;
+	t_obj			*next;
+	t_collision_fn	*collision_fn;
+	t_normal_fn		*normal_fn;
 }	t_obj;
-
-typedef t_obj	t_cam;
-typedef t_obj	t_light;
 
 typedef struct s_scene
 {
-	t_cam		cam;
+	t_obj		*objs;
+	t_cam		*cam;
 	t_light		*amb_light;
 	t_light		*light;
-	t_obj		*obj;
+	t_obj		*selected;
 }	t_scene;
 
 typedef struct s_all
@@ -87,7 +90,7 @@ typedef struct s_all
 	void	*mlx_ptr;
 	void	*mlx_win;
 	void	*img;
-	t_scene	scene;
+	t_obj	scene;
 }	t_all;
 
 #endif

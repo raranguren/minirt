@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/22 08:22:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:09:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define LIGHT		0b00000010
 # define AMB_LIGHT	0b00000110
 # define SHAPE		0b00001000
-# define PLANE		0b0001100
+# define PLANE		0b00011000
 # define SPHERE		0b00101000
 # define CYLINDER	0b00111000
 # define CONE		0b01001000
