@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:49:56 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:04:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:22:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	parse_light(char **param, t_scene *scene, char *unique)
 		return (1);
 	*unique |= LIGHT;
 	light = ft_calloc(1, sizeof(t_obj));
-	scene->light = light;
 	if (!light)
 		return (1);
 	light->type = LIGHT;
@@ -60,5 +59,7 @@ int	parse_light(char **param, t_scene *scene, char *unique)
 		return (ERROR("get_color"));
 	if (valid_values(light))
 		return (1);
+	ft_objadd_back(&scene->obj, light);
+	scene->light = light;
 	return (0);
 }

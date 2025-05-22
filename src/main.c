@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/22 23:57:15 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:18:59 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	print_scene(t_all *all)
 
 int	main(int ac, char **av)
 {
-	t_all	all;
+	static t_all	all;
 
 	if (parse_map(ac, av, &all))
 		return (free_everything(&all), 1);

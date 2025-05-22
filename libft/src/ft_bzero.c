@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:16:29 by bduval            #+#    #+#             */
-/*   Updated: 2024/11/11 12:34:25 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/21 13:58:13 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_bzero(void *mem, size_t bytes)
 {
-	unsigned int	i;
-	unsigned char	*p_mem;
+	size_t	i;
+	char	*p_mem;
 
 	i = 0;
 	p_mem = mem;

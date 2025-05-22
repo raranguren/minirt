@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:11:47 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:26:02 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	parse_cam(char **param, t_scene *scene, char *unique)
 		return (1);
 	*unique |= CAMERA;
 	cam = ft_calloc(1, sizeof(t_cam));
-	scene->cam = cam;
 	if (!cam)
 		return (1);
 	cam->type = CAMERA;
@@ -67,5 +66,7 @@ int	parse_cam(char **param, t_scene *scene, char *unique)
 		return (ERROR("atoi_double"));
 	if (check_valid_values(cam))
 		return (1);
+	ft_objadd_back(&scene->obj, cam);
+	scene->cam = cam;
 	return (0);
 }

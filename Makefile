@@ -3,11 +3,11 @@ NAME		= miniRT
 CC			= cc
 CFLAGS		= -Wall -Werror -Wextra -g
 
-CPPFLAGS	= -Iincludes/ -Ibiglibft/header/ -Imlx -I/usr/include/X11/
-LDFLAGS		= -Lbiglibft/ -Lmlx -L/usr/lib/
-LDLIBS		= -lft -lmlx -lX11 -lXext -lm -lz
+CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
+LDFLAGS		= -Llibft/ -Lmlx -L/usr/lib/
+LDLIBS		= -lft -lmlx -lX11 -lXext -lm
 
-LIB			= biglibft/libft.a mlx
+LIB			= libft/libft.a mlx
 
 SRC_DIR	= src/
 TMP_DIR = tmp/
@@ -35,14 +35,14 @@ $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
 
 clean :
-	rm $(NAME)
-
-fclean :
-	- $(MAKE) clean
 	rm -rf $(TMP_DIR)
+	rm -fr mlx
+	$(MAKE) -C libft fclean --silent
 
-re : fclean
-	make
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
 
 update_files :
 	find src -type f | sed 's/src\///g' > .c_files;
@@ -50,8 +50,8 @@ update_files :
 $(TMP_DIRS) :
 	@mkdir -p $(TMP_DIRS)
 
-biglibft/libft.a :
-	@$(MAKE) -C biglibft make
+libft/libft.a :
+	@$(MAKE) -C libft
 
 mlx :
 	git clone https://github.com/42paris/minilibx-linux.git mlx
