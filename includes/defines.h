@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 20:00:31 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/22 08:22:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@
 //Objects types
 # define CAMERA		0b00000001
 # define LIGHT		0b00000010
-# define AMB_LIGHT	0b00000100
-# define SPHERE		0b00001000
-# define PLANE		0b00010000
-# define CYLINDER	0b00100000
+# define AMB_LIGHT	0b00000110
+# define SHAPE		0b00001000
+# define PLANE		0b0001100
+# define SPHERE		0b00101000
+# define CYLINDER	0b00111000
+# define CONE		0b01001000
 
 //keycodes
 # define BTN_CROSS			0xadd477e0
