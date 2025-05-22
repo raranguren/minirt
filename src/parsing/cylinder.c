@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/17 09:29:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/23 00:09:54 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static int	valid_values(t_obj *cylinder)
 	if (!is_normalized(cylinder->orientation.x)
 		|| !is_normalized(cylinder->orientation.y)
 		|| !is_normalized(cylinder->orientation.z)
-		|| cylinder->dimensions.diameter <  0
-		|| cylinder->dimensions.height < 0)
+		|| cylinder->diameter <  0
+		|| cylinder->height < 0)
 		return (PERROR(CYLINDER_WAITED_VALUES));
 	return (0);
 }
@@ -54,8 +54,8 @@ int	parse_cylinder(char **param, t_scene *scene)
 		|| ft_atoi_double(&cylinder->orientation.x, param[4])
 		|| ft_atoi_double(&cylinder->orientation.y, param[5])
 		|| ft_atoi_double(&cylinder->orientation.z, param[6])
-		|| ft_atoi_double(&cylinder->dimensions.diameter, param[7])
-		|| ft_atoi_double(&cylinder->dimensions.height, param[8]))
+		|| ft_atoi_double(&cylinder->diameter, param[7])
+		|| ft_atoi_double(&cylinder->height, param[8]))
 		return (ERROR("atoi_double"));
 	if (ft_get_color(&(cylinder->color), &param[9]))
 		return (ERROR("get_color"));

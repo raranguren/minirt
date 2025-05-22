@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/17 09:24:42 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/23 00:00:59 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	valid_sphere_line(char **param)
 
 static int	valid_values(t_obj *sphere)
 {
-	if (sphere->dimensions.diameter <  0)
+	if (sphere->diameter <  0)
 		return (PERROR(SPHERE_WAITED_VALUES));
 	return (0);
 }
@@ -43,11 +43,13 @@ int	parse_sphere(char **param, t_scene *scene)
 	if (valid_sphere_line(param))
 		return (1);
 	sphere = ft_calloc(1, sizeof(t_obj));
+	if (!sphere)
+		return (1);
 	sphere->type = CYLINDER;
 	if (ft_atoi_double(&sphere->pos.x, param[1])
 		|| ft_atoi_double(&sphere->pos.y, param[2])
 		|| ft_atoi_double(&sphere->pos.z, param[3])
-		|| ft_atoi_double(&sphere->dimensions.diameter, param[4]))
+		|| ft_atoi_double(&sphere->diameter, param[4]))
 		return (ERROR("atoi_double"));
 	if (ft_get_color(&(sphere->color), &param[5]))
 		return (ERROR("get_color"));

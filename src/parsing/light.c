@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:49:56 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 16:52:20 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/23 00:04:29 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ int	parse_light(char **param, t_scene *scene, char *unique)
 	if (*unique & LIGHT || valid_light_line(param))
 		return (1);
 	*unique |= LIGHT;
-	light = &scene->light;
+	light = ft_calloc(1, sizeof(t_obj));
+	scene->light = light;
+	if (!light)
+		return (1);
+	light->type = LIGHT;
 	if (ft_atoi_double(&light->pos.x, param[1]))
 		return (ERROR("atoi_double"));
 	if (ft_atoi_double(&light->pos.y, param[2]))

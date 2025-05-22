@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 19:53:28 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/23 00:15:01 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	read_and_orient(char *path, t_all *all)
 			split = NULL;
 			if (split_set(&split, line, SPLIT))
 				return (error("split_spaces()"));
-			err = turntable(split, all->scene);
+			err = turntable(split, &all->scene);
 			free_strs(split);
 		}
 		free(line);
@@ -69,9 +69,6 @@ int	parse_map(int ac, char **av, t_all *all)
 	if (ac != 2 || ft_strlen(av[1]) < 3
 		|| ft_strncmp(&av[1][ft_strlen(av[1]) - 3], ".rt", 3))
 		return (PERROR(ERROR_ARGUMENTS));
-	all->scene = ft_calloc(1, sizeof(t_scene));
-	if (!all->scene)
-		return (ERROR("allocating scene"));
 	if (read_and_orient(av[1], all))
 		return (-1);
 	return (0);

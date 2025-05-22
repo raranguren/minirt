@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/22 23:37:49 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:48:25 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_obj
 
 typedef struct s_scene
 {
-	t_obj		*objs;
+	t_obj		*obj;
 	t_cam		*cam;
 	t_light		*amb_light;
 	t_light		*light;
@@ -90,7 +90,7 @@ typedef struct s_all
 	void	*mlx_ptr;
 	void	*mlx_win;
 	void	*img;
-	t_obj	scene;
+	t_scene	scene;
 }	t_all;
 
 #endif

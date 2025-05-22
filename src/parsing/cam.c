@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 16:54:00 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/23 00:11:47 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ int	parse_cam(char **param, t_scene *scene, char *unique)
 	if (*unique & CAMERA || valid_cam_line(param))
 		return (1);
 	*unique |= CAMERA;
-	cam = &scene->cam;
+	cam = ft_calloc(1, sizeof(t_cam));
+	scene->cam = cam;
+	if (!cam)
+		return (1);
+	cam->type = CAMERA;
 	if (ft_atoi_double(&cam->pos.x, param[1]))
 		return (ERROR("atoi_double"));
 	if (ft_atoi_double(&cam->pos.y, param[2]))
