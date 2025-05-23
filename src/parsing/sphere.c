@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:00:59 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:52:29 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse_sphere(char **param, t_scene *scene)
 	sphere = ft_calloc(1, sizeof(t_obj));
 	if (!sphere)
 		return (1);
-	sphere->type = CYLINDER;
+	sphere->type = SPHERE;
 	if (ft_atoi_double(&sphere->pos.x, param[1])
 		|| ft_atoi_double(&sphere->pos.y, param[2])
 		|| ft_atoi_double(&sphere->pos.z, param[3])

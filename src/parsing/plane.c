@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/17 09:25:06 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/23 08:52:45 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse_plane(char **param, t_scene *scene)
 	if (valid_plan_line(param))
 		return (1);
 	plane = ft_calloc(1, sizeof(t_obj));
-	plane->type = CYLINDER;
+	plane->type = PLANE;
 	if (ft_atoi_double(&plane->pos.x, param[1])
 		|| ft_atoi_double(&plane->pos.y, param[2])
 		|| ft_atoi_double(&plane->pos.z, param[3])

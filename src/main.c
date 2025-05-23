@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:18:59 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:00:32 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_scene(t_all *all)
 	printf("CAMERA\n"
 		"position	%lf,%lf,%lf\n"
 		"orientation	%lf,%lf,%lf\n"
-		"fov		%lf\n",
+		"fov		%lf\n\n",
 		all->scene.cam->pos.x,
 		all->scene.cam->pos.y,
 		all->scene.cam->pos.z,
@@ -27,7 +27,7 @@ void	print_scene(t_all *all)
 		all->scene.cam->orientation.y,
 		all->scene.cam->orientation.z,
 		all->scene.cam->fov);
-	printf("AMBLIGHT\n"
+	printf("AMBLIGHT\n\n"
 		"brightness	%lf\n"
 		"color		%d,%d,%d\n",
 		all->scene.amb_light->brightness,
@@ -49,9 +49,9 @@ void	print_scene(t_all *all)
 	while (ptr)
 	{
 		printf("OBJECT\n"
-			"type			%d\n"
+			"type			%#04x\n"
 			"position		%lf,%lf,%lf\n"
-			"orientation	%lf,%lf,%lf\n"
+			"orientation		%lf,%lf,%lf\n"
 			"dimensions		%lf,%lf\n"
 			"color			%d,%d,%d\n"
 			"next			%p\n",
