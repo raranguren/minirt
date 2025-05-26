@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:19:18 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/17 09:44:39 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/26 19:25:57 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	integer_part_strlen(const char *str)
 
 int	is_normalized(double n)
 {
-	if(n < -1 || n > 1)
+	if (n < -1 || n > 1)
 		return (0);
 	return (1);
 }

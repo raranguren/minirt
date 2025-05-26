@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:25:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 20:21:33 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ static int	valid_values(t_light *light)
 	return (0);
 }
 
-int	parse_amb_light(char **param, t_scene *scene, char *unique)
+int	parse_amb_light(char **param, t_scene *scene)
 {
-	t_light *light;
+	t_light	*light;
 
-	if (*unique & AMB_LIGHT || valid_amb_line(param))
+	if (valid_amb_line(param))
 		return (1);
-	*unique |= AMB_LIGHT;
 	light = ft_calloc(1, sizeof(t_light));
 	if (!light)
 		return (1);

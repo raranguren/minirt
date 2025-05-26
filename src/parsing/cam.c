@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:26:02 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 20:27:17 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	valid_cam_line(char **param)
 	i = 1;
 	while (param[i])
 	{
-		if (i <= 7  && !ft_is_double(param[i]))
+		if (i <= 7 && !ft_is_double(param[i]))
 			return (PERROR2((char *)param[i], "is not valid"));
 		i++;
 	}
@@ -30,7 +30,7 @@ static int	valid_cam_line(char **param)
 
 static int	check_valid_values(t_cam *cam)
 {
-	if (cam->orientation.x < 0  || cam->orientation.y < 0
+	if (cam->orientation.x < 0 || cam->orientation.y < 0
 		|| cam->orientation.z < 0
 		|| cam->orientation.x > 1 || cam->orientation.y > 1
 		|| cam->orientation.z > 1
@@ -39,30 +39,25 @@ static int	check_valid_values(t_cam *cam)
 	return (0);
 }
 
-int	parse_cam(char **param, t_scene *scene, char *unique)
+int	parse_cam(char **param, t_scene *scene)
 {
-	t_cam *cam;
+	t_cam	*cam;
+	int		err;
 
-	if (*unique & CAMERA || valid_cam_line(param))
+	if (valid_cam_line(param))
 		return (1);
-	*unique |= CAMERA;
 	cam = ft_calloc(1, sizeof(t_cam));
 	if (!cam)
 		return (1);
 	cam->type = CAMERA;
-	if (ft_atoi_double(&cam->pos.x, param[1]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->pos.y, param[2]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->pos.z, param[3]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->orientation.x, param[4]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->orientation.y, param[5]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->orientation.z, param[6]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->fov, param[7]))
+	err = ft_atoi_double(&cam->pos.x, param[1]);
+	err |= ft_atoi_double(&cam->pos.y, param[2]);
+	err |= ft_atoi_double(&cam->pos.z, param[3]);
+	err |= ft_atoi_double(&cam->orientation.x, param[4]);
+	err |= ft_atoi_double(&cam->orientation.y, param[5]);
+	err |= ft_atoi_double(&cam->orientation.z, param[6]);
+	err |= ft_atoi_double(&cam->fov, param[7]);
+	if (err)
 		return (ERROR("atoi_double"));
 	if (check_valid_values(cam))
 		return (1);

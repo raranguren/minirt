@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/21 19:52:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 20:20:11 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	start_mlx_loop(t_all *all);
 //parsing
 int	parse_map(int ac, char **av, t_all *all);
 int	split_set(char ***dest, const char *line, const char *set);
-int	parse_amb_light(char **param, t_scene *scene, char *unique);
-int	parse_light(char **param, t_scene *scene, char *unique);
-int	parse_cam(char **param, t_scene *scene, char *unique);
+int	parse_amb_light(char **param, t_scene *scene);
+int	parse_light(char **param, t_scene *scene);
+int	parse_cam(char **param, t_scene *scene);
 int	parse_sphere(char **param, t_scene *scene);
 int	parse_cylinder(char **param, t_scene *scene);
 int	parse_plane(char **param, t_scene *scene);
@@ -46,6 +46,7 @@ int	ft_atoi_double(double *dest, char *str);
 int	is_normalized(double n);
 int	ft_objclear(t_obj **lst);
 int	ft_objadd_back(t_obj **lst, t_obj *new);
+int	unique(char obj_type, int parse_err);
 
 //error
 int	error(char *str);

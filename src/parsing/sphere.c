@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 08:52:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 19:29:01 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	valid_sphere_line(char **param)
 	i = 1;
 	while (param[i])
 	{
-		if ((i <= 4  && !ft_is_double(param[i]))
+		if ((i <= 4 && !ft_is_double(param[i]))
 			|| (i > 4 && !ft_is_char(param[i])))
 			return (PERROR2((char *)param[i], "is not valid"));
 		i++;
@@ -31,14 +31,14 @@ static int	valid_sphere_line(char **param)
 
 static int	valid_values(t_obj *sphere)
 {
-	if (sphere->diameter <  0)
+	if (sphere->diameter < 0)
 		return (PERROR(SPHERE_WAITED_VALUES));
 	return (0);
 }
 
 int	parse_sphere(char **param, t_scene *scene)
 {
-	t_obj *sphere;
+	t_obj	*sphere;
 
 	if (valid_sphere_line(param))
 		return (1);

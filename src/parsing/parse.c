@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:15:01 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 20:28:42 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 static int	turntable(char **line, t_scene *scene)
 {
-	static char	unique;
-
 	if (!line || !*line || !ft_strncmp(*line, "\n", 1))
 		return (0);
 	if (!ft_strcmp(*line, "A"))
-		return (parse_amb_light(line, scene, &unique));
+		return (unique(AMB_LIGHT, parse_amb_light(line, scene)));
 	else if (!ft_strcmp(*line, "C"))
-		return (parse_cam(line, scene, &unique));
+		return (unique(CAMERA, parse_cam(line, scene)));
 	else if (!ft_strcmp(*line, "L"))
-		return (parse_light(line, scene, &unique));
+		return (unique(LIGHT, parse_light(line, scene)));
 	else if (!ft_strcmp(*line, "sp"))
 		return (parse_sphere(line, scene));
 	else if (!ft_strcmp(*line, "pl"))
