@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 20:20:11 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 20:55:30 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
+# include <errno.h>
 
 //mlx
 int	set_mlx(t_all *mlx);
@@ -52,6 +53,7 @@ int	unique(char obj_type, int parse_err);
 int	error(char *str);
 int	print_error2(char *err1, char *err2, const char *f, int l);
 int	print_error(char *err, const char *file, int line, const char *func);
+int error3(char *a, char *b, char *c);
 
 //utils
 int	free_strs(char **strs);

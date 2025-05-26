@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 20:21:33 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:14:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ static int	valid_amb_line(char **param)
 		if ((i == 1 && !ft_is_double(param[i]))
 			|| (i != 1 && !ft_is_char(param[i]))
 			|| i > 4)
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 5)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
 static int	valid_values(t_light *light)
 {
 	if (light->brightness < 0 || light->brightness > 1)
-		return (PERROR(AMB_LIGHT_WAITED_VALUES));
+		return (error3(AMB_LIGHT_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
@@ -48,9 +48,9 @@ int	parse_amb_light(char **param, t_scene *scene)
 		return (1);
 	light->type = AMB_LIGHT;
 	if (ft_atoi_double(&light->brightness, param[1]))
-		return (ERROR("atoi_double"));
+		return (error3("Parse error: invalid brightness '", param[1], "'"));
 	if (ft_get_color(&(light->color), &param[2]))
-		return (ERROR("get_color"));
+		return (error3("Parse error: invalid color '", param[2], "'"));
 	if (valid_values(light))
 		return (1);
 	ft_objadd_back(&scene->obj, light);

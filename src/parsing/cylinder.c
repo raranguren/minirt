@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 19:28:46 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:07:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static int	valid_cylinder_line(char **param)
 	{
 		if ((i <= 8 && !ft_is_double(param[i]))
 			|| (i > 8 && !ft_is_char(param[i])))
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 12)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
@@ -36,7 +36,7 @@ static int	valid_values(t_obj *cylinder)
 		|| !is_normalized(cylinder->orientation.z)
 		|| cylinder->diameter < 0
 		|| cylinder->height < 0)
-		return (PERROR(CYLINDER_WAITED_VALUES));
+		return (error3(CYLINDER_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
@@ -56,9 +56,9 @@ int	parse_cylinder(char **param, t_scene *scene)
 		|| ft_atoi_double(&cylinder->orientation.z, param[6])
 		|| ft_atoi_double(&cylinder->diameter, param[7])
 		|| ft_atoi_double(&cylinder->height, param[8]))
-		return (ERROR("atoi_double"));
+		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(&(cylinder->color), &param[9]))
-		return (ERROR("get_color"));
+		return (error3("Parse error: invalid color '", param[9], "'"));
 	if (valid_values(cylinder))
 		return (1);
 	ft_objadd_back(&scene->obj, cylinder);

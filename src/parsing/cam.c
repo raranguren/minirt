@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 20:27:17 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:15:48 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static int	valid_cam_line(char **param)
 	while (param[i])
 	{
 		if (i <= 7 && !ft_is_double(param[i]))
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 8)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
@@ -35,7 +35,7 @@ static int	check_valid_values(t_cam *cam)
 		|| cam->orientation.x > 1 || cam->orientation.y > 1
 		|| cam->orientation.z > 1
 		|| cam->fov > 180 || cam->fov < 0)
-		return (PERROR(CAM_WAITED_VALUES));
+		return (error3(CAM_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
@@ -58,7 +58,7 @@ int	parse_cam(char **param, t_scene *scene)
 	err |= ft_atoi_double(&cam->orientation.z, param[6]);
 	err |= ft_atoi_double(&cam->fov, param[7]);
 	if (err)
-		return (ERROR("atoi_double"));
+		return (error3("Parse error: invalid number for camera", 0, 0));
 	if (check_valid_values(cam))
 		return (1);
 	ft_objadd_back(&scene->obj, cam);
