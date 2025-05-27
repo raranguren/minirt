@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:00:30 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 20:42:11 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:10:27 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	error(char *str)
 	return (1);
 }
 
-int error3(char *a, char *b, char *c)
+int	error3(char *a, char *b, char *c)
 {
 	if (a)
 		write(2, a, ft_strlen(a));
