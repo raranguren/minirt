@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 21:15:48 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/29 00:20:44 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	check_valid_values(t_cam *cam)
 		|| cam->orientation.x > 1 || cam->orientation.y > 1
 		|| cam->orientation.z > 1
 		|| cam->fov > 180 || cam->fov < 0)
+		return (error3(CAM_WAITED_VALUES, 0, 0));
+	if (normalize(&cam->orientation))
 		return (error3(CAM_WAITED_VALUES, 0, 0));
 	return (0);
 }
