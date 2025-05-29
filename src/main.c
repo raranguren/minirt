@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 09:00:32 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:01:07 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(int ac, char **av)
 	static t_all	all;
 
 	if (parse_map(ac, av, &all))
+		return (free_everything(&all), 1);
+	if (edit_init(&all))
 		return (free_everything(&all), 1);
 	print_scene(&all);
 	if (set_mlx(&all))

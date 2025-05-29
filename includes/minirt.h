@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/29 00:17:11 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:00:41 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ int	is_normalized(double n);
 int	ft_objclear(t_obj **lst);
 int	ft_objadd_back(t_obj **lst, t_obj *new);
 int	unique(char obj_type, int parse_err);
+int	normalize(t_vector *vector);
 
 //edit
-int	normalize(t_vector *vector);
+int	edit_init(t_all *all);
+int edit(t_all *all, int keycode);
 int rotate(t_vector *vector, double horizontal_angle, double vertical_angle);
 
 //error

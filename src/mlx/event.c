@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:59:13 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 06:05:26 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/29 18:57:17 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@ static int	expose_hook(void *param)
 
 static int	key_press_hook(int keycode, void *param)
 {
-	if (keycode == KEY_ESCAPE)
+	if (keycode == XK_Escape)
 		quit_hook(param);
+	if (edit(param, keycode) == 0)
+	{
+		// TODO refresh display here, edit return 0 indicates a change
+		return (0);
+	}
+	// handle other keys, debugging etc.
 	return (0);
 }
 
