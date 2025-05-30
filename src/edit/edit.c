@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/29 21:05:00 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 09:38:22 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	edit_rotate(t_all *all, double horizontal, double vertical)
 		return (1);
 	if (obj->type != CAMERA && obj->type != CYLINDER)
 		return (1);
-	printf("rotate %f %f %f --> ", obj->orientation.x, obj->orientation.y, obj->orientation.z);
 	rotate(&obj->orientation, horizontal, vertical);
-	printf("%f %f %f\n", obj->orientation.x, obj->orientation.y, obj->orientation.z);
 	return (0);
 }
 
@@ -59,24 +57,24 @@ int	edit(t_all *all, int key)
 	if (key == XK_n)
 		return (edit_next(all));
 	if (key == XK_w)
-		return (edit_move(all, 0, 1, 0));
+		return (edit_move(all, 0, 10, 0));
 	if (key == XK_s)
-		return (edit_move(all, 0, -1, 0));
+		return (edit_move(all, 0, -10, 0));
 	if (key == XK_a)
-		return (edit_move(all, -1, 0, 0));
+		return (edit_move(all, -10, 0, 0));
 	if (key == XK_d)
-		return (edit_move(all, 1, 0, 0));
+		return (edit_move(all, 10, 0, 0));
 	if (key == XK_e)
-		return (edit_move(all, 0, 0, 1));
+		return (edit_move(all, 0, 0, 10));
 	if (key == XK_c)
-		return (edit_move(all, 0, 0, -1));
+		return (edit_move(all, 0, 0, -10));
 	if (key == XK_Up)
-		return (edit_rotate(all, 0, -30));
+		return (edit_rotate(all, 0, -10));
 	if (key == XK_Down)
-		return (edit_rotate(all, 0, 30));
+		return (edit_rotate(all, 0, 10));
 	if (key == XK_Left)
-		return (edit_rotate(all, 30, 0));
+		return (edit_rotate(all, 10, 0));
 	if (key == XK_Right)
-		return (edit_rotate(all, -30, 0));
+		return (edit_rotate(all, -10, 0));
 	return (1);
 }

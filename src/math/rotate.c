@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 21:26:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/30 06:55:33 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 09:50:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,16 @@ void	rodrigues(t_vector *v, t_vector *axis, double angle_radian)
 
 	cos_ = cos(angle_radian);
 	sin_ = sin(angle_radian);
-	cross.x = axis->y * v->z - axis->z * v->y;
-	cross.y = axis->z * v->x - axis->x * v->z;
-	cross.z = axis->x * v->y - axis->y * v->x;
+	cross.x = v->y * axis->z - v->z * axis->y;
+	cross.y = v->z * axis->x - v->x * axis->z;
+	cross.z = v->x * axis->y - v->y * axis->x;
 	dot = axis->x * v->x + axis->y * v->y + axis->z * v->z;
 	v->x = v->x * cos_ + cross.x * sin_ + axis->x * dot * (1.0 - cos_);
 	v->y = v->y * cos_ + cross.y * sin_ + axis->y * dot * (1.0 - cos_);
 	v->z = v->z * cos_ + cross.z * sin_ + axis->z * dot * (1.0 - cos_);
 }
 
-// Rotation up or down
-// If not vertical, uses the tangent in plane XZ as axis for the rotation
-// If after rotating it is vertical, adds small degree to not lose the direction
-//   - xy_magn is the magnitude of the vector when proyected in plane XZ
-//   - axis is the vector tangent to the proyection of v in the plane XZ
-void	rotate_pitch(t_vector *v, double angle_radians)
+static t_vector	tangent(t_vector *v)
 {
 	double		xz_magn;
 	t_vector	axis;
@@ -71,11 +66,30 @@ void	rotate_pitch(t_vector *v, double angle_radians)
 		axis.x = v->z / xz_magn;
 		axis.y = 0.0;
 		axis.z = -v->x / xz_magn;
+		if (axis.x < 0)
+		{
+			axis.x = -axis.x;
+			axis.z = -axis.z;
+		}
 		normalize(&axis);
 	}
+	return (axis);
+}
+
+// Rotation up or down
+// If not vertical, uses the tangent in plane XZ as axis for the rotation
+// If after rotating it is vertical, adds small degree to not lose the direction
+//   - xy_magn is the magnitude of the vector when proyected in plane XZ
+//   - axis is the vector tangent to the proyection of v in the plane XZ
+void	rotate_pitch(t_vector *v, double angle_radians)
+{
+	double		xz_magn;
+	t_vector	axis;
+
+	axis = tangent(v);
 	rodrigues(v, &axis, angle_radians);
 	xz_magn = sqrt(v->x * v->x + v->z * v->z);
-	if (xz_magn < 1e-4)
+	if (xz_magn < 1e-6)
 		rodrigues(v, &axis, M_PI / 180.0);
 }
 
