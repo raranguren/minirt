@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/29 19:00:41 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 10:09:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	normalize(t_vector *vector);
 int	edit_init(t_all *all);
 int edit(t_all *all, int keycode);
 int rotate(t_vector *vector, double horizontal_angle, double vertical_angle);
+int	ui_update(t_all *all);
 
 //error
 int	error(char *str);

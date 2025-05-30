@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/30 09:38:22 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 10:51:02 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	edit_rotate(t_all *all, double horizontal, double vertical)
 	if (obj->type != CAMERA && obj->type != CYLINDER)
 		return (1);
 	rotate(&obj->orientation, horizontal, vertical);
+	ui_update(all);
 	return (0);
 }
 
@@ -35,6 +36,7 @@ int	edit_move(t_all *all, double x, double y, double z)
 	obj->pos.x += x;
 	obj->pos.y += y;
 	obj->pos.z += z;
+	ui_update(all);
 	return (0);
 }
 
@@ -43,13 +45,19 @@ int	edit_next(t_all *all)
 	all->scene.selected = all->scene.selected->next;
 	if (!all->scene.selected)
 		all->scene.selected = all->scene.obj;
-	return (all->scene.selected == NULL);
+	if (all->scene.selected == NULL)
+		return (1);
+	ui_update(all);
+	return (0);
 }
 
 int	edit_init(t_all *all)
 {
 	all->scene.selected = all->scene.cam;
-	return (all->scene.selected == NULL);
+	if (all->scene.selected == NULL)
+		return (1);
+	ui_update(all);
+	return (0);
 }
 
 int	edit(t_all *all, int key)
