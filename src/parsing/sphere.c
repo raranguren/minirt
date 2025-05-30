@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 08:52:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/27 06:53:07 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ int	parse_sphere(char **param, t_scene *scene)
 	if (!sphere)
 		return (1);
 	sphere->type = SPHERE;
+	sphere->collision_fn = sphere_collision;
 	if (ft_atoi_double(&sphere->pos.x, param[1])
 		|| ft_atoi_double(&sphere->pos.y, param[2])
 		|| ft_atoi_double(&sphere->pos.z, param[3])
 		|| ft_atoi_double(&sphere->diameter, param[4]))
 		return (ERROR("atoi_double"));
-	if (ft_get_color(&(sphere->color), &param[5]))
+	if (ft_get_color(sphere, &param[5]))
 		return (ERROR("get_color"));
 	if (valid_values(sphere))
 		return (1);

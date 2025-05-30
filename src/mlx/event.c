@@ -6,13 +6,13 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:59:13 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 06:05:26 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:02:03 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	quit_hook(void *param)
+int	quit_hook(void *param)
 {
 	mlx_loop_end(((t_all *)param)->mlx_ptr);
 	return (0);

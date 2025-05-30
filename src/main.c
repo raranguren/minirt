@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 09:00:32 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 09:04:03 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,24 @@ void	print_scene(t_all *all)
 		all->scene.cam->orientation.y,
 		all->scene.cam->orientation.z,
 		all->scene.cam->fov);
-	printf("AMBLIGHT\n\n"
+	printf("AMBLIGHT\n"
 		"brightness	%lf\n"
-		"color		%d,%d,%d\n",
+		"color		%d,%d,%d\n\n",
 		all->scene.amb_light->brightness,
-		all->scene.amb_light->r,
-		all->scene.amb_light->g,
-		all->scene.amb_light->b);
+		all->scene.amb_light->color.r,
+		all->scene.amb_light->color.g,
+		all->scene.amb_light->color.b);
 	printf("LIGHT\n"
 		"position		%lf,%lf,%lf\n"
 		"brightness		%lf\n"
-		"color			%d,%d,%d\n",
+		"color			%d,%d,%d\n\n",
 		all->scene.light->pos.x,
 		all->scene.light->pos.y,
 		all->scene.light->pos.z,
 		all->scene.light->brightness,
-		all->scene.light->r,
-		all->scene.light->g,
-		all->scene.light->b);
+		all->scene.light->color.r,
+		all->scene.light->color.g,
+		all->scene.light->color.b);
 	ptr = all->scene.obj;
 	while (ptr)
 	{
@@ -54,7 +54,7 @@ void	print_scene(t_all *all)
 			"orientation		%lf,%lf,%lf\n"
 			"dimensions		%lf,%lf\n"
 			"color			%d,%d,%d\n"
-			"next			%p\n",
+			"next			%p\n\n",
 			ptr->type,
 			ptr->pos.x,
 			ptr->pos.y,
@@ -64,9 +64,9 @@ void	print_scene(t_all *all)
 			ptr->orientation.z,
 			ptr->diameter,
 			ptr->height,
-			ptr->r,
-			ptr->g,
-			ptr->b,
+			ptr->color.r,
+			ptr->color.g,
+			ptr->color.b,
 			ptr->next);
 		ptr = ptr->next;
 	}

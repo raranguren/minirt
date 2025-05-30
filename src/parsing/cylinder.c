@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:09:54 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/27 06:55:21 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	parse_cylinder(char **param, t_scene *scene)
 		|| ft_atoi_double(&cylinder->diameter, param[7])
 		|| ft_atoi_double(&cylinder->height, param[8]))
 		return (ERROR("atoi_double"));
-	if (ft_get_color(&(cylinder->color), &param[9]))
+	if (ft_get_color(cylinder, &param[9]))
 		return (ERROR("get_color"));
 	if (valid_values(cylinder))
 		return (1);

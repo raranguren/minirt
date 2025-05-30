@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/22 23:48:25 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:23:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,63 @@
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
-	double	z;
+	union
+	{
+		double	x;
+		double	a;
+		double	solution_1;
+	};
+	union
+	{
+		double	y;
+		double	b;
+		double	solution_2;
+	};
+	union
+	{
+		double	z;
+		double	c;
+	};
+	union
+	{
+		double	delta;
+		double	norm;
+	};
 }	t_coord;
 
+typedef struct s_color
+{
+	union
+	{
+		int32_t	argb;
+		struct
+		{
+			uint8_t	a;
+			uint8_t	r;
+			uint8_t	g;
+			uint8_t	b;
+		};
+	};
+}	t_color;
+
 typedef t_coord			t_vector;
+typedef t_coord			t_quadratic;
 typedef t_coord			t_point;
+
+typedef struct s_obj	t_obj;
+typedef t_obj			t_cam;
+typedef t_obj			t_light;
+//typedef t_point			(*t_collision_fn)(t_obj*, t_ray*);
+//typedef t_vector		(*t_normal_fn)(t_obj*, t_ray*);
 
 typedef struct s_ray
 {
 	t_point		start;
 	t_vector	direction;
+	t_color		color;
+	double		shortest_impact_dist;
+	t_obj		*impact_object;
 }	t_ray;
-
-typedef struct s_obj	t_obj;
-typedef t_obj			t_cam;
-typedef t_obj			t_light;
-typedef t_point			(*t_collision_fn)(t_obj*, t_ray*);
-typedef t_vector		(*t_normal_fn)(t_obj*, t_ray*);
 
 // objects in scene: | A | C | L | sp| pl| cy|
 // -----------------------------------------------
@@ -50,16 +88,7 @@ typedef struct s_obj
 	char			type;
 	t_coord			pos;
 	t_vector		orientation;
-	union
-	{
-		int			color;
-		struct
-		{
-			uint8_t	r;
-			uint8_t	g;
-			uint8_t	b;
-		};
-	};
+	t_color			color;
 	union
 	{
 		double		diameter;
@@ -72,8 +101,8 @@ typedef struct s_obj
 		double		fov;
 	};
 	t_obj			*next;
-	t_collision_fn	*collision_fn;
-	t_normal_fn		*normal_fn;
+	int				(*collision_fn)(t_obj *, t_ray *);
+//	t_normal_fn		*normal_fn;
 }	t_obj;
 
 typedef struct s_scene

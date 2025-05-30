@@ -1,6 +1,6 @@
 NAME		= miniRT
 
-CC			= cc
+CC			= gcc-12
 CFLAGS		= -Wall -Werror -Wextra -g
 
 CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
@@ -55,7 +55,7 @@ libft/libft.a :
 
 mlx :
 	git clone https://github.com/42paris/minilibx-linux.git mlx
-	cd mlx; make
+	cd mlx; make CC=gcc-12
 
 #<--------------	DEV_TOOLS	------------->
 

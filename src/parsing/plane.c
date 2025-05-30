@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 08:52:45 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/27 06:55:39 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parse_plane(char **param, t_scene *scene)
 		|| ft_atoi_double(&plane->orientation.y, param[5])
 		|| ft_atoi_double(&plane->orientation.z, param[6]))
 		return (ERROR("atoi_double"));
-	if (ft_get_color(&(plane->color), &param[7]))
+	if (ft_get_color(plane, &param[7]))
 		return (ERROR("get_color"));
 	if (valid_values(plane))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:49:56 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/23 00:22:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/27 06:56:09 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@ int	parse_light(char **param, t_scene *scene, char *unique)
 		return (ERROR("atoi_double"));
 	if (ft_atoi_double(&light->brightness, param[4]))
 		return (ERROR("atoi_double"));
-	if (ft_get_color(&(light->color), &param[5]))
+	if (ft_get_color(light, &param[5]))
 		return (ERROR("get_color"));
 	if (valid_values(light))
 		return (1);
-	ft_objadd_back(&scene->obj, light);
 	scene->light = light;
 	return (0);
 }

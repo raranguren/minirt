@@ -6,27 +6,19 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:19:18 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/17 09:44:39 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/27 06:57:56 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	ft_get_color(int *dest, char **param)
+int	ft_get_color(t_obj *obj, char **param)
 {
-	int		i;
-	char	*color;
 
-	color = (char *)dest;
-	i = 3;
-	while (i >= 0)
-	{
-		if (param[i])
-			color[i] = ft_atoi(param[i]);
-		else
-			color[i] = 0;
-		i--;
-	}
+	obj->color.a = 1;
+	obj->color.r = ft_atoi(param[0]);
+	obj->color.g = ft_atoi(param[1]);
+	obj->color.b = ft_atoi(param[2]);
 	return (0);
 }
 

@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 11:24:08 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 09:01:40 by bduval           ###   ########.fr       */
+/*   Created: 2025/05/24 22:46:32 by bduval            #+#    #+#             */
+/*   Updated: 2025/05/26 14:04:31 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	loop_hook(void *param)
+double	ft_norm(t_vector *v)
 {
-	t_all	*all;
-
-	all = (t_all *)param;
-	//mlx_clear_window(all->mlx_ptr, all->mlx_win);
-	if  (send_rays(all))
-		quit_hook(all);
-	return (0);
-}
-
-int	start_mlx_loop(t_all *all)
-{
-	mlx_loop_hook(all->mlx_ptr, &loop_hook, all);
-	mlx_loop(all->mlx_ptr);
-	return (0);
+	if (v->x && v->y && v->z)
+		return (0);
+	return (sqrt(pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2)));
 }
