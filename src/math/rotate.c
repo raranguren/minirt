@@ -6,55 +6,61 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 21:26:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/29 21:18:55 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 06:55:33 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// Rotation around the Z axis, looking left or right
-void	rotate_yaw(t_vector *v, double angle)
+// Rotation around the Y axis, looking left or right
+void	rotate_yaw(t_vector *v, double angle_radians)
 {
-	double	radian;
+	double	x;
+	double	z;
+	double	cos_;
+	double	sin_;
 
-	radian = angle * M_PI / 180.0;
-	v->z = v->x * sin(radian) + v->z * cos(radian);
-	v->x = v->x * cos(radian) - v->z * sin(radian);
+	x = v->x;
+	z = v->z;
+	cos_ = cos(angle_radians);
+	sin_ = sin(angle_radians);
+	v->x = x * cos_ - z * sin_;
+	v->z = x * sin_ + z * cos_;
 }
 
 // Rodrigues rotation formula (see Wikipedia)
 //   - cross is the cross vector multiplication (v x axis)
 //   - dot is the dot vector multiplication (v . axis)
-void	rodrigues(t_vector *v, t_vector *axis, double angle)
+void	rodrigues(t_vector *v, t_vector *axis, double angle_radian)
 {
-	double		cos_a;
-	double		sin_a;
+	double		cos_;
+	double		sin_;
 	t_vector	cross;
 	double		dot;
 
+	cos_ = cos(angle_radian);
+	sin_ = sin(angle_radian);
 	cross.x = axis->y * v->z - axis->z * v->y;
 	cross.y = axis->z * v->x - axis->x * v->z;
 	cross.z = axis->x * v->y - axis->y * v->x;
 	dot = axis->x * v->x + axis->y * v->y + axis->z * v->z;
-	cos_a = cos(angle);
-	sin_a = sin(angle);
-	v->x = v->x * cos_a + cross.x * sin_a + axis->x * dot * (1.0 - cos_a);
-	v->y = v->y * cos_a + cross.y * sin_a + axis->y * dot * (1.0 - cos_a);
-	v->z = v->z * cos_a + cross.z * sin_a + axis->z * dot * (1.0 - cos_a);
+	v->x = v->x * cos_ + cross.x * sin_ + axis->x * dot * (1.0 - cos_);
+	v->y = v->y * cos_ + cross.y * sin_ + axis->y * dot * (1.0 - cos_);
+	v->z = v->z * cos_ + cross.z * sin_ + axis->z * dot * (1.0 - cos_);
 }
 
 // Rotation up or down
-// If not entirely vertical, uses the tangent in plane XY as axis
+// If not vertical, uses the tangent in plane XZ as axis for the rotation
 // If after rotating it is vertical, adds small degree to not lose the direction
-//   - xy_magn is the magnitude of the vector when proyected in plane XY
-//   - axis is the vector tangent to the proyection of v in the plane XY
-void	rotate_pitch(t_vector *v, double angle)
+//   - xy_magn is the magnitude of the vector when proyected in plane XZ
+//   - axis is the vector tangent to the proyection of v in the plane XZ
+void	rotate_pitch(t_vector *v, double angle_radians)
 {
-	double		xy_magn;
+	double		xz_magn;
 	t_vector	axis;
 
-	xy_magn = sqrt(v->x * v->x + v->y * v->y);
-	if (xy_magn < 1e-10)
+	xz_magn = sqrt(v->x * v->x + v->z * v->z);
+	if (xz_magn < 1e-10)
 	{
 		axis.x = 1.0;
 		axis.y = 0.0;
@@ -62,19 +68,24 @@ void	rotate_pitch(t_vector *v, double angle)
 	}
 	else
 	{
-		axis.x = -v->y / xy_magn;
-		axis.y = v->x / xy_magn;
-		axis.z = 0.0;
+		axis.x = v->z / xz_magn;
+		axis.y = 0.0;
+		axis.z = -v->x / xz_magn;
+		normalize(&axis);
 	}
-	rodrigues(v, &axis, angle);
-	xy_magn = sqrt(v->x * v->x + v->y * v->y);
-	if (xy_magn < 1e-4)
-		rodrigues(v, &axis, 0.1);
+	rodrigues(v, &axis, angle_radians);
+	xz_magn = sqrt(v->x * v->x + v->z * v->z);
+	if (xz_magn < 1e-4)
+		rodrigues(v, &axis, M_PI / 180.0);
 }
 
 int	rotate(t_vector *v, double horizontal_angle, double vertical_angle)
 {
-	rotate_yaw(v, horizontal_angle);
-	rotate_pitch(v, vertical_angle);
+	if (!horizontal_angle && !vertical_angle)
+		return (1);
+	if (horizontal_angle)
+		rotate_yaw(v, horizontal_angle * M_PI / 180);
+	if (vertical_angle)
+		rotate_pitch(v, vertical_angle * M_PI / 180);
 	return (0);
 }
