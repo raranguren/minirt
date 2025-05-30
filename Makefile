@@ -16,7 +16,6 @@ TMP_DIRS	= $(addprefix $(TMP_DIR), $(filter-out $(curr), $(sort $(dir $(FILES)))
 
 SRC = $(FILES:%=$(SRC_DIR)%.c)
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
-DEP = $(OBJ:%.o=%.d)
 
 MAKEFLAGS += --no-print-directory
 
@@ -29,9 +28,8 @@ all : $(NAME)
 $(TMP_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
--include $(DEP)
 
-$(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ) 
+$(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
 
 clean :

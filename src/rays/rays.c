@@ -6,48 +6,44 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 12:40:22 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 23:32:40 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	set_the_fundamentals(t_ray *ray, t_point *projection, t_cam *cam)
+int	set_the_fundamentals(t_ray *ray, t_cam *cam)
 {
-	(void)cam;
-	ft_memset(projection, 0, sizeof (t_point));
 	ft_memset(ray, 0, sizeof (t_ray));
 	ray->start = cam->pos;
+	cam->up.y = 1;
+	cam->forward = v_unit(cam->forward);
+	cam->right = v_unit(v_cross(cam->up, cam->forward));
+	cam->up = v_cross(cam->forward, cam->right);
+	cam->aspect_ratio = (double)WIN_WIDTH / WIN_HEIGHT;
+	cam->fov_scale = ;
 	return (0);
 }
 
-int	update_ray_properties(t_ray *ray, t_cam *cam, t_point *projection)
+int	set_ray(t_ray *ray, t_cam *cam,  int x, int y)
 {
-	t_vector	projection_scale;
-	t_vector	local_current_proj;
-	//t_vector	center_proj;
+	t_vector	projection;
 
-	projection_scale.x = 2 * tan(cam->fov * M_PI / 180.0);
-	projection_scale.y = projection_scale.x * ((double)WIN_HEIGHT / WIN_WIDTH);
-	projection_scale.z = 1;
-	local_current_proj.x = (projection->x - WIN_WIDTH / 2) / WIN_WIDTH / 2;
-	local_current_proj.y = (projection->y - WIN_HEIGHT / 2) / WIN_HEIGHT /2;
-	local_current_proj.z = 0;
-	local_current_proj = v_cross(local_current_proj, projection_scale);
-	ray->direction = v_add(cam->orientation, local_current_proj);
-	ray->direction = v_scale(ray->direction, 1 / v_norm(ray->direction));
-	ray->color.argb = 0x00ffffff;
+	projection.x = (2.0 * (x + 0.5) / WIN_WIDTH - 1);
+	projection.x *= cam->aspect_ratio * cam->fov_scale;
+	projection.y = 1 - 2.0 * (y + 0.5) / WIN_HEIGHT;
+	projection.y *= cam->fov_scale;
+	ray->direction = v_unit(v_add(
+				cam->forward,
+				v_add(v_scale(cam->right, projection.x),
+					v_scale(cam->up, projection.y))));
+	ray->color.argb = COLOR_BG;
 	ray->shortest_impact_dist = DBL_MAX;
 	return (0);
 }
 
-int	set_pixel_to_ray_color(t_all *all, t_ray *ray, t_point *projection)
+int	set_pixel_to_ray_color(t_all *all, t_ray *ray, int x, int y)
 {
-	double	x;
-	double	y;
-
-	x = projection->x;
-	y = projection->y;
 	mlx_pixel_put(all->mlx_ptr, all->mlx_win, x, y, ray->color.argb);
 	return (0);
 }
@@ -55,34 +51,36 @@ int	set_pixel_to_ray_color(t_all *all, t_ray *ray, t_point *projection)
 int	print_ray(t_ray r)
 {
 	printf("RAY---\npos: %lf,%lf,%lf\ndir: %lf,%lf,%lf\ncol :%i,%i,%i,%i\n\n",
-			r.start.x, r.start.y,r.start.z, r.direction.x, r.direction.y, r.direction.z,
-			r.color.a, r.color.r, r.color.g, r.color.b);
+		r.start.x, r.start.y,r.start.z, r.direction.x, r.direction.y, r.direction.z,
+		r.color.a, r.color.r, r.color.g, r.color.b);
 	return (0);
 }
 
 int	send_rays(t_all *all)
 {
 	t_ray	ray;
-	t_point	projection;
+	int		x;
+	int		y;
 
-	if  (set_the_fundamentals(&ray, &projection, all->scene.cam))
+	if  (set_the_fundamentals(&ray, all->scene.cam))
 		return (-1);
-	while (projection.x < WIN_WIDTH)
+	x = 0;
+	while (x < WIN_WIDTH)
 	{
-		projection.y = 0;
-		while (projection.y < WIN_HEIGHT)
+		y = 0;
+		while (y < WIN_HEIGHT)
 		{
-			update_ray_properties(&ray, all->scene.cam, &projection);
+			set_ray(&ray, all->scene.cam, x, y);
 			all->scene.selected = all->scene.obj;
 			while (all->scene.selected)
 			{
 				all->scene.selected->collision_fn(all->scene.selected, &ray);
 				all->scene.selected = all->scene.selected->next;
 			}
-			set_pixel_to_ray_color(all, &ray, &projection);
-			projection.y++;
+			set_pixel_to_ray_color(all, &ray, x, y);
+			y++;
 		}
-		projection.x++;
+		x++;
 	}
 	return (0);
 }

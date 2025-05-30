@@ -6,12 +6,23 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 15:23:55 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 22:40:05 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPEDEFS_H
 # define TYPEDEFS_H
+
+typedef struct s_quadratic
+{
+		double	a;
+		double	b;
+		double	c;
+		double	delta;
+		double	solution_1;
+		double	solution_2;
+
+}	t_quadratic;
 
 typedef struct s_coord
 {
@@ -55,11 +66,9 @@ typedef struct s_color
 }	t_color;
 
 typedef t_coord			t_vector;
-typedef t_coord			t_quadratic;
 typedef t_coord			t_point;
 
 typedef struct s_obj	t_obj;
-typedef t_obj			t_cam;
 typedef t_obj			t_light;
 //typedef t_point			(*t_collision_fn)(t_obj*, t_ray*);
 //typedef t_vector		(*t_normal_fn)(t_obj*, t_ray*);
@@ -104,6 +113,18 @@ typedef struct s_obj
 	int				(*collision_fn)(t_obj *, t_ray *);
 //	t_normal_fn		*normal_fn;
 }	t_obj;
+
+typedef struct s_cam
+{
+	t_coord			pos;
+	t_vector		forward;
+	t_color			color;
+	double			fov;
+	double			fov_scale;
+	double			aspect_ratio;
+	t_vector		right;
+	t_vector		up;
+}	t_cam;
 
 typedef struct s_scene
 {

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 09:04:03 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 22:43:21 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	print_scene(t_all *all)
 		all->scene.cam->pos.x,
 		all->scene.cam->pos.y,
 		all->scene.cam->pos.z,
-		all->scene.cam->orientation.x,
-		all->scene.cam->orientation.y,
-		all->scene.cam->orientation.z,
+		all->scene.cam->forward.x,
+		all->scene.cam->forward.y,
+		all->scene.cam->forward.z,
 		all->scene.cam->fov);
 	printf("AMBLIGHT\n"
 		"brightness	%lf\n"

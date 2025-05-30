@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 10:56:47 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 21:22:02 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ int	sphere_collision(t_obj *sphere, t_ray *ray)
 	t_vector	tmp;
 
 	tmp = v_substract(ray->start, sphere->pos);
-	quad.a = 1;
-	quad.b = 2 * v_dot(tmp, ray->direction);
-	quad.c = v_dot(tmp, tmp) - pow((double)sphere->diameter / 2, 2);
-	quad.delta = pow(quad.b, 2) - 4 * quad.c;
+	quad.a = 1.0;
+	quad.b = 2.0 * v_dot(tmp, ray->direction);
+	quad.c = v_dot(tmp, tmp) - (double)sphere->diameter / 2 * (double)sphere->diameter / 2;
+	quad.delta = quad.b * quad.b - 4.0 * quad.c;
 	if (quad.delta < 0)
 		return (0);
 	if (quad.delta)
 		quad.delta = sqrt(quad.delta);
-	tmp.solution_1 = (double)(-quad.b - quad.delta ) / 2;
-	tmp.solution_2 = (double)(-quad.b + quad.delta ) / 2;
-	interpret_results(&tmp, ray, sphere);
+	quad.solution_1 = (double)(-quad.b - quad.delta ) / 2.0;
+	quad.solution_2 = (double)(-quad.b + quad.delta ) / 2.0;
+	interpret_results(&quad, ray, sphere);
 	return(0);
 }

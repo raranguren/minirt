@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 13:17:42 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 19:11:33 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 // Screen dimensions
 # define WIN_WIDTH		1000
 # define WIN_HEIGHT		1000
+
+# define COLOR_BG		0x00111111
 
 //Objects types
 # define CAMERA		0b00000001

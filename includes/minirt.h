@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 12:26:14 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/30 22:19:20 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ int			send_rays(t_all *all);
 int			sphere_collision(t_obj *sphere, t_ray *ray);
 double		ft_norm(t_vector *v);
 t_vector	v_substract(t_vector v1, t_vector v2);
+t_vector	v_multiply(t_vector v1, t_vector v2);
 t_vector	v_cross(t_vector v1, t_vector v2);
 t_vector	v_scale(t_vector v, double scalar);
 double		v_dot(t_vector v1, t_vector v2);
 t_vector	v_add(t_vector v1, t_vector v2);
-double		v_norm(t_vector v1);
+t_vector	v_unit(t_vector v1);
+double		v_magnitude(t_vector v1);
 
 			//error
 int			error(char *str);
