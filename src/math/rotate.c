@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 21:26:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/30 09:50:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:34:34 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	rotate_pitch(t_vector *v, double angle_radians)
 	rodrigues(v, &axis, angle_radians);
 	xz_magn = sqrt(v->x * v->x + v->z * v->z);
 	if (xz_magn < 1e-6)
-		rodrigues(v, &axis, M_PI / 180.0);
+		rodrigues(v, &axis, 0.01 * M_PI / 180.0);
 }
 
 int	rotate(t_vector *v, double horizontal_angle, double vertical_angle)

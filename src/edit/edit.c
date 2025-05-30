@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/30 10:51:02 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/05/30 13:33:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	edit_rotate(t_all *all, double horizontal, double vertical)
 	obj = all->scene.selected;
 	if (!obj)
 		return (1);
-	if (obj->type != CAMERA && obj->type != CYLINDER)
+	if (obj->type != CAMERA && obj->type != CYLINDER && obj->type != PLANE)
 		return (1);
 	rotate(&obj->orientation, horizontal, vertical);
 	ui_update(all);
