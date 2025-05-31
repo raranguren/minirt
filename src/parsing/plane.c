@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:14:04 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:43:14 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static int	valid_plan_line(char **param)
 	{
 		if ((i <= 6 && !ft_is_double(param[i]))
 			|| (i > 6 && !ft_is_char(param[i])))
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 10)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
@@ -34,7 +34,7 @@ static int	valid_values(t_obj *plane)
 	if (!is_normalized(plane->orientation.x)
 		|| !is_normalized(plane->orientation.y)
 		|| !is_normalized(plane->orientation.z))
-		return (PERROR(PLANE_WAITED_VALUES));
+		return (error3(PLANE_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
@@ -52,9 +52,9 @@ int	parse_plane(char **param, t_scene *scene)
 		|| ft_atoi_double(&plane->orientation.x, param[4])
 		|| ft_atoi_double(&plane->orientation.y, param[5])
 		|| ft_atoi_double(&plane->orientation.z, param[6]))
-		return (ERROR("atoi_double"));
+		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(plane, &param[7]))
-		return (ERROR("get_color"));
+		return (error3("Parse error: invalid color '", param[7], "'"));
 	if (valid_values(plane))
 		return (1);
 	ft_objadd_back(&scene->obj, plane);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:18:01 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:43:23 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ static int	valid_sphere_line(char **param)
 	{
 		if ((i <= 4 && !ft_is_double(param[i]))
 			|| (i > 4 && !ft_is_char(param[i])))
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 8)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
 static int	valid_values(t_obj *sphere)
 {
 	if (sphere->diameter < 0)
-		return (PERROR(SPHERE_WAITED_VALUES));
+		return (error3(SPHERE_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
@@ -52,9 +52,9 @@ int	parse_sphere(char **param, t_scene *scene)
 		|| ft_atoi_double(&sphere->pos.y, param[2])
 		|| ft_atoi_double(&sphere->pos.z, param[3])
 		|| ft_atoi_double(&sphere->diameter, param[4]))
-		return (ERROR("atoi_double"));
+		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(sphere, &param[5]))
-		return (ERROR("get_color"));
+		return (error3("Parse error: invalid color '", param[5], "'"));
 	if (valid_values(sphere))
 		return (1);
 	ft_objadd_back(&scene->obj, sphere);

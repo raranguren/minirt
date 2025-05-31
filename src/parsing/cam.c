@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:13:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:41:47 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,46 @@ static int	valid_cam_line(char **param)
 	while (param[i])
 	{
 		if (i <= 7 && !ft_is_double(param[i]))
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 8)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
 static int	check_valid_values(t_cam *cam)
 {
-	if (cam->forward.x < 0 || cam->forward.y < 0
-		|| cam->forward.z < 0
-		|| cam->forward.x > 1 || cam->forward.y > 1
-		|| cam->forward.z > 1
+	if (cam->orientation.x < 0 || cam->orientation.y < 0
+		|| cam->orientation.z < 0
+		|| cam->orientation.x > 1 || cam->orientation.y > 1
+		|| cam->orientation.z > 1
 		|| cam->fov > 180 || cam->fov < 0)
-		return (PERROR(CAM_WAITED_VALUES));
+		return (error3(CAM_WAITED_VALUES, 0, 0));
+	if (normalize(&cam->orientation))
+		return (error3(CAM_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
-int	parse_cam(char **param, t_scene *scene, char *unique)
+int	parse_cam(char **param, t_scene *scene)
 {
 	t_cam	*cam;
+	int		err;
 
-	if (*unique & CAMERA || valid_cam_line(param))
+	if (valid_cam_line(param))
 		return (1);
-	*unique |= CAMERA;
 	cam = ft_calloc(1, sizeof(t_cam));
 	if (!cam)
 		return (1);
-	if (ft_atoi_double(&cam->pos.x, param[1]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->pos.y, param[2]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->pos.z, param[3]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->forward.x, param[4]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->forward.y, param[5]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->forward.z, param[6]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&cam->fov, param[7]))
-		return (ERROR("atoi_double"));
+	err = ft_atoi_double(&cam->pos.x, param[1]);
+	err |= ft_atoi_double(&cam->pos.y, param[2]);
+	err |= ft_atoi_double(&cam->pos.z, param[3]);
+	err |= ft_atoi_double(&cam->orientation.x, param[4]);
+	err |= ft_atoi_double(&cam->orientation.y, param[5]);
+	err |= ft_atoi_double(&cam->orientation.z, param[6]);
+	err |= ft_atoi_double(&cam->fov, param[7]);
+	if (err)
+		return (error3("Parse error: invalid number for camera", 0, 0));
 	if (check_valid_values(cam))
 		return (1);
 	scene->cam = cam;

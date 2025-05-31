@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 13:26:14 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:46:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef t_coord			t_point;
 
 typedef struct s_obj	t_obj;
 typedef t_obj			t_light;
+typedef t_obj			t_cam;
 //typedef t_point			(*t_collision_fn)(t_obj*, t_ray*);
 //typedef t_vector		(*t_normal_fn)(t_obj*, t_ray*);
 
@@ -114,19 +115,11 @@ typedef struct s_obj
 	t_obj			*next;
 	int				(*collision_fn)(t_obj *, t_ray *);
 	t_vector		(*normal_fn)(t_obj *obj, t_point p);
-}	t_obj;
-
-typedef struct s_cam
-{
-	t_coord			pos;
-	t_vector		forward;
-	t_color			color;
-	double			fov;
 	double			fov_scale;
 	double			aspect_ratio;
 	t_vector		right;
 	t_vector		up;
-}	t_cam;
+}	t_obj;
 
 typedef struct s_scene
 {

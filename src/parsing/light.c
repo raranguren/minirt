@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:49:56 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:11:57 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:42:58 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,42 +21,41 @@ static int	valid_light_line(char **param)
 	{
 		if ((i <= 4 && !ft_is_double(param[i]))
 			|| (i > 4 && !ft_is_char(param[i])))
-			return (PERROR2((char *)param[i], "is not valid"));
+			return (error3("Parse error : invalid '", param[i], "'"));
 		i++;
 	}
 	if (i != 8)
-		return (PERROR("Invalid number of parameters"));
+		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
 
 static int	valid_values(t_light *light)
 {
 	if (light->brightness < 0 || light->brightness > 1)
-		return (PERROR(LIGHT_WAITED_VALUES));
+		return (error3(LIGHT_WAITED_VALUES, 0, 0));
 	return (0);
 }
 
-int	parse_light(char **param, t_scene *scene, char *unique)
+int	parse_light(char **param, t_scene *scene)
 {
 	t_light	*light;
+	int		err;
 
-	if (*unique & LIGHT || valid_light_line(param))
+	if (valid_light_line(param))
 		return (1);
-	*unique |= LIGHT;
 	light = ft_calloc(1, sizeof(t_obj));
 	if (!light)
 		return (1);
 	light->type = LIGHT;
-	if (ft_atoi_double(&light->pos.x, param[1]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&light->pos.y, param[2]))
-		return (ERROR("atoi_double"));
-	if (ft_atoi_double(&light->pos.z, param[3]))
-		return (ERROR("atoi_double"));
+	err = ft_atoi_double(&light->pos.x, param[1]);
+	err |= ft_atoi_double(&light->pos.y, param[2]);
+	err |= ft_atoi_double(&light->pos.z, param[3]);
+	if (err)
+		return (error3("Parse error: invalid number for light position", 0, 0));
 	if (ft_atoi_double(&light->brightness, param[4]))
-		return (ERROR("atoi_double"));
+		return (error3("Parse error: invalid brightness '", param[4], "'"));
 	if (ft_get_color(light, &param[5]))
-		return (ERROR("get_color"));
+		return (error3("Parse error: invalid color '", param[5], "'"));
 	if (valid_values(light))
 		return (1);
 	scene->light = light;

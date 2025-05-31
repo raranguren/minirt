@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:30:14 by bduval           ###   ########.fr       */
+/*   Created: 2025/05/27 21:13:18 by rarangur          #+#    #+#             */
+/*   Updated: 2025/05/27 22:04:13 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int ac, char **av)
+int	normalize(t_vector *v)
 {
-	static t_all	all;
+	double	size;
 
-	if (parse_map(ac, av, &all))
-		return (free_everything(&all), 1);
-	if (edit_init(&all))
-		return (free_everything(&all), 1);
-	print_scene(&all);
-	if (set_mlx(&all))
-		return (free_everything(&all), 1);
-	free_everything(&all);
+	if (v->x == 0.0 && v->y == 0.0 && v->z == 0)
+		return (1);
+	size = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+	v->x /= size;
+	v->y /= size;
+	v->z /= size;
 	return (0);
 }
