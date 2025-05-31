@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/27 06:53:07 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 13:14:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	parse_sphere(char **param, t_scene *scene)
 		return (1);
 	sphere->type = SPHERE;
 	sphere->collision_fn = sphere_collision;
+	sphere->normal_fn = sphere_normal;
 	if (ft_atoi_double(&sphere->pos.x, param[1])
 		|| ft_atoi_double(&sphere->pos.y, param[2])
 		|| ft_atoi_double(&sphere->pos.z, param[3])

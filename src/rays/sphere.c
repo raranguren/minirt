@@ -6,11 +6,18 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 21:22:02 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 13:17:52 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_vector sphere_normal(t_obj *obj, t_point p)
+{
+	t_vector	normal;
+	normal = v_unit(v_add(obj->pos, p));
+	return (normal);
+}
 
 // Ray equation  :  R(t)= ray->start + t * ray->orientation;
 // Point is at the sphere  surface if ||R(t) - sphere->pos||² = sphere->rayon
@@ -32,13 +39,13 @@ static int	interpret_results(t_quadratic *res, t_ray *ray, t_obj *obj)
 	if ((res->solution_1 < 0 || res->solution_1 > ray->shortest_impact_dist)
 		&& (res->solution_2 < 0 || res->solution_2 > ray->shortest_impact_dist))
 			return (0);
-	if (res->solution_1 < ray->shortest_impact_dist)
+	if (res->solution_1 > 0 && res->solution_1 < ray->shortest_impact_dist)
 		ray->shortest_impact_dist = res->solution_1;
-	if (res->solution_2 < ray->shortest_impact_dist)
+	if (res->solution_2 > 0 && res->solution_2 < ray->shortest_impact_dist)
 		ray->shortest_impact_dist = res->solution_2;
 	ray->impact_object = obj;
 	ray->color.argb = obj->color.argb;
-	return (0);
+	return (1);
 }
 
 int	sphere_collision(t_obj *sphere, t_ray *ray)
@@ -46,17 +53,17 @@ int	sphere_collision(t_obj *sphere, t_ray *ray)
 	t_quadratic	quad;
 	t_vector	tmp;
 
+	sphere->radius = (double)sphere->diameter / 2.0; 
 	tmp = v_substract(ray->start, sphere->pos);
 	quad.a = 1.0;
 	quad.b = 2.0 * v_dot(tmp, ray->direction);
-	quad.c = v_dot(tmp, tmp) - (double)sphere->diameter / 2 * (double)sphere->diameter / 2;
-	quad.delta = quad.b * quad.b - 4.0 * quad.c;
+	quad.c = v_dot(tmp, tmp) - sphere->radius * sphere->radius;
+	quad.delta = quad.b * quad.b - 4.0 * quad.a * quad.c;
 	if (quad.delta < 0)
 		return (0);
 	if (quad.delta)
 		quad.delta = sqrt(quad.delta);
-	quad.solution_1 = (double)(-quad.b - quad.delta ) / 2.0;
-	quad.solution_2 = (double)(-quad.b + quad.delta ) / 2.0;
-	interpret_results(&quad, ray, sphere);
-	return(0);
+	quad.solution_1 = (-quad.b - quad.delta) / 2.0;
+	quad.solution_2 = (-quad.b + quad.delta) / 2.0;
+	return(interpret_results(&quad, ray, sphere));
 }

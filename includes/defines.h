@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 19:11:33 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 12:29:26 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #define ICI	printf("ICI\n");
 
 // Screen dimensions
-# define WIN_WIDTH		1000
-# define WIN_HEIGHT		1000
+# define WIN_WIDTH		720
+# define WIN_HEIGHT		720
 
 # define COLOR_BG		0x00111111
 

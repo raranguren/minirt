@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:48:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 22:56:17 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 07:39:40 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vector	v_add(t_vector v1, t_vector v2)
 
 t_vector	v_unit(t_vector v)
 {
-	return (v_scale(v  , 1.0 / v_magnitude(v)));
+	return (v_scale(v, 1.0 / v_magnitude(v)));
 }
 
 double	v_magnitude(t_vector v1)

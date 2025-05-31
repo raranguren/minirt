@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 22:40:05 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 13:26:14 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ typedef struct s_ray
 // objects in scene: | A | C | L | sp| pl| cy|
 // -----------------------------------------------
 // | pos             |   | x | x | x | x | x |
-// | orientation     |   | x |   |   | x | x | 
+// | orientation     |   | x |   |   | x | x |
 // | diameter        |   |   |   | x |   | x | 1 union
 // | ratio           | x |   |   |   |   |   | 1
 // | height          |   |   |   |   |   | x | 2 union
+// | radius          |   |   |   |   | x |   | 2 union
 // | brightness      |   |   | x |   |   |   | 2
 // | fov             |   | x |   |   |   |   | 2
 // | color           | x |   | x | x | x | x |
@@ -106,12 +107,13 @@ typedef struct s_obj
 	union
 	{
 		double		height;
+		double		radius;
 		double		brightness;
 		double		fov;
 	};
 	t_obj			*next;
 	int				(*collision_fn)(t_obj *, t_ray *);
-//	t_normal_fn		*normal_fn;
+	t_vector		(*normal_fn)(t_obj *obj, t_point p);
 }	t_obj;
 
 typedef struct s_cam
