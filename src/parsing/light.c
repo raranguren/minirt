@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:49:56 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/27 06:56:09 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:11:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	valid_light_line(char **param)
 	i = 1;
 	while (param[i])
 	{
-		if ((i <= 4  && !ft_is_double(param[i]))
+		if ((i <= 4 && !ft_is_double(param[i]))
 			|| (i > 4 && !ft_is_char(param[i])))
 			return (PERROR2((char *)param[i], "is not valid"));
 		i++;
@@ -38,7 +38,7 @@ static int	valid_values(t_light *light)
 
 int	parse_light(char **param, t_scene *scene, char *unique)
 {
-	t_light *light;
+	t_light	*light;
 
 	if (*unique & LIGHT || valid_light_line(param))
 		return (1);

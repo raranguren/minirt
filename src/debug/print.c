@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 12:04:37 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 13:51:56 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:23:26 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	print_scene(t_all *all)
 int	print_ray(t_ray r)
 {
 	printf("RAY---\npos: %lf,%lf,%lf\ndir: %lf,%lf,%lf\ncol :%i,%i,%i,%i\n\n",
-		r.start.x, r.start.y,r.start.z, r.direction.x, r.direction.y, r.direction.z,
+		r.start.x, r.start.y, r.start.z, r.direction.x,
+		r.direction.y, r.direction.z,
 		r.color.a, r.color.r, r.color.g, r.color.b);
 	return (0);
 }

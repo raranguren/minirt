@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/27 06:55:21 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:10:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	valid_cylinder_line(char **param)
 	i = 1;
 	while (param[i])
 	{
-		if ((i <= 8  && !ft_is_double(param[i]))
+		if ((i <= 8 && !ft_is_double(param[i]))
 			|| (i > 8 && !ft_is_char(param[i])))
 			return (PERROR2((char *)param[i], "is not valid"));
 		i++;
@@ -34,7 +34,7 @@ static int	valid_values(t_obj *cylinder)
 	if (!is_normalized(cylinder->orientation.x)
 		|| !is_normalized(cylinder->orientation.y)
 		|| !is_normalized(cylinder->orientation.z)
-		|| cylinder->diameter <  0
+		|| cylinder->diameter < 0
 		|| cylinder->height < 0)
 		return (PERROR(CYLINDER_WAITED_VALUES));
 	return (0);
@@ -42,7 +42,7 @@ static int	valid_values(t_obj *cylinder)
 
 int	parse_cylinder(char **param, t_scene *scene)
 {
-	t_obj *cylinder;
+	t_obj	*cylinder;
 
 	if (valid_cylinder_line(param))
 		return (1);

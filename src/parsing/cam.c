@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 22:16:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:13:11 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	valid_cam_line(char **param)
 	i = 1;
 	while (param[i])
 	{
-		if (i <= 7  && !ft_is_double(param[i]))
+		if (i <= 7 && !ft_is_double(param[i]))
 			return (PERROR2((char *)param[i], "is not valid"));
 		i++;
 	}
@@ -30,7 +30,7 @@ static int	valid_cam_line(char **param)
 
 static int	check_valid_values(t_cam *cam)
 {
-	if (cam->forward.x < 0  || cam->forward.y < 0
+	if (cam->forward.x < 0 || cam->forward.y < 0
 		|| cam->forward.z < 0
 		|| cam->forward.x > 1 || cam->forward.y > 1
 		|| cam->forward.z > 1
@@ -41,7 +41,7 @@ static int	check_valid_values(t_cam *cam)
 
 int	parse_cam(char **param, t_scene *scene, char *unique)
 {
-	t_cam *cam;
+	t_cam	*cam;
 
 	if (*unique & CAMERA || valid_cam_line(param))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:02:27 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:24:56 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	set_the_fundamentals(t_ray *ray, t_cam *cam)
 	return (0);
 }
 
-int	set_ray(t_ray *ray, t_cam *cam,  int x, int y)
+int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 {
 	t_vector	projection;
 
@@ -70,12 +70,13 @@ int	compute_reflection(t_scene *scene, t_ray *ray)
 	t_vector	to_light;
 	double		dot_product;
 
-	point = v_add(ray->start, v_scale(ray->direction, ray->shortest_impact_dist));
+	point = v_add(ray->start, v_scale(ray->direction,
+				ray->shortest_impact_dist));
 	print_vector("point", point);
 	normal = ray->impact_object->normal_fn(ray->impact_object, point);
 	print_vector("normal", normal);
-	to_light = v_unit(v_substract( scene->light->pos, point));
-	print_vector("to_light",to_light);
+	to_light = v_unit(v_substract(scene->light->pos, point));
+	print_vector("to_light", to_light);
 	dot_product = fmax(v_dot(to_light, normal), 0);
 	printf("dot -> %lf\n", dot_product);
 	ray->color = c_scale(ray->color, dot_product);
@@ -88,7 +89,7 @@ int	send_rays(t_all *all)
 	int		x;
 	int		y;
 
-	if  (set_the_fundamentals(&ray, all->scene.cam))
+	if (set_the_fundamentals(&ray, all->scene.cam))
 		return (-1);
 	x = 0;
 	while (x < WIN_WIDTH)

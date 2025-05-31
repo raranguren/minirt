@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:24:08 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/30 09:01:40 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:10:31 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static int	loop_hook(void *param)
 	t_all	*all;
 
 	all = (t_all *)param;
-	//mlx_clear_window(all->mlx_ptr, all->mlx_win);
-	if  (send_rays(all))
+	if (send_rays(all))
 		quit_hook(all);
 	return (0);
 }

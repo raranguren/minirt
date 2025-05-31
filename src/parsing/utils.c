@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:19:18 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/27 06:57:56 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:12:21 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_get_color(t_obj *obj, char **param)
 {
-
 	obj->color.a = 1;
 	obj->color.r = ft_atoi(param[0]);
 	obj->color.g = ft_atoi(param[1]);
@@ -34,7 +33,7 @@ static int	integer_part_strlen(const char *str)
 
 int	is_normalized(double n)
 {
-	if(n < -1 || n > 1)
+	if (n < -1 || n > 1)
 		return (0);
 	return (1);
 }

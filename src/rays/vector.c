@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:48:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 07:39:40 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:14:29 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ t_vector	v_unit(t_vector v)
 
 double	v_magnitude(t_vector v1)
 {
-	double	res = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
+	double	res;
+
+	res = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
 	if (res)
 		res = sqrt(res);
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/27 06:56:00 by bduval           ###   ########.fr       */
+/*   Updated: 2025/05/31 14:11:38 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	valid_values(t_light *light)
 
 int	parse_amb_light(char **param, t_scene *scene, char *unique)
 {
-	t_light *light;
+	t_light	*light;
 
 	if (*unique & AMB_LIGHT || valid_amb_line(param))
 		return (1);
