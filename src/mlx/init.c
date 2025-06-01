@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:52:34 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 20:55:41 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/01 15:14:04 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	set_mlx(t_all *all)
 	if (!all->mlx_win)
 		return (error("mlx_new_window()"));
 	set_mlx_events(all);
+	send_rays(all);
 	start_mlx_loop(all);
 	return (0);
 }

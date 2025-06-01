@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:46:55 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/01 15:24:11 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ typedef struct s_obj
 {
 	char			type;
 	t_coord			pos;
-	t_vector		orientation;
+	union
+	{
+		t_vector		orientation;
+		t_vector		forward;
+	};
 	t_color			color;
 	union
 	{
