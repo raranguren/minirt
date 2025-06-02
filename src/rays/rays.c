@@ -6,16 +6,14 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 20:31:58 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 15:21:45 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	set_the_fundamentals(t_ray *ray, t_cam *cam)
+int	set_the_cam(t_cam *cam)
 {
-	ft_memset(ray, 0, sizeof (t_ray));
-	ray->start = cam->pos;
 	cam->up.y = 1;
 	cam->forward = v_unit(cam->forward);
 	cam->right = v_unit(v_cross(cam->up, cam->forward));
@@ -29,6 +27,8 @@ int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 {
 	t_vector	projection;
 
+	ft_memset(ray, 0, sizeof (t_ray));
+	ray->start = cam->pos;
 	projection.x = (2.0 * (x + 0.5) / WIN_WIDTH - 1);
 	projection.x *= cam->aspect_ratio * cam->fov_scale;
 	projection.y = 1 - 2.0 * (y + 0.5) / WIN_HEIGHT;
@@ -38,7 +38,6 @@ int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 				cam->forward,
 				v_add(v_scale(cam->right, projection.x),
 					v_scale(cam->up, projection.y))));
-	ray->color.argb = 0b0001000100010001;
 	ray->shortest_impact_dist = DBL_MAX;
 	return (0);
 }
@@ -69,7 +68,7 @@ int	send_rays(t_all *all)
 	int		x;
 	int		y;
 
-	if (set_the_fundamentals(&ray, all->scene.cam))
+	if (set_the_cam(all->scene.cam))
 		return (-1);
 	x = 0;
 	while (x < WIN_WIDTH)
@@ -81,7 +80,7 @@ int	send_rays(t_all *all)
 			if (get_impact(&all->scene, &ray))
 			{
 				compute_light(&all->scene, &ray);
-				set_pixel_to_ray_color(all, ray->color.argb, x, y);
+				set_pixel_to_ray_color(all, ray.color.argb, x, y);
 			}
 			else
 				set_pixel_to_ray_color(all, COLOR_BG, x, y);

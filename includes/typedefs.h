@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 19:35:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 14:00:06 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_ray
 	t_vector	normal;
 	t_color		color;
 	double		shortest_impact_dist;
+	double		direct_light;
+	double		specular_light;
 	t_obj		*impact_object;
 }	t_ray;
 
@@ -121,8 +123,12 @@ typedef struct s_obj
 	t_obj			*next;
 	int				(*collision_fn)(t_obj *, t_ray *);
 	t_vector		(*normal_fn)(t_obj *obj, t_point p);
-	double			fov_scale;
-	double			aspect_ratio;
+		double			fov_scale;
+	union
+	{
+		double			aspect_ratio;
+		double			reflection;
+	};
 	t_vector		right;
 	t_vector		up;
 }	t_obj;

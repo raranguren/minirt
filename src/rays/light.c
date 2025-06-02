@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 20:17:50 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 15:15:10 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,45 @@
 
 int	set_ray_to_light(t_scene *scene, t_ray *ray)
 {
+	ray->start = v_add(
+		ray->start,
+		v_scale(ray->direction, ray->shortest_impact_dist));
 	ray->normal = ray->impact_object->normal_fn(ray->impact_object, ray->start);
 	ray->bump = v_substract(
-				ray->direction,
-				v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal)));
+		ray->direction,
+		v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal)));
 	ray->direction = v_unit(v_substract(scene->light->pos, ray->start));
 	return (0);
 }
 
 int	light(t_scene *scene, t_ray *ray)
 {
-	double	dot;
-
 	if (get_impact(scene, ray))
-	{
-		ray->direct_light = 0;
 		return (0);
+	ray->direct_light = fmax(v_dot(ray->normal, ray->direction), 0);
+	ray->specular_light = fmax(v_dot(ray->bump, ray->direction), 0);
+	printf("direct_light -> %lf\n", ray->direct_light);
+	printf("specular_light -> %lf\n", ray->specular_light);
+	return (0);
+}
+
+int	get_color(t_scene *scene, t_ray *ray)
+{
+	int		i;
+	float	c;
+
+	i = 0;
+	while (i < 4)
+	{
+		c = ray->impact_object->color.argb >> i * 8 & 0xFF;
+		c *= ray->direct_light;
+		c += ray->specular_light * pow(
+				scene->light->color.argb << i * 8, ray->impact_object->reflection);
+		c = round(fmin(c, 255));
+		ray->color.argb &= ~(0xFF << i * 8);
+		ray->color.argb |= (unsigned char)c << i * 8;
+		i++;
 	}
-	dot = v_dot(ray->normal, ray->direction);
-	ray->color.r *= dot * (double)scene->light->color.r / 255;
-	ray->color.g *= dot * (double)scene->light->color.g / 255;
-	ray->color.b *= dot * (double)scene->light->color.b / 255;
 	return (0);
 }
 
@@ -42,7 +60,6 @@ int	compute_light(t_scene *scene, t_ray *ray)
 {
 	set_ray_to_light(scene, ray);
 	light(scene, ray);
-	specular(scene, ray);
-	ambiant(scene, ray);
-	retutn (0);
+	get_color(scene, ray);
+	return (0);
 }
