@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 15:24:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 22:21:58 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_obj
 typedef struct s_scene
 {
 	t_obj		*obj;
+	t_obj		*obj2;
 	t_cam		*cam;
 	t_light		*amb_light;
 	t_light		*light;

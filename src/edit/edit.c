@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/02 10:58:31 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:32:31 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ int	edit_move(t_all *all, double x, double y, double z)
 
 int	edit_next(t_all *all)
 {
-	if (all->scene.selected)
-		all->scene.selected = all->scene.selected->next;
-	else
-		return (1);
+	char	type;
+
+	type = all->scene.selected->type;
+	all->scene.selected = all->scene.selected->next;
 	if (!all->scene.selected)
-		all->scene.selected = all->scene.obj;
+	{
+		if (type & SHAPE)
+			all->scene.selected = all->scene.obj2;
+		else
+			all->scene.selected = all->scene.obj;
+	}
 	if (all->scene.selected == NULL)
 		return (1);
 	ui_update(all);
@@ -57,8 +62,6 @@ int	edit_next(t_all *all)
 int	edit_init(t_all *all)
 {
 	all->scene.selected = all->scene.cam;
-	printf("initialized with next=%p\n", all->scene.cam->next);
-	printf("next->next=%p\n", all->scene.cam->next->next);
 	if (all->scene.selected == NULL)
 		return (1);
 	ui_update(all);

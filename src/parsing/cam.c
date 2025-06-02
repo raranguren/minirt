@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 09:57:53 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:28:21 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int	parse_cam(char **param, t_scene *scene)
 		return (error3("Parse error: invalid number for camera", 0, 0));
 	if (check_valid_values(cam))
 		return (1);
-	ft_objadd_back(&scene->obj, cam);
+	ft_objadd_back(&scene->obj2, cam);
 	return (0);
 }

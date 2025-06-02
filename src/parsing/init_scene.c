@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:04:36 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/02 10:43:51 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:24:43 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,23 @@ t_normal_fn	normal_fn(char type)
 int	init_scene(t_scene *scene)
 {
 	t_obj	*obj;
+	char	type;
 
 	obj = scene->obj;
 	while (obj)
 	{
-		if (obj->type == CAMERA)
+		type = obj->type;
+		if (type == CAMERA)
 			scene->cam = obj;
-		else if (obj->type == AMB_LIGHT)
+		else if (type == AMB_LIGHT)
 			scene->amb_light = obj;
-		else if (obj->type == LIGHT)
+		else if (type == LIGHT)
 			scene->light = obj;
 		obj->collision_fn = collision_fn(obj->type);
 		obj->normal_fn = normal_fn(obj->type);
 		obj = obj->next;
+		if (!obj && (type & SHAPE))
+			obj = scene->obj2;
 	}
 	return (0);
 }
