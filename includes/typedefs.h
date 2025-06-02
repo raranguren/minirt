@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 15:24:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/01 19:35:11 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_ray
 {
 	t_point		start;
 	t_vector	direction;
+	t_vector	bump;
+	t_vector	normal;
 	t_color		color;
 	double		shortest_impact_dist;
 	t_obj		*impact_object;

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:22:37 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/01 15:35:34 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_vector	sphere_normal(t_obj *obj, t_point p)
 {
 	t_vector	normal;
 
-	normal = v_unit(v_add(obj->pos, p));
+	normal = v_unit(v_scale(v_substract(obj->pos, p), -1));
 	return (normal);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 15:24:45 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/01 20:31:58 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 				cam->forward,
 				v_add(v_scale(cam->right, projection.x),
 					v_scale(cam->up, projection.y))));
-	ray->color.argb = COLOR_BG;
+	ray->color.argb = 0b0001000100010001;
 	ray->shortest_impact_dist = DBL_MAX;
 	return (0);
 }
 
-int	set_pixel_to_ray_color(t_all *all, t_ray *ray, int x, int y)
+int	set_pixel_to_ray_color(t_all *all, int	color, int x, int y)
 {
-	mlx_pixel_put(all->mlx_ptr, all->mlx_win, x, y, ray->color.argb);
+	mlx_pixel_put(all->mlx_ptr, all->mlx_win, x, y, color);
 	return (0);
 }
 
-int	get_first_impact(t_scene *scene, t_ray *ray)
+int	get_impact(t_scene *scene, t_ray *ray)
 {
 	int	impact;
 
@@ -61,26 +61,6 @@ int	get_first_impact(t_scene *scene, t_ray *ray)
 		scene->selected = scene->selected->next;
 	}
 	return (impact);
-}
-
-int	compute_reflection(t_scene *scene, t_ray *ray)
-{
-	t_point		point;
-	t_vector	normal;
-	t_vector	to_light;
-	double		dot_product;
-
-	point = v_add(ray->start, v_scale(ray->direction,
-				ray->shortest_impact_dist));
-	print_vector("point", point);
-	normal = ray->impact_object->normal_fn(ray->impact_object, point);
-	print_vector("normal", normal);
-	to_light = v_unit(v_substract(scene->light->pos, point));
-	print_vector("to_light", to_light);
-	dot_product = fmax(v_dot(to_light, normal), 0);
-	printf("dot -> %lf\n", dot_product);
-	ray->color = c_scale(ray->color, dot_product);
-	return (0);
 }
 
 int	send_rays(t_all *all)
@@ -98,9 +78,13 @@ int	send_rays(t_all *all)
 		while (y < WIN_HEIGHT)
 		{
 			set_ray(&ray, all->scene.cam, x, y);
-			if (get_first_impact(&all->scene, &ray))
-				compute_reflection(&all->scene, &ray);
-			set_pixel_to_ray_color(all, &ray, x, y);
+			if (get_impact(&all->scene, &ray))
+			{
+				compute_light(&all->scene, &ray);
+				set_pixel_to_ray_color(all, ray->color.argb, x, y);
+			}
+			else
+				set_pixel_to_ray_color(all, COLOR_BG, x, y);
 			y++;
 		}
 		x++;
