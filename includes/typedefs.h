@@ -83,6 +83,9 @@ typedef struct s_ray
 	t_obj		*impact_object;
 }	t_ray;
 
+typedef int	(*t_collision_fn)(t_obj *, t_ray *);
+typedef t_vector	(*t_normal_fn)(t_obj *obj, t_point p);
+
 // objects in scene: | A | C | L | sp| pl| cy|
 // -----------------------------------------------
 // | pos             |   | x | x | x | x | x |
@@ -117,8 +120,8 @@ typedef struct s_obj
 		double		fov;
 	};
 	t_obj			*next;
-	int				(*collision_fn)(t_obj *, t_ray *);
-	t_vector		(*normal_fn)(t_obj *obj, t_point p);
+	t_collision_fn	collision_fn;
+	t_normal_fn		normal_fn;
 	double			fov_scale;
 	double			aspect_ratio;
 	t_vector		right;

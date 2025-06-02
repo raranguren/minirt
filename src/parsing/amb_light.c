@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:43:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 09:57:48 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	parse_amb_light(char **param, t_scene *scene)
 		return (error3("Parse error: invalid color '", param[2], "'"));
 	if (valid_values(light))
 		return (1);
-	scene->amb_light = light;
+	ft_objadd_back(&scene->obj, light);
 	return (0);
 }

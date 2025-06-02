@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/26 20:55:10 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/02 10:30:42 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	parse_map(int ac, char **av, t_all *all)
 		return (error3(ERROR_ARGUMENTS, 0, 0));
 	if (read_and_orient(av[1], all))
 		return (-1);
+	init_scene(&all->scene);
 	return (0);
 }
