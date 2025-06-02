@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 15:15:10 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 16:15:10 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	light(t_scene *scene, t_ray *ray)
 	if (get_impact(scene, ray))
 		return (0);
 	ray->direct_light = fmax(v_dot(ray->normal, ray->direction), 0);
-	ray->specular_light = fmax(v_dot(ray->bump, ray->direction), 0);
-	printf("direct_light -> %lf\n", ray->direct_light);
-	printf("specular_light -> %lf\n", ray->specular_light);
+	ray->specular_light = fmax(pow(v_dot(ray->bump, ray->direction), 30), 0);
 	return (0);
 }
 
@@ -41,13 +39,13 @@ int	get_color(t_scene *scene, t_ray *ray)
 	int		i;
 	float	c;
 
+	(void)scene;
 	i = 0;
 	while (i < 4)
 	{
 		c = ray->impact_object->color.argb >> i * 8 & 0xFF;
 		c *= ray->direct_light;
-		c += ray->specular_light * pow(
-				scene->light->color.argb << i * 8, ray->impact_object->reflection);
+		c += ray->specular_light * (scene->light->color.argb << i * 8 & 0xFF);
 		c = round(fmin(c, 255));
 		ray->color.argb &= ~(0xFF << i * 8);
 		ray->color.argb |= (unsigned char)c << i * 8;

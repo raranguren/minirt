@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 15:21:45 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/02 15:48:29 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	get_impact(t_scene *scene, t_ray *ray)
 	scene->selected = scene->obj;
 	while (scene->selected)
 	{
-		impact |= scene->selected->collision_fn(scene->selected, ray);
+		if (scene->selected != ray->impact_object)
+			impact |= scene->selected->collision_fn(scene->selected, ray);
 		scene->selected = scene->selected->next;
 	}
 	return (impact);
