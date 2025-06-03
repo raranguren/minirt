@@ -1,6 +1,6 @@
 NAME		= miniRT
 
-CC			= gcc
+CC	 		= gcc-12
 CFLAGS		= -Wall -Werror -Wextra -g
 
 CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
@@ -13,19 +13,20 @@ SRC_DIR	= src/
 TMP_DIR = tmp/
 TMP_DIRS	= $(addprefix $(TMP_DIR), $(filter-out $(curr), $(sort $(dir $(FILES)))))
 
+FILES	!= find src -type f -name "*.c" | sed 's/src\///g' | sed 's/\.c//g'
 
 SRC = $(FILES:%=$(SRC_DIR)%.c)
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 
 MAKEFLAGS += --no-print-directory
 
-FILES	:= $(basename $(shell cat .files))
+
 
 all : $(NAME)
 
 .PHONY :  clean fclean re update_files
 
-$(TMP_DIR)%.o : $(SRC_DIR)%.c .c_files
+$(TMP_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 
@@ -53,7 +54,7 @@ libft/libft.a :
 
 mlx :
 	git clone https://github.com/42paris/minilibx-linux.git mlx
-	$(MAKE) -C mlx/
+	$(MAKE) -C mlx/ CC=gcc-12
 
 #<--------------	DEV_TOOLS	------------->
 

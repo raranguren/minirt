@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 20:00:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 14:42:44 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ int	light(t_scene *scene, t_ray *ray)
 
 int	get_color(t_scene *scene, t_ray *ray)
 {
-	double	fact_light;
-
-	ray->color.a = ray->impact_object->color.a;
-	fact_light = ray->direct_light * (double)scene->light->color.a / 255;
-	ray->color.a *= 
-
-
-
-
-
 	int		i;
 	float	c;
 
