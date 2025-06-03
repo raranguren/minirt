@@ -1,7 +1,7 @@
 NAME		= miniRT
 
 CC	 		= cc
-CFLAGS		= -Wall -Werror -Wextra -g
+CFLAGS		= -Wall -Werror -Wextra -g -O3
 
 CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
 LDFLAGS		= -Llibft/ -Lmlx -L/usr/lib/
@@ -55,7 +55,7 @@ mlx :
 
 #<--------------	DEV_TOOLS	------------->
 
-.PHONY : vi dev watch
+.PHONY : vi dev watch prof
 
 watch :
 	source ~/42/42_venv/bin/activate
@@ -70,6 +70,13 @@ gdb : all
 
 dev : all
 	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) scene_files/scene1.rt
+
+prof : CFLAGS += -pg
+prof : LDFLAGS += -pg
+prof : re
+	./$(NAME) scene_files/scene1.rt
+	gprof $(NAME) -p
+	$(MAKE) fclean
 
 coma 	:= ,
 space 	:= $(empty) $(empty)
