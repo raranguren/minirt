@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 14:47:52 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 21:59:36 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ t_vector	v_unit(t_vector v1);
 double		v_magnitude(t_vector v1);
 int			get_impact(t_scene *scene, t_ray *ray);
 int			compute_light(t_scene *scene, t_ray *ray);
-t_color		c_scale(t_color c, double scale);
+int			c_set(t_color *c, float scale);
+int			c_scale(t_color *c, float scale);
+int			c_scale_c(t_color *c, t_color *scale);
 
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);
@@ -69,6 +71,7 @@ int			ft_objadd_back(t_obj **lst, t_obj *new);
 int			unique(char obj_type, int parse_err);
 int			normalize(t_vector *vector);
 int			init_scene(t_scene *scene);
+
 
 			//edit
 int			edit_init(t_all *all);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 20:36:04 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 22:57:29 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	set_ray_to_impact(t_ray *ray)
 	ray->bump = v_unit(v_substract(
 		ray->direction,
 		v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal))));
-	ray->direct_light = 1;
-	ray->specular_light = 1;
+	c_set(&ray->direct_light, 1.0);
+	c_set(&ray->specular_light, 1.0);
 	return (0);
 }
 
@@ -38,14 +38,17 @@ int	get_light_incidence(t_scene *scene, t_ray *ray)
 {
 	if (get_impact(scene, ray))
 		return (0);
-	ray->direct_light *= v_dot(ray->normal, ray->direction);
-	ray->specular_light *= pow(v_dot(ray->bump, ray->direction), REFRACT);
+	c_scale(&ray->direct_light, v_dot(ray->normal, ray->direction));
+	c_scale(&ray->specular_light, pow(v_dot(ray->bump, ray->direction), REFRACT));
 	return (0);
 }
 
 int	compute_final_color(t_light *amb_light, t_ray *ray)
 {
-	(void)ray;
+	ray->color = ray->impact_object->color;
+	print_color("ray", ray->color);
+	print_color("direct light", ray->direct_light);
+	c_scale_c(&ray->color, &ray->direct_light);
 	(void)amb_light;
 	return (0);
 }
@@ -55,7 +58,7 @@ int	compute_light(t_scene *scene, t_ray *ray)
 	t_light	*light;
 
 	light = scene->light;
-	if (!set_ray_to_impact(ray))
+	if (set_ray_to_impact(ray))
 		light = NULL;
 	while (light && light->type == LIGHT)
 	{

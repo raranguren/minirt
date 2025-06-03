@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 20:48:55 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 21:23:35 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct s_ray
 	t_vector	normal;
 	t_color		color;
 	double		shortest_impact_dist;
-	double		direct_light;
-	double		specular_light;
+	t_color		direct_light;
+	t_color		specular_light;
 	t_obj		*impact_object;
 }	t_ray;
 
