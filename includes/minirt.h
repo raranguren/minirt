@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/01 20:23:39 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 14:47:52 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int			ft_objclear(t_obj **lst);
 int			ft_objadd_back(t_obj **lst, t_obj *new);
 int			unique(char obj_type, int parse_err);
 int			normalize(t_vector *vector);
+int			init_scene(t_scene *scene);
 
 			//edit
 int			edit_init(t_all *all);

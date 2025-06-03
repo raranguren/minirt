@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/30 13:33:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:32:31 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,21 @@ int	edit_move(t_all *all, double x, double y, double z)
 
 int	edit_next(t_all *all)
 {
+	char	type;
+
+	type = all->scene.selected->type;
 	all->scene.selected = all->scene.selected->next;
 	if (!all->scene.selected)
-		all->scene.selected = all->scene.obj;
+	{
+		if (type & SHAPE)
+			all->scene.selected = all->scene.obj2;
+		else
+			all->scene.selected = all->scene.obj;
+	}
 	if (all->scene.selected == NULL)
 		return (1);
 	ui_update(all);
-	return (0);
+	return (2);
 }
 
 int	edit_init(t_all *all)

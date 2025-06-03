@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 15:48:29 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 14:54:00 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,16 @@ int	set_pixel_to_ray_color(t_all *all, int	color, int x, int y)
 
 int	get_impact(t_scene *scene, t_ray *ray)
 {
-	int	impact;
+	int		impact;
+	t_obj	*obj;
 
 	impact = 0;
-	scene->selected = scene->obj;
-	while (scene->selected)
+	obj = scene->obj;
+	while (obj)
 	{
-		if (scene->selected != ray->impact_object)
-			impact |= scene->selected->collision_fn(scene->selected, ray);
-		scene->selected = scene->selected->next;
+		if (obj != ray->impact_object)
+			impact |= obj->collision_fn(obj, ray);
+		obj = obj->next;
 	}
 	return (impact);
 }

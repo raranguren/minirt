@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 14:00:06 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 15:04:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,9 @@ typedef struct s_ray
 	t_obj		*impact_object;
 }	t_ray;
 
-// objects in scene: | A | C | L | sp| pl| cy|
-// -----------------------------------------------
-// | pos             |   | x | x | x | x | x |
-// | orientation     |   | x |   |   | x | x |
-// | diameter        |   |   |   | x |   | x | 1 union
-// | ratio           | x |   |   |   |   |   | 1
-// | height          |   |   |   |   |   | x | 2 union
-// | radius          |   |   |   |   | x |   | 2 union
-// | brightness      |   |   | x |   |   |   | 2
-// | fov             |   | x |   |   |   |   | 2
-// | color           | x |   | x | x | x | x |
+typedef	int				(*t_collision_fn)(t_obj *, t_ray *);
+typedef	t_vector		(*t_normal_fn)(t_obj *obj, t_point p);
+
 typedef struct s_obj
 {
 	char			type;
@@ -121,8 +113,9 @@ typedef struct s_obj
 		double		fov;
 	};
 	t_obj			*next;
-	int				(*collision_fn)(t_obj *, t_ray *);
-	t_vector		(*normal_fn)(t_obj *obj, t_point p);
+	t_collision_fn	collision_fn;
+	t_normal_fn 	normal_fn;
+
 		double			fov_scale;
 	union
 	{
@@ -136,6 +129,7 @@ typedef struct s_obj
 typedef struct s_scene
 {
 	t_obj		*obj;
+	t_obj		*obj2;
 	t_cam		*cam;
 	t_light		*amb_light;
 	t_light		*light;
