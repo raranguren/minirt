@@ -1,6 +1,6 @@
 NAME		= miniRT
 
-CC	 		= gcc-12
+CC	 		= cc
 CFLAGS		= -Wall -Werror -Wextra -g
 
 CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
@@ -24,7 +24,7 @@ MAKEFLAGS += --no-print-directory
 
 all : $(NAME)
 
-.PHONY :  clean fclean re update_files
+.PHONY :  clean fclean re 
 
 $(TMP_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -43,9 +43,6 @@ fclean : clean
 
 re : fclean all
 
-files :
-	find src -type f | sed 's/src\///g' > .$@;
-
 $(TMP_DIRS) :
 	@mkdir -p $(TMP_DIRS)
 
@@ -54,7 +51,7 @@ libft/libft.a :
 
 mlx :
 	git clone https://github.com/42paris/minilibx-linux.git mlx
-	$(MAKE) -C mlx/ CC=gcc-12
+	$(MAKE) -C mlx/ 
 
 #<--------------	DEV_TOOLS	------------->
 

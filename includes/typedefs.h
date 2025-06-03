@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 15:04:30 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 20:47:09 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,23 @@ typedef struct s_quadratic
 
 typedef struct s_coord
 {
-	union
-	{
 		double	x;
-		double	a;
-		double	solution_1;
-	};
-	union
-	{
 		double	y;
-		double	b;
-		double	solution_2;
-	};
-	union
-	{
 		double	z;
-		double	c;
-	};
-	union
-	{
-		double	delta;
-		double	norm;
-	};
 }	t_coord;
+
+typedef struct s_col
+{
+		double	r;
+		double	g;
+		double	b;
+}	t_col;
 
 typedef struct s_color
 {
 	union
 	{
-		int32_t	argb;
+		uint32_t	argb;
 		struct
 		{
 			uint8_t	a;

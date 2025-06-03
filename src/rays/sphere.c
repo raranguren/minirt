@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 16:00:17 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 20:17:09 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	interpret_results(t_quadratic *res, t_ray *ray, t_obj *obj)
 	if ((res->solution_1 < 0 || res->solution_1 > ray->shortest_impact_dist)
 		&& (res->solution_2 < 0 || res->solution_2 > ray->shortest_impact_dist))
 		return (0);
+	if (ray->impact_object != NULL)
+		return (1);
 	if (res->solution_1 > 0 && res->solution_1 < ray->shortest_impact_dist)
 		ray->shortest_impact_dist = res->solution_1;
 	if (res->solution_2 > 0 && res->solution_2 < ray->shortest_impact_dist)
