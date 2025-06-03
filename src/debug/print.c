@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 12:04:37 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:23:26 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 20:51:23 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	print_scene(t_all *all)
 		all->scene.cam->fov);
 	printf("AMBLIGHT\n"
 		"brightness	%lf\n"
-		"color		%d,%d,%d\n\n",
+		"color		%f,%f,%f\n\n",
 		all->scene.amb_light->brightness,
 		all->scene.amb_light->color.r,
 		all->scene.amb_light->color.g,
@@ -37,7 +37,7 @@ int	print_scene(t_all *all)
 	printf("LIGHT\n"
 		"position		%lf,%lf,%lf\n"
 		"brightness		%lf\n"
-		"color			%d,%d,%d\n\n",
+		"color			%f,%f,%f\n\n",
 		all->scene.light->pos.x,
 		all->scene.light->pos.y,
 		all->scene.light->pos.z,
@@ -53,7 +53,7 @@ int	print_scene(t_all *all)
 			"position		%lf,%lf,%lf\n"
 			"orientation		%lf,%lf,%lf\n"
 			"dimensions		%lf,%lf\n"
-			"color			%d,%d,%d\n"
+			"color			%f,%f,%f\n"
 			"next			%p\n\n",
 			ptr->type,
 			ptr->pos.x,
@@ -75,7 +75,7 @@ int	print_scene(t_all *all)
 
 int	print_ray(t_ray r)
 {
-	printf("RAY---\npos: %lf,%lf,%lf\ndir: %lf,%lf,%lf\ncol :%i,%i,%i,%i\n\n",
+	printf("RAY---\npos: %lf,%lf,%lf\ndir: %lf,%lf,%lf\ncol :%f,%f,%f,%f\n\n",
 		r.start.x, r.start.y, r.start.z, r.direction.x,
 		r.direction.y, r.direction.z,
 		r.color.a, r.color.r, r.color.g, r.color.b);
@@ -84,7 +84,7 @@ int	print_ray(t_ray r)
 
 int	print_color(char *s, t_color c)
 {
-	printf("%s -> (%d,\t%d,\t%d,\t%d)\n", s, c.a, c.r, c.g, c.b);
+	printf("%s -> (%f,\t%f,\t%f,\t%f)\n", s, c.a, c.r, c.g, c.b);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 20:47:09 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 20:48:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,10 @@ typedef struct s_col
 
 typedef struct s_color
 {
-	union
-	{
-		uint32_t	argb;
-		struct
-		{
-			uint8_t	a;
-			uint8_t	r;
-			uint8_t	g;
-			uint8_t	b;
-		};
-	};
+	float	a;
+	float	r;
+	float	g;
+	float	b;
 }	t_color;
 
 typedef t_coord			t_vector;

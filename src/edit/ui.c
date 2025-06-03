@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 09:54:48 by rarangur          #+#    #+#             */
-/*   Updated: 2025/05/31 14:47:48 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/03 20:53:00 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	tui_update(t_all *all)
 	obj = all->scene.selected;
 	printf("%10s ", typestr(obj));
 	if (obj->type != CAMERA)
-		printf("[%#6x] ", obj->color.argb);
+		printf("[%#6x] ", 0);
 	else
 		printf("           ");
 	if (obj->type != AMB_LIGHT)
