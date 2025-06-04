@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 21:23:35 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 08:55:47 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 
 typedef struct s_quadratic
 {
-		double	a;
-		double	b;
-		double	c;
-		double	delta;
-		double	solution_1;
-		double	solution_2;
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+	double	solution_1;
+	double	solution_2;
 
 }	t_quadratic;
 
 typedef struct s_coord
 {
-		double	x;
-		double	y;
-		double	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_coord;
 
 typedef struct s_col
 {
-		double	r;
-		double	g;
-		double	b;
+	double	r;
+	double	g;
+	double	b;
 }	t_col;
 
 typedef struct s_color
@@ -68,8 +68,8 @@ typedef struct s_ray
 	t_obj		*impact_object;
 }	t_ray;
 
-typedef	int				(*t_collision_fn)(t_obj *, t_ray *);
-typedef	t_vector		(*t_normal_fn)(t_obj *obj, t_point p);
+typedef int				(*t_collision_fn)(t_obj *, t_ray *);
+typedef t_vector		(*t_normal_fn)(t_obj *obj, t_point p);
 
 typedef struct s_obj
 {
@@ -95,9 +95,9 @@ typedef struct s_obj
 	};
 	t_obj			*next;
 	t_collision_fn	collision_fn;
-	t_normal_fn 	normal_fn;
+	t_normal_fn		normal_fn;
 
-		double			fov_scale;
+	double			fov_scale;
 	union
 	{
 		double			aspect_ratio;

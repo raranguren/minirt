@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 21:10:52 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 09:02:42 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 int	set_pixel_to_ray_color(t_all *all, t_color *c, int x, int y)
 {
 	int	color;
-	
+
 	color = (int)c->a << 24 | (int)c->r << 16 | (int)c->g << 8 | (int)c->b;
 	mlx_pixel_put(all->mlx_ptr, all->mlx_win, x, y, color);
 	return (0);

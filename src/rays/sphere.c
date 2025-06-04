@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/03 20:17:09 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 09:01:36 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,6 @@ t_vector	sphere_normal(t_obj *obj, t_point p)
 	return (normal);
 }
 
-/*
-Ray equation  :  R(t)= ray->start + t * ray->orientation;
-Point is at the sphere  surface if ||R(t) - sphere->pos||² = sphere->rayon
-After developpment we get the final equation :
- t² + 2 * (L . D)t + (L . L - sphere->rayon²) = 0
- with L = ray->start - sphere->pos
- so a = 1	b = 2(L . D)	c = L . L - r2
- Delta = b²-4ac
- if Delta > 0  	>> 2 results : 
- 	-> (-b + sqr_root(delta)) / 2a
- 	-> (-b - sqr_root(delta)) / 2a
- if Delta = 0  	>> 1 results : 
- 	-> -b / 2a
- if Delta < 0	>> 0 results :
- printf("Ray :\n start %lf, %lf, %lf\n orient : %lf,%lf,%lf\n",
- ray->start.x,ray->start.y,ray->start.z,ray->direction.x,ray->direction.y,ray->direction.z);
-*/
 static int	interpret_results(t_quadratic *res, t_ray *ray, t_obj *obj)
 {
 	if ((res->solution_1 < 0 || res->solution_1 > ray->shortest_impact_dist)
