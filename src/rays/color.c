@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:23:25 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:26:17 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 17:14:15 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,5 @@ t_color	c_multiply(t_color c, t_color scale)
 	c.r = c.r * scale.r;
 	c.g = c.g * scale.g;
 	c.b = c.b * scale.b;
-	return (c_range(c));
-}
-
-t_color	c_scale(t_color c, float scale)
-{
-	c.a = c.a * scale;
-	c.r = c.r * scale;
-	c.g = c.g * scale;
-	c.b = c.b * scale;
 	return (c_range(c));
 }

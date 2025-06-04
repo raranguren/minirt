@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 08:53:27 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 17:16:36 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define PERROR(msg) print_error(msg, __FILE__, __LINE__, __func__)
 # define PERROR2(msg1, msg2) print_error2(msg1, msg2,  __FILE__, __LINE__)
 
-#define ICI	printf("ICI\n");
+# define ICI	printf("ICI\n");
 
 // Screen dimensions
 # define WIN_WIDTH		720

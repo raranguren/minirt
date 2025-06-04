@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:59:13 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 15:49:04 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:13:04 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	key_press_hook(int keycode, void *param)
 		quit_hook(param);
 	if (edit(param, keycode) == 0)
 	{
-		send_rays((t_all*)param);
+		send_rays((t_all *)param);
 		return (0);
 	}
 	// handle other keys, debugging etc.

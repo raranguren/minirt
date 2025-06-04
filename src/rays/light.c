@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 17:05:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 17:15:56 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	spotlight(t_light *light, t_ray *ray)
 			pow(fmax(v_dot(ray->normal, ray->direction), 0), REFRACT));
 	ray->color = c_multiply(ray->impact_object->color, ray->direct_light);
 	ray->color = c_add(
-			ray->color, 
+			ray->color,
 			c_multiply(light->color, ray->specular_light));
 	return (0);
 }
@@ -64,7 +64,6 @@ int	amblight(t_light *light, t_ray *ray)
 	return (0);
 }
 
-
 int	reach_spotlight(t_scene *scene, t_light *light, t_ray *ray)
 {
 	t_vector	to_spotlight;
@@ -73,13 +72,13 @@ int	reach_spotlight(t_scene *scene, t_light *light, t_ray *ray)
 	ray->shortest_impact_dist = v_magnitude(to_spotlight);
 	ray->direction = v_unit(to_spotlight);
 	if (v_dot(ray->normal, ray->bump) >= 0
-		|| v_dot(ray->normal, 
+		|| v_dot(ray->normal,
 			v_unit(v_substract(light->pos, ray->start))) < 0)
 	{
 		if (!get_impact(scene, ray))
 			return (1);
 	}
-		return (0);
+	return (0);
 }
 
 int	compute_light(t_scene *scene, t_ray *ray)
