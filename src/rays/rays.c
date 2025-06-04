@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 11:43:54 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:33:47 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,20 @@ int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 	return (0);
 }
 
+void	put_pixelto(t_image *img, int x, int y, int color)
+{
+	char	*pix;
+
+	pix = img->data + (y * img->line_length + x * (img->bits_per_pix / 8));
+	*(int *)pix = color;
+}
+
 int	set_pixel_to_ray_color(t_all *all, t_color *c, int x, int y)
 {
 	int	color;
 
 	color = (int)c->a << 24 | (int)c->r << 16 | (int)c->g << 8 | (int)c->b;
-	mlx_pixel_put(all->mlx_ptr, all->mlx_win, x, y, color);
+	put_pixelto(&all->img, x, y, color);
 	return (0);
 }
 
@@ -89,10 +97,11 @@ int	send_rays(t_all *all)
 				set_pixel_to_ray_color(all, &ray.color, x, y);
 			}
 			else
-				mlx_pixel_put(all->mlx_ptr, all->mlx_win, x, y, COLOR_BG);
+				put_pixelto(&all->img, x, y, COLOR_BG);
 			y++;
 		}
 		x++;
 	}
+	mlx_put_image_to_window(all->mlx_ptr, all->mlx_win, all->img.id, 0, 0);
 	return (0);
 }

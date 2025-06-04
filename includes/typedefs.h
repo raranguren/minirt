@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 11:50:01 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 12:30:00 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,20 @@ typedef struct s_scene
 	t_obj		*selected;
 }	t_scene;
 
+typedef struct s_image
+{
+	void	*id;
+	char	*data;
+	int		bits_per_pix;
+	int		line_length;
+	int		endian;
+}	t_image;
+
 typedef struct s_all
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
-	void	*img;
+	t_image	img;
 	t_scene	scene;
 }	t_all;
 
