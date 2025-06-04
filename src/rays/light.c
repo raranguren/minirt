@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:34:18 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 09:41:32 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	set_ray_to_impact(t_ray *ray)
 				ray->direction,
 				v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal))));
 	ray->direct_light = c_set(1);
+	ray->specular_light = c_set(1);
 	return (0);
 }
 
@@ -38,7 +39,15 @@ int	spotlight(t_light *light, t_ray *ray)
 				ray->direct_light,
 				c_scale(c_normalize(light->color), light->brightness)),
 			fmax(v_dot(ray->normal, ray->direction), 0));
+	ray->specular_light = c_scale(
+			c_multiply(
+				ray->specular_light,
+				c_scale(c_normalize(light->color), light->brightness)),
+			pow(fmax(v_dot(ray->normal, ray->direction), 0), REFRACT));
 	ray->color = c_multiply(ray->impact_object->color, ray->direct_light);
+	ray->color = c_add(
+			ray->color, 
+			c_multiply(light->color, ray->specular_light));
 	return (0);
 }
 
