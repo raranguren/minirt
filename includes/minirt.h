@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:25:10 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 15:27:17 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int			quit_hook(void *param);
 			//ray
 int			send_rays(t_all *all);
 int			sphere_collision(t_obj *sphere, t_ray *ray);
-t_vector	sphere_normal(t_obj *sphere, t_point point);
+t_vector	sphere_normal(t_obj *sphere, t_ray *ray);
+int			plane_collision(t_obj *plane, t_ray *ray);
+t_vector	plane_normal(t_obj *obj, t_ray *ray);
 float		ft_norm(t_vector *v);
 t_vector	v_substract(t_vector v1, t_vector v2);
 t_vector	v_multiply(t_vector v1, t_vector v2);

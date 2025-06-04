@@ -6,33 +6,43 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 11:44:55 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 17:07:27 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	sphere_normal(t_obj *obj, t_point p)
+t_vector	sphere_normal(t_obj *obj, t_ray *ray)
 {
 	t_vector	normal;
+	t_point		p;
 
+	p = ray->start;
 	normal = v_unit(v_substract(p, obj->pos));
 	return (normal);
 }
 
 static int	interpret(t_quadratic *res, t_ray *ray, t_obj *obj)
 {
-	if ((res->solution_1 < 0 || res->solution_1 > ray->shortest_impact_dist)
-		&& (res->solution_2 < 0 || res->solution_2 > ray->shortest_impact_dist))
+	float	dist;
+
+	if (res->solution_1 < 0 && res->solution_2 < 0)
 		return (0);
-	if (!ray->from_cam)
+	if (res->solution_1 < 0)
+		res->solution_1 = FLT_MAX;
+	else if (res->solution_2 < 0)
+		res->solution_2 = FLT_MAX;
+	dist = fminf(res->solution_1, res->solution_2);
+	if (dist < ray->shortest_impact_dist)
+	{
+		if (ray->from_cam)
+		{
+			ray->shortest_impact_dist = dist;
+			ray->impact_object = obj;
+		}
 		return (1);
-	if (res->solution_1 > 0 && res->solution_1 < ray->shortest_impact_dist)
-		ray->shortest_impact_dist = res->solution_1;
-	if (res->solution_2 > 0 && res->solution_2 < ray->shortest_impact_dist)
-		ray->shortest_impact_dist = res->solution_2;
-	ray->impact_object = obj;
-	return (1);
+	}
+	return (0);
 }
 
 int	sphere_collision(t_obj *sphere, t_ray *ray)

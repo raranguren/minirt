@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:04:36 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/02 22:24:43 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:29:41 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_collision_fn	collision_fn(char type)
 {
 	if (type == SPHERE)
 		return (&sphere_collision);
+	if (type == PLANE)
+		return (&plane_collision);
 	else
 		return (&no_collision);
 }
@@ -33,6 +35,8 @@ t_normal_fn	normal_fn(char type)
 {
 	if (type == SPHERE)
 		return (&sphere_normal);
+	if (type == PLANE)
+		return (&plane_normal);
 	else
 		return (NULL);
 }
