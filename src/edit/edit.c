@@ -6,11 +6,12 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/02 22:32:31 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:49:49 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#define	STEP	10
 
 int	edit_rotate(t_all *all, float horizontal, float vertical)
 {
@@ -26,16 +27,16 @@ int	edit_rotate(t_all *all, float horizontal, float vertical)
 	return (0);
 }
 
-int	edit_move(t_all *all, float x, float y, float z)
+int	edit_move(t_all *all, t_vector v)
 {
 	t_obj	*obj;
 
 	obj = all->scene.selected;
 	if (!obj || obj->type == AMB_LIGHT)
 		return (1);
-	obj->pos.x += x;
-	obj->pos.y += y;
-	obj->pos.z += z;
+	obj->pos.x += v.x;
+	obj->pos.y += v.y;
+	obj->pos.z += v.z;
 	ui_update(all);
 	return (0);
 }
@@ -73,17 +74,17 @@ int	edit(t_all *all, int key)
 	if (key == XK_n)
 		return (edit_next(all));
 	if (key == XK_w)
-		return (edit_move(all, 0, 10, 0));
+		return (edit_move(all, v_scale(all->scene.cam->up, STEP)));
 	if (key == XK_s)
-		return (edit_move(all, 0, -10, 0));
+		return (edit_move(all, v_scale(all->scene.cam->up, -STEP)));
 	if (key == XK_a)
-		return (edit_move(all, -10, 0, 0));
+		return (edit_move(all, v_scale(all->scene.cam->right, -STEP)));
 	if (key == XK_d)
-		return (edit_move(all, 10, 0, 0));
+		return (edit_move(all, v_scale(all->scene.cam->right, STEP)));
 	if (key == XK_e)
-		return (edit_move(all, 0, 0, 10));
+		return (edit_move(all, v_scale(all->scene.cam->forward, STEP)));
 	if (key == XK_c)
-		return (edit_move(all, 0, 0, -10));
+		return (edit_move(all, v_scale(all->scene.cam->forward, -STEP)));
 	if (key == XK_Up)
 		return (edit_rotate(all, 0, -10));
 	if (key == XK_Down)
