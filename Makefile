@@ -44,6 +44,13 @@ OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 MAKEFLAGS += --no-print-directory
 
 
+# ------ temporary --------
+SRC = $(SRC_BONUS)
+OBJ = $(OBJ_BONUS)
+CPPFLAGS += -D BONUS=1
+# -------------------------
+
+
 
 all : $(NAME)
 
@@ -104,3 +111,4 @@ prof : re
 	./$(NAME) scene_files/scene1.rt
 	gprof $(NAME) -p
 	$(MAKE) fclean
+	rm -f gmon.out
