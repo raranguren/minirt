@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/04 12:49:49 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 13:12:26 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ int	edit(t_all *all, int key)
 {
 	if (key == XK_n)
 		return (edit_next(all));
-	if (key == XK_w)
+	if (key == XK_i)
 		return (edit_move(all, v_scale(all->scene.cam->up, STEP)));
-	if (key == XK_s)
-		return (edit_move(all, v_scale(all->scene.cam->up, -STEP)));
-	if (key == XK_a)
+	if (key == XK_j)
 		return (edit_move(all, v_scale(all->scene.cam->right, -STEP)));
-	if (key == XK_d)
+	if (key == XK_k)
+		return (edit_move(all, v_scale(all->scene.cam->up, -STEP)));
+	if (key == XK_l)
 		return (edit_move(all, v_scale(all->scene.cam->right, STEP)));
-	if (key == XK_e)
+	if (key == XK_u)
 		return (edit_move(all, v_scale(all->scene.cam->forward, STEP)));
-	if (key == XK_c)
+	if (key == XK_h)
 		return (edit_move(all, v_scale(all->scene.cam->forward, -STEP)));
 	if (key == XK_Up)
 		return (edit_rotate(all, 0, -10));
