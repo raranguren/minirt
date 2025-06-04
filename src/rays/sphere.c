@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:34:25 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 11:44:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ t_vector	sphere_normal(t_obj *obj, t_point p)
 	return (normal);
 }
 
-static int	interpret_results(t_quadratic *res, t_ray *ray, t_obj *obj)
+static int	interpret(t_quadratic *res, t_ray *ray, t_obj *obj)
 {
 	if ((res->solution_1 < 0 || res->solution_1 > ray->shortest_impact_dist)
 		&& (res->solution_2 < 0 || res->solution_2 > ray->shortest_impact_dist))
 		return (0);
-	if (ray->impact_object != NULL)
+	if (!ray->from_cam)
 		return (1);
 	if (res->solution_1 > 0 && res->solution_1 < ray->shortest_impact_dist)
 		ray->shortest_impact_dist = res->solution_1;
@@ -52,5 +52,5 @@ int	sphere_collision(t_obj *sphere, t_ray *ray)
 		quad.delta = sqrt(quad.delta);
 	quad.solution_1 = (-quad.b - quad.delta) / 2.0;
 	quad.solution_2 = (-quad.b + quad.delta) / 2.0;
-	return (interpret_results(&quad, ray, sphere));
+	return (interpret(&quad, ray, sphere));
 }

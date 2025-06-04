@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 08:55:47 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 11:44:32 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_ray
 	t_color		direct_light;
 	t_color		specular_light;
 	t_obj		*impact_object;
+	int			from_cam;
 }	t_ray;
 
 typedef int				(*t_collision_fn)(t_obj *, t_ray *);

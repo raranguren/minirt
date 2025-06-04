@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:02:42 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 11:43:54 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
 				v_add(v_scale(cam->right, projection.x),
 					v_scale(cam->up, projection.y))));
 	ray->shortest_impact_dist = DBL_MAX;
+	ray->from_cam = 1;
 	return (0);
 }
 

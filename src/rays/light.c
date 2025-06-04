@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:41:32 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 11:44:18 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	set_ray_to_impact(t_ray *ray)
 	ray->bump = v_unit(v_substract(
 				ray->direction,
 				v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal))));
+	ray->from_cam = 0;
 	ray->direct_light = c_set(1);
 	ray->specular_light = c_set(1);
 	return (0);
