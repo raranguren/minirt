@@ -13,12 +13,12 @@
 #include "minirt.h"
 
 // Rotation around the Y axis, looking left or right
-void	rotate_yaw(t_vector *v, double angle_radians)
+void	rotate_yaw(t_vector *v, float angle_radians)
 {
-	double	x;
-	double	z;
-	double	cos_;
-	double	sin_;
+	float	x;
+	float	z;
+	float	cos_;
+	float	sin_;
 
 	x = v->x;
 	z = v->z;
@@ -31,12 +31,12 @@ void	rotate_yaw(t_vector *v, double angle_radians)
 // Rodrigues rotation formula (see Wikipedia)
 //   - cross is the cross vector multiplication (v x axis)
 //   - dot is the dot vector multiplication (v . axis)
-void	rodrigues(t_vector *v, t_vector *axis, double angle_radian)
+void	rodrigues(t_vector *v, t_vector *axis, float angle_radian)
 {
-	double		cos_;
-	double		sin_;
+	float		cos_;
+	float		sin_;
 	t_vector	cross;
-	double		dot;
+	float		dot;
 
 	cos_ = cos(angle_radian);
 	sin_ = sin(angle_radian);
@@ -51,7 +51,7 @@ void	rodrigues(t_vector *v, t_vector *axis, double angle_radian)
 
 static t_vector	tangent(t_vector *v)
 {
-	double		xz_magn;
+	float		xz_magn;
 	t_vector	axis;
 
 	xz_magn = sqrt(v->x * v->x + v->z * v->z);
@@ -81,9 +81,9 @@ static t_vector	tangent(t_vector *v)
 // If after rotating it is vertical, adds small degree to not lose the direction
 //   - xy_magn is the magnitude of the vector when proyected in plane XZ
 //   - axis is the vector tangent to the proyection of v in the plane XZ
-void	rotate_pitch(t_vector *v, double angle_radians)
+void	rotate_pitch(t_vector *v, float angle_radians)
 {
-	double		xz_magn;
+	float		xz_magn;
 	t_vector	axis;
 
 	axis = tangent(v);
@@ -93,7 +93,7 @@ void	rotate_pitch(t_vector *v, double angle_radians)
 		rodrigues(v, &axis, 0.01 * M_PI / 180.0);
 }
 
-int	rotate(t_vector *v, double horizontal_angle, double vertical_angle)
+int	rotate(t_vector *v, float horizontal_angle, float vertical_angle)
 {
 	if (!horizontal_angle && !vertical_angle)
 		return (1);

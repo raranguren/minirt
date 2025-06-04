@@ -26,9 +26,9 @@ t_vector	v_multiply(t_vector v1, t_vector v2)
 {
 	t_vector	result;
 
-	result.x = (double)v1.x * v2.x;
-	result.y = (double)v1.y * v2.y;
-	result.z = (double)v1.z * v2.z;
+	result.x = (float)v1.x * v2.x;
+	result.y = (float)v1.y * v2.y;
+	result.z = (float)v1.z * v2.z;
 	return (result);
 }
 

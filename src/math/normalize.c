@@ -14,7 +14,7 @@
 
 int	normalize(t_vector *v)
 {
-	double	size;
+	float	size;
 
 	if (v->x == 0.0 && v->y == 0.0 && v->z == 0)
 		return (1);

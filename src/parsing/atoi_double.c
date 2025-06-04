@@ -32,11 +32,11 @@ static int	is_valid_double(char *str)
 	return (*str == '\0');
 }
 
-static double	ft_strtod(char *str)
+static float	ft_strtod(char *str)
 {
-	double	num;
-	double	decimal;
-	double	sign;
+	float	num;
+	float	decimal;
+	float	sign;
 
 	num = 0;
 	sign = 1;
@@ -58,7 +58,7 @@ static double	ft_strtod(char *str)
 	return (num * sign);
 }
 
-int	ft_atoi_double(double *res, char *str)
+int	ft_atoi_double(float *res, char *str)
 {
 	while (ft_isspace(*str))
 		str++;
@@ -73,7 +73,7 @@ int	ft_atoi_double(double *res, char *str)
 /*
 int	main(int argc, char **argv)
 {
-	double	n;
+	float	n;
 	for (int i = 1; i < argc; i++)
 	{
 		int err = ft_atoi_double(&n, argv[i]);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 11:44:32 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 11:50:01 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 
 typedef struct s_quadratic
 {
-	double	a;
-	double	b;
-	double	c;
-	double	delta;
-	double	solution_1;
-	double	solution_2;
+	float	a;
+	float	b;
+	float	c;
+	float	delta;
+	float	solution_1;
+	float	solution_2;
 
 }	t_quadratic;
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_coord;
 
 typedef struct s_col
 {
-	double	r;
-	double	g;
-	double	b;
+	float	r;
+	float	g;
+	float	b;
 }	t_col;
 
 typedef struct s_color
@@ -62,7 +62,7 @@ typedef struct s_ray
 	t_vector	bump;
 	t_vector	normal;
 	t_color		color;
-	double		shortest_impact_dist;
+	float		shortest_impact_dist;
 	t_color		direct_light;
 	t_color		specular_light;
 	t_obj		*impact_object;
@@ -84,25 +84,25 @@ typedef struct s_obj
 	t_color			color;
 	union
 	{
-		double		diameter;
-		double		ratio;
+		float		diameter;
+		float		ratio;
 	};
 	union
 	{
-		double		height;
-		double		radius;
-		double		brightness;
-		double		fov;
+		float		height;
+		float		radius;
+		float		brightness;
+		float		fov;
 	};
 	t_obj			*next;
 	t_collision_fn	collision_fn;
 	t_normal_fn		normal_fn;
 
-	double			fov_scale;
+	float			fov_scale;
 	union
 	{
-		double			aspect_ratio;
-		double			reflection;
+		float			aspect_ratio;
+		float			reflection;
 	};
 	t_vector		right;
 	t_vector		up;

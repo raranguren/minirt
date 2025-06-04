@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-int	edit_rotate(t_all *all, double horizontal, double vertical)
+int	edit_rotate(t_all *all, float horizontal, float vertical)
 {
 	t_obj	*obj;
 
@@ -26,7 +26,7 @@ int	edit_rotate(t_all *all, double horizontal, double vertical)
 	return (0);
 }
 
-int	edit_move(t_all *all, double x, double y, double z)
+int	edit_move(t_all *all, float x, float y, float z)
 {
 	t_obj	*obj;
 

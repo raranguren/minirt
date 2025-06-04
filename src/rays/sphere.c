@@ -40,7 +40,7 @@ int	sphere_collision(t_obj *sphere, t_ray *ray)
 	t_quadratic	quad;
 	t_vector	tmp;
 
-	sphere->radius = (double)sphere->diameter / 2.0;
+	sphere->radius = (float)sphere->diameter / 2.0;
 	tmp = v_substract(ray->start, sphere->pos);
 	quad.a = 1.0;
 	quad.b = 2.0 * v_dot(tmp, ray->direction);

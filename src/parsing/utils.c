@@ -21,7 +21,7 @@ int	ft_get_color(t_obj *obj, char **param)
 	return (0);
 }
 
-int	is_normalized(double n)
+int	is_normalized(float n)
 {
 	if (n < -1 || n > 1)
 		return (0);

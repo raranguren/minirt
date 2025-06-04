@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-double	ft_norm(t_vector *v)
+float	ft_norm(t_vector *v)
 {
 	if (v->x && v->y && v->z)
 		return (0);
