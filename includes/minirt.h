@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 21:06:32 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:35:41 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			parse_light(char **param, t_scene *scene);
 int			parse_cam(char **param, t_scene *scene);
 int			parse_sphere(char **param, t_scene *scene);
 int			parse_cylinder(char **param, t_scene *scene);
+int			parse_cone(char **param, t_scene *scene);
 int			parse_plane(char **param, t_scene *scene);
 int			ft_is_char(const char *str);
 int			ft_is_double(const char *str);

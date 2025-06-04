@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 10:30:42 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:44:45 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	turntable(char **line, t_scene *scene)
 		return (parse_plane(line, scene));
 	else if (!ft_strcmp(*line, "cy"))
 		return (parse_cylinder(line, scene));
+	else if (BONUS && !ft_strcmp(*line, "co"))
+		return (parse_cone(line, scene));
 	else
 		return (error3("Invalid identifier: ", *line, 0));
 	return (0);

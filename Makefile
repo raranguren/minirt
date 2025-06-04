@@ -32,12 +32,11 @@ SRC_COMMON = $(FILES:%=$(SRC_DIR)%.c) \
 	$(SRC_DIR)parsing/parse.c \
 
 SRC = $(SRC_COMMON) \
-	$(SRC_DIR)parsing/unique_bonus.c \
-#	$(SRC_DIR)parsing/unique.c \
-#	using bonus mode for development
+	$(SRC_DIR)parsing/unique.c \
 
 SRC_BONUS = $(SRC_COMMON) \
 	$(SRC_DIR)parsing/unique_bonus.c \
+	$(SRC_DIR)parsing/cone_bonus.c \
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
@@ -59,7 +58,7 @@ $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS) :  $(LIB) $(TMP_DIRS) $(OBJ_BONUS)
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ_BONUS) $(LDLIBS) -o $@
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ_BONUS) $(LDLIBS) -o $@ -D BONUS=1
 
 clean :
 	rm -rf $(TMP_DIR)
@@ -67,7 +66,7 @@ clean :
 	$(MAKE) -C libft fclean --silent
 
 fclean : clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 
 re : fclean all
 

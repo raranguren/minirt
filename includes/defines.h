@@ -6,12 +6,16 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 17:16:36 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 21:50:39 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # define ERROR(msg) error(msg)
 # define PERROR(msg) print_error(msg, __FILE__, __LINE__, __func__)
@@ -33,6 +37,7 @@
 # define SPHERE		0b00011000
 # define PLANE		0b00101000
 # define CYLINDER	0b01001000
+# define CONE		0b10001000
 
 //Eroors messages
 # define ERROR_ARGUMENTS	"\
@@ -58,7 +63,12 @@ Format for plane parameter is the following :\n\
 
 # define CYLINDER_WAITED_VALUES	"\
 Format for cylinder parameter is the following :\n\
-(cy) (x,y,z center coorinates) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
+(cy) (x,y,z center coords.) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
+(r,g,b color [0->255])"
+
+# define CONE_WAITED_VALUES	"\
+Format for cone parameter is the following :\n\
+(cy) (x,y,z center coords.) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
 (r,g,b color [0->255])"
 
 # define SPHERE_WAITED_VALUES	"\
