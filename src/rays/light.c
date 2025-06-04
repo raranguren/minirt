@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 09:04:15 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 09:34:18 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,16 @@ int	spotlight(t_light *light, t_ray *ray)
 	return (0);
 }
 
-int	amblight(t_light *amb_light, t_ray *ray)
+int	amblight(t_light *light, t_ray *ray)
 {
-	(void)amb_light;
-	(void)ray;
+	ray->color = c_add(
+			ray->color,
+			c_multiply(
+				ray->impact_object->color,
+				c_scale(
+					c_normalize(light->color),
+					light->brightness))
+			);
 	return (0);
 }
 

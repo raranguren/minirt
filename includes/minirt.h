@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 08:54:45 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 09:25:10 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_color		c_multiply(t_color a, t_color b);
 t_color		c_normalize(t_color a);
 t_color		c_set(float scale);
 t_color		c_scale(t_color c, float scale);
+t_color		c_add(t_color c, t_color c2);
 
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);
