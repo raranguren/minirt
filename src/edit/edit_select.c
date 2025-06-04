@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:57:08 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/04 15:22:36 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:50:51 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ int	edit_select_next(t_all *all)
 	ui_update(all);
 	return (2);
 }
-
