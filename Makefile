@@ -1,4 +1,5 @@
 NAME		= miniRT
+NAME_BONUS	= miniRT_bonus
 
 CC	 		= gcc-12
 CFLAGS		= -Wall -Werror -Wextra -g 
@@ -12,11 +13,34 @@ LIB			= libft/libft.a mlx
 SRC_DIR	= src/
 TMP_DIR = tmp/
 TMP_DIRS	= $(addprefix $(TMP_DIR), $(filter-out $(curr), $(sort $(dir $(FILES)))))
+TMP_DIRS += tmp/parsing
 
-FILES	!= find src -type f -name "*.c" | sed 's/src\///g' | sed 's/\.c//g'
+FILES	!= find src -type f -name "*.c" | grep -v parsing | sed 's/src\///g' | sed 's/\.c//g'
 
-SRC = $(FILES:%=$(SRC_DIR)%.c)
+SRC_COMMON = $(FILES:%=$(SRC_DIR)%.c) \
+	$(SRC_DIR)parsing/init_scene.c \
+	$(SRC_DIR)parsing/object.c \
+	$(SRC_DIR)parsing/utils.c \
+	$(SRC_DIR)parsing/atoi_double.c \
+	$(SRC_DIR)parsing/split_set.c \
+	$(SRC_DIR)parsing/cam.c \
+	$(SRC_DIR)parsing/amb_light.c \
+	$(SRC_DIR)parsing/light.c \
+	$(SRC_DIR)parsing/plane.c \
+	$(SRC_DIR)parsing/sphere.c \
+	$(SRC_DIR)parsing/cylinder.c \
+	$(SRC_DIR)parsing/parse.c \
+
+SRC = $(SRC_COMMON) \
+	$(SRC_DIR)parsing/unique_bonus.c \
+#	$(SRC_DIR)parsing/unique.c \
+#	using bonus mode for development
+
+SRC_BONUS = $(SRC_COMMON) \
+	$(SRC_DIR)parsing/unique_bonus.c \
+
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
+OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 
 MAKEFLAGS += --no-print-directory
 
@@ -24,14 +48,18 @@ MAKEFLAGS += --no-print-directory
 
 all : $(NAME)
 
-.PHONY :  clean fclean re 
+.PHONY :  clean fclean re bonus
 
 $(TMP_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-
 $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS) :  $(LIB) $(TMP_DIRS) $(OBJ_BONUS)
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ_BONUS) $(LDLIBS) -o $@
 
 clean :
 	rm -rf $(TMP_DIR)
