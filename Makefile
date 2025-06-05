@@ -44,14 +44,6 @@ OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 MAKEFLAGS += --no-print-directory
 
 
-# ------ temporary --------
-SRC = $(SRC_BONUS)
-OBJ = $(OBJ_BONUS)
-CPPFLAGS += -D BONUS=1
-# -------------------------
-
-
-
 all : $(NAME)
 
 .PHONY :  clean fclean re bonus
@@ -81,11 +73,11 @@ $(TMP_DIRS) :
 	@mkdir -p $(TMP_DIRS)
 
 libft/libft.a :
-	@$(MAKE) -C libft
+	$(MAKE) -C libft --silent
 
 mlx :
-	git clone https://github.com/42paris/minilibx-linux.git mlx
-	$(MAKE) -C mlx/ CC=gcc-12
+	git clone -q https://github.com/42paris/minilibx-linux.git mlx
+	$(MAKE) -C mlx/ CC=$(CC) 2>/dev/null >/dev/null
 
 #<--------------	DEV_TOOLS	------------->
 

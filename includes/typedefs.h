@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 15:21:07 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/05 12:41:01 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ typedef struct s_coord
 	float	y;
 	float	z;
 }	t_coord;
-
-typedef struct s_col
-{
-	float	r;
-	float	g;
-	float	b;
-}	t_col;
 
 typedef struct s_color
 {
