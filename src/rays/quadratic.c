@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:09:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 14:56:39 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/05 17:08:42 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,26 @@ int	bind_ray_if_nearest(t_quadratic *res, t_ray *ray, t_obj *obj)
 	return (0);
 }
 
+static int	exit_quad(t_quadratic *quad)
+{
+	quad->solution_1 = FLT_MAX;
+	return (0);
+}
+
 int	solve_quadratic(t_quadratic *quad)
 {
 	float	tmp;
 
 	quad->delta = quad->b * quad->b - 4.0 * quad->a * quad->c;
 	if (quad->delta < 0)
-		return (0);
+		return (exit_quad(quad));
 	if (quad->delta)
 		quad->delta = sqrt(quad->delta);
 	quad->solution_1 = (-quad->b - quad->delta) / 2.0;
 	quad->solution_2 = (-quad->b + quad->delta) / 2.0;
 	tmp = fmaxf(quad->solution_1, quad->solution_2);
 	if (tmp < 0)
-		return (0);
+		return (exit_quad(quad));
 	quad->solution_1 = fminf(quad->solution_1, quad->solution_2);
 	quad->solution_2 = tmp;
 	if (quad->solution_1 < 0)
