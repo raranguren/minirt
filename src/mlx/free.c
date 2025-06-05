@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:56:50 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 21:56:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/05 15:03:13 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	free_mlx(t_all *all)
 {
+	if (all->img.id)
+		mlx_destroy_image(all->mlx_ptr, all->img.id);
 	if (all->mlx_win)
 		mlx_destroy_window(all->mlx_ptr, all->mlx_win);
 	if (all->mlx_ptr)
@@ -21,7 +23,5 @@ int	free_mlx(t_all *all)
 		mlx_destroy_display(all->mlx_ptr);
 		free(all->mlx_ptr);
 	}
-	if (all->img.id)
-		mlx_destroy_image(all->mlx_ptr, all->img.id);
 	return (0);
 }
