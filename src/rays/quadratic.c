@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:09:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 17:08:42 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/05 18:55:02 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	solve_quadratic(t_quadratic *quad)
 		return (exit_quad(quad));
 	if (quad->delta)
 		quad->delta = sqrt(quad->delta);
-	quad->solution_1 = (-quad->b - quad->delta) / 2.0;
-	quad->solution_2 = (-quad->b + quad->delta) / 2.0;
+	quad->solution_1 = (-quad->b - quad->delta) / 2.0 * quad->a;
+	quad->solution_2 = (-quad->b + quad->delta) / 2.0 * quad->a;
 	tmp = fmaxf(quad->solution_1, quad->solution_2);
 	if (tmp < 0)
 		return (exit_quad(quad));
