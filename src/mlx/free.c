@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:56:50 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/16 13:01:40 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/04 21:56:46 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ int	free_mlx(t_all *all)
 		mlx_destroy_display(all->mlx_ptr);
 		free(all->mlx_ptr);
 	}
+	if (all->img.id)
+		mlx_destroy_image(all->mlx_ptr, all->img.id);
 	return (0);
 }

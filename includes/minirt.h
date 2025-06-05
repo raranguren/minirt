@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 21:35:41 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:00:54 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ t_color		c_normalize(t_color a);
 t_color		c_set(float scale);
 t_color		c_scale(t_color c, float scale);
 t_color		c_add(t_color c, t_color c2);
+int			solve_quadratic(t_quadratic *quad);
+int			bind_ray_if_nearest(t_quadratic *res, t_ray *ray, t_obj *obj);
+int			cylinder_collision(t_obj *cyl, t_ray *ray);
+t_vector	cylinder_normal(t_obj *obj, t_ray *ray);
 
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);
