@@ -15,6 +15,11 @@ TMP_DIR = tmp/
 TMP_DIRS	= $(addprefix $(TMP_DIR), $(filter-out $(curr), $(sort $(dir $(FILES)))))
 TMP_DIRS += tmp/parsing
 
+HEADERS = \
+	includes/defines.h \
+	includes/minirt.h \
+	includes/typedefs.h \
+
 FILES	!= find src -type f -name "*.c" | grep -v parsing | sed 's/src\///g' | sed 's/\.c//g'
 
 SRC_COMMON = $(FILES:%=$(SRC_DIR)%.c) \
@@ -53,6 +58,8 @@ $(TMP_DIR)%.o : $(SRC_DIR)%.c
 
 $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
+
+$(OBJ) : $(HEADERS) Makefile
 
 bonus: $(NAME_BONUS)
 

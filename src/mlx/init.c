@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:52:34 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 17:12:26 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/06 15:34:28 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	set_mlx(t_all *all)
 	all->mlx_ptr = mlx_init();
 	if (!all->mlx_ptr)
 		return (error("mlx_init()"));
-	all->mlx_win = mlx_new_window(all->mlx_ptr, WIN_WIDTH,
+	all->mlx_win = mlx_new_window(all->mlx_ptr, WIN_WIDTH + UI_WIDTH,
 			WIN_HEIGHT, "SCREEN_1");
 	if (!all->mlx_win)
 		return (error("mlx_new_window()"));
@@ -29,7 +29,6 @@ int	set_mlx(t_all *all)
 	if (!all->img.data)
 		return (error("mlx_get_data_addr()"));
 	set_mlx_events(all);
-	send_rays(all);
-	start_mlx_loop(all);
 	return (0);
 }
+// loop starts in main.c

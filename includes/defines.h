@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 21:50:39 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:16:38 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // Screen dimensions
 # define WIN_WIDTH		720
 # define WIN_HEIGHT		720
+# define UI_WIDTH		0
 
 # define COLOR_BG		0x00111111
 
@@ -36,10 +37,20 @@
 # define SHAPE		0b00001000
 # define SPHERE		0b00011000
 # define PLANE		0b00101000
-# define CYLINDER	0b01001000
-# define CONE		0b10001000
+# define CYLINDER	0b00111000
+# define CONE		0b01001000
+//(Using values 0 to 127 to avoid needing unsigned char)
 
-//Eroors messages
+//GUI textures
+# define CAMERA_BG		"textures/ui_camera.xpm"
+# define LIGHT_BG		"textures/ui_light.xpm"
+# define AMB_LIGHT_BG	"textures/ui_amb_light.xpm"
+# define SPHERE_BG		"textures/ui_sphere.xpm"
+# define PLANE_BG		"textures/ui_plane.xpm"
+# define CYLINDER_BG	"textures/ui_cylinder.xpm"
+# define CONE_BG		"textures/ui_cone.xpm"
+
+//Error messages
 # define ERROR_ARGUMENTS	"\
 You must provide only a scene description \
 file with .rt extension as argument"

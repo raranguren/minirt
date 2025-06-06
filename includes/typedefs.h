@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 12:41:01 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:30:09 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_scene
 
 typedef struct s_image
 {
-	void	*id;
+	t_img	*id;
 	char	*data;
 	int		bits_per_pix;
 	int		line_length;
@@ -124,6 +124,7 @@ typedef struct s_all
 	void	*mlx_win;
 	t_image	img;
 	t_scene	scene;
+	t_img	*ui_bg;
 }	t_all;
 
 #endif

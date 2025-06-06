@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 09:54:48 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/05 12:32:17 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:18:33 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	tui_update(t_all *all)
 int	ui_update(t_all *all)
 {
 	tui_update(all);
-	return (0);
+	return (gui_update(all));
 }

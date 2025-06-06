@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 21:35:41 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:27:13 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			edit_select_next(t_all *all);
 int			edit_select(t_all *all, t_obj *target);
 int			rotate(t_vector *v, float hztl_angle, float vertical_angle);
 int			ui_update(t_all *all);
+int			gui_update(t_all *all);
 
 			//error
 int			error(char *str);
