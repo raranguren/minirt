@@ -49,8 +49,8 @@ static int	mouse_hook(int button, int x, int y, void *param)
 int	set_mlx_events(t_all *all)
 {
 	mlx_mouse_hook(all->mlx_win, &mouse_hook, all);
-	mlx_hook(all->mlx_win, KeyPress, KeyPressMask, &key_press_hook, all);
-	mlx_hook(all->mlx_win, DestroyNotify, KeyPressMask, &quit_hook, all);
+	mlx_key_hook(all->mlx_win, &key_press_hook, all);
+	mlx_hook(all->mlx_win, DestroyNotify, None, &quit_hook, all);
 	mlx_expose_hook(all->mlx_win, &expose_hook, all);
 	return (0);
 }
