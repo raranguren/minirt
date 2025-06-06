@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:04:36 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/04 21:04:23 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:52:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ int	no_collision(t_obj *obj, t_ray *ray)
 	(void)obj;
 	(void)ray;
 	return (0);
+}
+
+t_color	base_color(t_obj *obj, t_vector *normal)
+{
+	(void)normal;
+	return (obj->color);
 }
 
 t_collision_fn	collision_fn(char type)
@@ -43,11 +49,13 @@ t_normal_fn	normal_fn(char type)
 
 // Ensures that the scene has pointers to camera and lights
 // Also sets the collision functions to the objets
-int	init_scene(t_scene *scene)
+int	init_scene(t_all *all)
 {
+	t_scene	*scene;
 	t_obj	*obj;
 	char	type;
 
+	scene = &all->scene;
 	obj = scene->obj;
 	while (obj)
 	{
@@ -58,9 +66,12 @@ int	init_scene(t_scene *scene)
 			scene->amb_light = obj;
 		obj->collision_fn = collision_fn(obj->type);
 		obj->normal_fn = normal_fn(obj->type);
+		obj->color_fn = base_color;
 		obj = find_next_obj_in_scene(scene, obj);
 		if (obj == scene->obj)
 			break ;
 	}
+	if (BONUS)
+		init_scene_bonus(all);
 	return (0);
 }

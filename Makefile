@@ -59,7 +59,7 @@ $(TMP_DIR)%.o : $(SRC_DIR)%.c
 $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
 
-$(OBJ) : $(HEADERS) Makefile
+$(OBJ) $(OBJ_BONUS) : $(HEADERS) Makefile
 
 bonus: $(NAME_BONUS)
 

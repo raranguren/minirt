@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 15:30:09 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:42:25 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,18 @@ typedef struct s_ray
 	int			from_cam;
 }	t_ray;
 
+typedef struct s_image
+{
+	t_img	*id;
+	char	*data;
+	int		bits_per_pix;
+	int		line_length;
+	int		endian;
+}	t_image;
+
 typedef int				(*t_collision_fn)(t_obj *, t_ray *);
 typedef t_vector		(*t_normal_fn)(t_obj *, t_ray *);
+typedef t_color			(*t_color_fn)(t_obj *, t_vector *normal);
 
 typedef struct s_obj
 {
@@ -88,7 +98,8 @@ typedef struct s_obj
 	t_obj			*next;
 	t_collision_fn	collision_fn;
 	t_normal_fn		normal_fn;
-
+	t_color_fn		color_fn;
+	t_image			bump_map;
 	float			fov_scale;
 	union
 	{
@@ -108,15 +119,6 @@ typedef struct s_scene
 	t_light		*light;
 	t_obj		*selected;
 }	t_scene;
-
-typedef struct s_image
-{
-	t_img	*id;
-	char	*data;
-	int		bits_per_pix;
-	int		line_length;
-	int		endian;
-}	t_image;
 
 typedef struct s_all
 {
