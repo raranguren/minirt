@@ -42,12 +42,18 @@ SRC = $(SRC_COMMON) \
 SRC_BONUS = $(SRC_COMMON) \
 	$(SRC_DIR)parsing/unique_bonus.c \
 	$(SRC_DIR)parsing/cone_bonus.c \
+	$(SRC_DIR)parsing/init_scene_bonus.c \
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 
 MAKEFLAGS += --no-print-directory
 
+# ------ temporary --------
+SRC = $(SRC_BONUS)
+OBJ = $(OBJ_BONUS)
+CPPFLAGS += -D BONUS=1
+# -------------------------
 
 all : $(NAME)
 

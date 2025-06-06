@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:04:36 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/06 21:52:19 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/06 23:19:15 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ int	init_scene(t_all *all)
 	char	type;
 
 	scene = &all->scene;
-	obj = scene->obj;
-	while (obj)
+	obj = NULL;
+	while (obj != scene->obj)
 	{
+		if (!obj)
+			obj = scene->obj;
 		type = obj->type;
 		if (type == CAMERA)
 			scene->cam = obj;
@@ -68,8 +70,6 @@ int	init_scene(t_all *all)
 		obj->normal_fn = normal_fn(obj->type);
 		obj->color_fn = base_color;
 		obj = find_next_obj_in_scene(scene, obj);
-		if (obj == scene->obj)
-			break ;
 	}
 	if (BONUS)
 		init_scene_bonus(all);
