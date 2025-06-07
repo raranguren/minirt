@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 14:17:48 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 22:36:06 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	main(int ac, char **av)
 {
 	static t_all	all;
 
+	if (ac != 2)
+	{
+		printf("%s\n", ERROR_ARGUMENTS);
+		return (0);
+	}
 	if (parse_map(ac, av, &all))
 		return (free_everything(&all), 1);
 	if (set_mlx(&all))

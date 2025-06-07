@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 14:01:39 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:56:16 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ static int	read_and_orient(char *path, t_all *all)
 		{
 			split = NULL;
 			if (split_set(&split, line, SPLIT))
-				return (error3("Parse error: ", strerror(errno), 0));
-			err = turntable(split, &all->scene);
+				err = error3("Parse error: ", strerror(errno), 0);
+			else
+				err = turntable(split, &all->scene);
 			free_strs(split);
 		}
 		free(line);

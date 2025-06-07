@@ -50,13 +50,7 @@ OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 
 MAKEFLAGS += --no-print-directory
 
-# ------ temporary --------
-SRC = $(SRC_BONUS)
-OBJ = $(OBJ_BONUS)
-CPPFLAGS += -D BONUS=1
-# -------------------------
-
-all : $(NAME)
+all: $(NAME)
 
 .PHONY :  clean fclean re bonus
 
@@ -103,7 +97,7 @@ watch :
 
 vi vim :
 	find . -name "*.c" -exec ctags {} +
-	vim $(SRC) includes/* Makefile
+	vim $(SRC) $(SRC_BONUS) includes/* Makefile
 
 gdb : all
 	gdb --args ./$(NAME) scene_files/scene1.rt

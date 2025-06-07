@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:00:30 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/27 21:10:27 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 22:32:36 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ int	print_error(char *err, const char *file, int line, const char *func)
 
 int	error(char *str)
 {
-	perror(str);
+	ft_putendl_fd("Error", 2);
+	if (errno)
+		perror(str);
+	else
+		ft_putendl_fd(str, 2);
 	return (1);
 }
 
 int	error3(char *a, char *b, char *c)
 {
+	ft_putendl_fd("Error", 2);
 	if (a)
 		write(2, a, ft_strlen(a));
 	if (b)
