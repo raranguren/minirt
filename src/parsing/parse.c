@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 20:56:16 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 22:54:01 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,37 @@ static int	turntable(char **line, t_scene *scene)
 	return (0);
 }
 
+static int	split_and_turntable(char *line, t_scene *scene)
+{
+	char	**split;
+	int		err;
+
+	split = NULL;
+	if (split_set(&split, line, SPLIT))
+		err = error("Parsing error: split_set()");
+	else
+		err = turntable(split, scene);
+	if (split)
+		free_strs(split);
+	return (err);
+}
+
 static int	read_and_orient(char *path, t_all *all)
 {
 	int		fd;
 	char	*line;
-	char	**split;
 	int		err;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (error3("Can't find the file: '", path, "'"));
+		return (error3("Can't open the file: '", path, "'"));
 	line = (char *)1;
 	err = 0;
 	while (line && !err)
 	{
 		line = get_next_line(fd);
 		if (line && *line)
-		{
-			split = NULL;
-			if (split_set(&split, line, SPLIT))
-				err = error3("Parse error: ", strerror(errno), 0);
-			else
-				err = turntable(split, &all->scene);
-			free_strs(split);
-		}
+			err = split_and_turntable(line, &all->scene);
 		free(line);
 	}
 	close(fd);

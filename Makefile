@@ -13,7 +13,10 @@ LIB			= libft/libft.a mlx
 SRC_DIR	= src/
 TMP_DIR = tmp/
 TMP_DIRS	= $(addprefix $(TMP_DIR), $(filter-out $(curr), $(sort $(dir $(FILES)))))
-TMP_DIRS += tmp/parsing
+TMP_DIRS += $(TMP_DIR)/parsing
+TMP_DIR_BONUS = tmp2/
+TMP_DIRS_BONUS= $(addprefix $(TMP_DIR_BONUS), $(filter-out $(curr), $(sort $(dir $(FILES)))))
+TMP_DIRS_BONUS += $(TMP_DIR_BONUS)/parsing
 
 HEADERS = \
 	includes/defines.h \
@@ -46,7 +49,7 @@ SRC_BONUS = $(SRC_COMMON) \
 	$(SRC_DIR)parsing/utils_bonus.c \
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
-OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
+OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR_BONUS)%.o)
 
 MAKEFLAGS += --no-print-directory
 
@@ -55,7 +58,10 @@ all: $(NAME)
 .PHONY :  clean fclean re bonus
 
 $(TMP_DIR)%.o : $(SRC_DIR)%.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@ -D BONUS=0
+
+$(TMP_DIR_BONUS)%.o : $(SRC_DIR)%.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@ -D BONUS=1
 
 $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
@@ -64,11 +70,12 @@ $(OBJ) $(OBJ_BONUS) : $(HEADERS) Makefile
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS) :  $(LIB) $(TMP_DIRS) $(OBJ_BONUS)
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ_BONUS) $(LDLIBS) -o $@ -D BONUS=1
+$(NAME_BONUS) :  $(LIB) $(TMP_DIRS_BONUS) $(OBJ_BONUS)
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ_BONUS) $(LDLIBS) -o $@
+
 
 clean :
-	rm -rf $(TMP_DIR)
+	rm -rf $(TMP_DIR) $(TMP_DIR_BONUS)
 	rm -fr mlx
 	$(MAKE) -C libft fclean --silent
 
@@ -79,6 +86,9 @@ re : fclean all
 
 $(TMP_DIRS) :
 	@mkdir -p $(TMP_DIRS)
+
+$(TMP_DIRS_BONUS) :
+	@mkdir -p $(TMP_DIRS_BONUS)
 
 libft/libft.a :
 	$(MAKE) -C libft --silent

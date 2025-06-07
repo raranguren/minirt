@@ -6,16 +6,12 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 15:16:38 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:35:02 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
-
-# ifndef BONUS
-#  define BONUS 0
-# endif
 
 # define ERROR(msg) error(msg)
 # define PERROR(msg) print_error(msg, __FILE__, __LINE__, __func__)

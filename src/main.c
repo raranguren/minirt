@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 22:36:06 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:05:21 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	main(int ac, char **av)
 {
 	static t_all	all;
 
+	if (BONUS)
+		printf("Bonus: ON\n");
+	else
+		printf("Bonus: OFF\n");
 	if (ac != 2)
 	{
 		printf("%s\n", ERROR_ARGUMENTS);
