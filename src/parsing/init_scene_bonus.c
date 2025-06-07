@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/07 14:00:35 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:58:39 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,16 @@ int	init_scene_bonus(t_all *all)
 	{
 		if (!obj)
 			obj = scene->obj;
-		if (!obj->map_name)
-			continue ;
-		if (ft_strcmp(obj->map_name, "#") == 0)
+		if (obj->map_name)
 		{
-			if (set_color_disruption(obj))
+			if (ft_strcmp(obj->map_name, "#") == 0)
+			{
+				if (set_color_disruption(obj))
+					return (-1);
+			}
+			else if (set_bump_map(all, obj))
 				return (-1);
 		}
-		else if (set_bump_map(all, obj))
-			return (-1);
 		obj = find_next_obj_in_scene(scene, obj);
 	}
 	return (0);
