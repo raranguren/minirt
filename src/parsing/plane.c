@@ -6,13 +6,13 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/05/31 14:43:14 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:22:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	valid_plan_line(char **param)
+static int	valid_plane_line(char **param)
 {
 	int		i;
 
@@ -21,10 +21,13 @@ static int	valid_plan_line(char **param)
 	{
 		if ((i <= 6 && !ft_is_double(param[i]))
 			|| (i > 6 && !ft_is_char(param[i])))
-			return (error3("Parse error : invalid '", param[i], "'"));
+		{
+			if (i != 10 || !BONUS)
+				return (error3("Parse error : invalid '", param[i], "'"));
+		}
 		i++;
 	}
-	if (i != 10)
+	if (i != 10 && !(BONUS && i == 11))
 		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
@@ -42,7 +45,7 @@ int	parse_plane(char **param, t_scene *scene)
 {
 	t_obj	*plane;
 
-	if (valid_plan_line(param))
+	if (valid_plane_line(param))
 		return (1);
 	plane = ft_calloc(1, sizeof(t_obj));
 	plane->type = PLANE;
@@ -55,6 +58,8 @@ int	parse_plane(char **param, t_scene *scene)
 		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(plane, &param[7]))
 		return (error3("Parse error: invalid color '", param[7], "'"));
+	if (BONUS && ft_get_map_name(&plane->map_name, param[10]))
+		return (error3("Parse error: invalid texture name '", param[10], "'"));
 	if (valid_values(plane))
 		return (1);
 	ft_objadd_back(&scene->obj, plane);

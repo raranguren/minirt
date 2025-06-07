@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 09:58:21 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:14:07 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ static int	valid_sphere_line(char **param)
 	{
 		if ((i <= 4 && !ft_is_double(param[i]))
 			|| (i > 4 && !ft_is_char(param[i])))
-			return (error3("Parse error : invalid '", param[i], "'"));
+		{
+			if (i != 8 || !BONUS)
+				return (error3("Parse error : invalid '", param[i], "'"));
+		}
 		i++;
 	}
-	if (i != 8)
+	if (i != 8 && !(BONUS && i == 9))
 		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
@@ -53,6 +56,8 @@ int	parse_sphere(char **param, t_scene *scene)
 		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(sphere, &param[5]))
 		return (error3("Parse error: invalid color '", param[5], "'"));
+	if (BONUS && ft_get_map_name(&sphere->map_name, param[8]))
+		return (error3("Parse error: invalid texture name '", param[8], "'"));
 	if (valid_values(sphere))
 		return (1);
 	ft_objadd_back(&scene->obj, sphere);

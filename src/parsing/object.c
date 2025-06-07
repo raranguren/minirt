@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:29:29 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 22:15:10 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:29:22 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	ft_objclear(t_obj **lst)
 	{
 		temp = *lst;
 		*lst = (*lst)->next;
-		if (temp->bump_map.id)
-			free(temp->bump_map.id);
-		if (temp->texture)
-			free(temp->texture);
+		if (temp->map.id)
+			free(temp->map.id);
+		if (temp->map_name)
+			free(temp->map_name);
 		free(temp);
 	}
 	*lst = NULL;

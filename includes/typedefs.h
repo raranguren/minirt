@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 22:12:44 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:27:45 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct s_obj
 	t_collision_fn	collision_fn;
 	t_normal_fn		normal_fn;
 	t_color_fn		color_fn;
-	t_image			bump_map;
-	char			*texture;
+	t_image			map;
+	char			*map_name;
 	float			fov_scale;
 	union
 	{

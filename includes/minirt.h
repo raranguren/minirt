@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 21:51:44 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:58:50 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int			unique(char obj_type, int parse_err);
 int			normalize(t_vector *vector);
 int			init_scene(t_all *all);
 int			init_scene_bonus(t_all *all);
+int			ft_get_map_name(char **dest, char *param);
 
 			//edit
 int			edit_init(t_all *all);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 21:45:36 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/07 14:24:09 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ static int	valid_cone_line(char **param)
 	{
 		if ((i <= 8 && !ft_is_double(param[i]))
 			|| (i > 8 && !ft_is_char(param[i])))
-			return (error3("Parse error : invalid '", param[i], "'"));
+		{
+			if (i != 12 || !BONUS)
+				return (error3("Parse error : invalid '", param[i], "'"));
+		}
 		i++;
 	}
-	if (i != 12)
+	if (i != 12 && !(BONUS && i == 13))
 		return (error3("Parse error: Wrong number of parameters", 0, 0));
 	return (0);
 }
@@ -61,6 +64,8 @@ int	parse_cone(char **param, t_scene *scene)
 		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(cone, &param[9]))
 		return (error3("Parse error: invalid color '", param[9], "'"));
+	if (BONUS && ft_get_map_name(&cone->map_name, param[12]))
+		return (error3("Parse error: invalid texture name '", param[12], "'"));
 	if (valid_values(cone))
 		return (1);
 	ft_objadd_back(&scene->obj, cone);
