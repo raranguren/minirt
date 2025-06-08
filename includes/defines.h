@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 23:35:02 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:24:01 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // Screen dimensions
 # define WIN_WIDTH		720
 # define WIN_HEIGHT		720
-# define UI_WIDTH		0
+# define UI_WIDTH		360
 
 # define COLOR_BG		0x00111111
 
@@ -38,13 +38,13 @@
 //(Using values 0 to 127 to avoid needing unsigned char)
 
 //GUI textures
-# define CAMERA_BG		"textures/ui_camera.xpm"
-# define LIGHT_BG		"textures/ui_light.xpm"
-# define AMB_LIGHT_BG	"textures/ui_amb_light.xpm"
-# define SPHERE_BG		"textures/ui_sphere.xpm"
-# define PLANE_BG		"textures/ui_plane.xpm"
-# define CYLINDER_BG	"textures/ui_cylinder.xpm"
-# define CONE_BG		"textures/ui_cone.xpm"
+# define CAMERA_BG		"ui_textures/ui_camera.xpm"
+# define LIGHT_BG		"ui_textures/ui_light.xpm"
+# define AMB_LIGHT_BG	"ui_textures/ui_amb_light.xpm"
+# define SPHERE_BG		"ui_textures/ui_sphere.xpm"
+# define PLANE_BG		"ui_textures/ui_plane.xpm"
+# define CYLINDER_BG	"ui_textures/ui_cylinder.xpm"
+# define CONE_BG		"ui_textures/ui_cone.xpm"
 
 //Error messages
 # define ERROR_ARGUMENTS	"\

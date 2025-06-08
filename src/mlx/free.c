@@ -6,18 +6,30 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:56:50 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/06 13:07:30 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:50:53 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+void	free_ui(t_all *all)
+{
+	int	i;
+
+	i = 0;
+	while (i < 7)
+	{
+		if (all->ui_bg[i])
+			mlx_destroy_image(all->mlx_ptr, all->ui_bg[i]);
+		i++;
+	}
+}
+
 int	free_mlx(t_all *all)
 {
+	free_ui(all);
 	if (all->img.id)
 		mlx_destroy_image(all->mlx_ptr, all->img.id);
-	if (all->ui_bg)
-		mlx_destroy_image(all->mlx_ptr, all->ui_bg);
 	if (all->mlx_win)
 		mlx_destroy_window(all->mlx_ptr, all->mlx_win);
 	if (all->mlx_ptr)

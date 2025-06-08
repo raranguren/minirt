@@ -6,11 +6,31 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 11:01:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/06 16:21:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:20:09 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static int	layout_index(char type)
+{
+	printf("findint type %d...\n", type);
+	if (type == CAMERA)
+		return (0);
+	if (type == AMB_LIGHT)
+		return (1);
+	if (type == LIGHT)
+		return (2);
+	if (type == PLANE)
+		return (3);
+	if (type == SPHERE)
+		return (4);
+	if (type == CYLINDER)
+		return (5);
+	if (type == CONE)
+		return (6);
+	return (-1);
+}
 
 static char	*background_image(char type)
 {
@@ -34,14 +54,19 @@ static char	*background_image(char type)
 static int	set_layout(t_all *all, char type)
 {
 	char	*filename;
-	int		tmp;
+	int		i;
+	int		_;
 
+	i = layout_index(type);
 	filename = background_image(type);
-	if (!filename)
-		return (0);
-	all->ui_bg = mlx_xpm_file_to_image(all->mlx_ptr, filename, &tmp, &tmp);
-	if (!all->ui_bg)
+	if (!filename || i < 0)
+		return (error("UI layout is misconfigured in [gui.c]"));
+	if (!all->ui_bg[i])
+		all->ui_bg[i] = mlx_xpm_file_to_image(all->mlx_ptr, filename, &_, &_);
+	if (!all->ui_bg[i])
 		return (error3("Unable to load background image '", filename, "'"));
+	mlx_put_image_to_window(all->mlx_ptr, all->mlx_win, all->ui_bg[i],
+		WIN_WIDTH, 0);
 	return (0);
 }
 
@@ -61,7 +86,7 @@ int	gui_update(t_all *all)
 	err = 0;
 	obj = all->scene.selected;
 	if (obj->type != type)
-		err = set_layout(all, type);
+		err = set_layout(all, obj->type);
 	err |= put_obj_info(all, obj);
 	return (err);
 }
