@@ -99,7 +99,7 @@ mlx :
 
 #<--------------	DEV_TOOLS	------------->
 
-.PHONY : vi dev watch prof
+.PHONY : vi dev watch prof ui
 
 watch :
 	source ~/42/42_venv/bin/activate
@@ -122,3 +122,19 @@ prof : re
 	gprof $(NAME) -p
 	$(MAKE) fclean
 	rm -f gmon.out
+
+ui :
+	convert ~/Downloads/ui_camera.png ui_textures/ui_camera.xpm
+	convert ~/Downloads/ui_light.png ui_textures/ui_light.xpm
+	convert ~/Downloads/ui_amb_light.png ui_textures/ui_amb_light.xpm
+	convert ~/Downloads/ui_sphere.png ui_textures/ui_sphere.xpm
+	convert ~/Downloads/ui_plane.png ui_textures/ui_plane.xpm
+	convert ~/Downloads/ui_cylinder.png ui_textures/ui_cylinder.xpm
+	convert ~/Downloads/ui_cone.png ui_textures/ui_cone.xpm
+	rm -f ~/Downloads/ui_camera.png
+	rm -f ~/Downloads/ui_light.png
+	rm -f ~/Downloads/ui_amb_light.png
+	rm -f ~/Downloads/ui_sphere.png
+	rm -f ~/Downloads/ui_plane.png
+	rm -f ~/Downloads/ui_cylinder.png
+	rm -f ~/Downloads/ui_cone.png

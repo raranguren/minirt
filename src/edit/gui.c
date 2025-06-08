@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 11:01:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/08 16:20:09 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:19:16 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	layout_index(char type)
 {
-	printf("findint type %d...\n", type);
 	if (type == CAMERA)
 		return (0);
 	if (type == AMB_LIGHT)
