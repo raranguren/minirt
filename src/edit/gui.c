@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 11:01:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/08 21:19:16 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:46:39 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,6 @@ static int	set_layout(t_all *all, char type)
 	return (0);
 }
 
-static int	put_obj_info(t_all *all, t_obj *obj)
-{
-	(void)all;
-	(void)obj;
-	return (0);
-}
-
 int	gui_update(t_all *all)
 {
 	static char	type;
@@ -86,6 +79,6 @@ int	gui_update(t_all *all)
 	obj = all->scene.selected;
 	if (obj->type != type)
 		err = set_layout(all, obj->type);
-	err |= put_obj_info(all, obj);
+	err |= gui_numbers(all, obj);
 	return (err);
 }

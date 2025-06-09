@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/08 15:24:01 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:44:24 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,18 @@
 // Screen dimensions
 # define WIN_WIDTH		720
 # define WIN_HEIGHT		720
-# define UI_WIDTH		360
 
+// Interface
+# define TEXT_FONT "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso10646-1"
+# define TEXT_COLOR	0xaaaaaa
+# define UI_WIDTH		360
+# define MARGIN_LEFT	38
+# define MARGIN_TOP	355
+# define COL_WIDTH	100
+# define ROW_HEIGHT	79
+
+
+// Background
 # define COLOR_BG		0x00111111
 
 //Objects types
