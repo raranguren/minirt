@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:04:36 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/07 14:03:42 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:29:36 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,5 @@ int	init_scene(t_all *all)
 		obj->color_fn = base_color;
 		obj = find_next_obj_in_scene(scene, obj);
 	}
-	if (BONUS)
-		return (init_scene_bonus(all));
 	return (0);
 }
