@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:47:11 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/09 19:11:17 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/09 19:25:43 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,20 @@ void	gui_put_float(t_all *all, int x, int y, double f)
 void	gui_put_color(t_all *all, int x, int y, t_color color)
 {
 	char	buff[10];
-	int		i;
+	int		r;
+	int		g;
+	int		b;
 
-	i = ft_strlcpy(buff, "0xFFFFFF", 10);
-	(void)color;
-	buff[i] = '\0';
+	ft_strlcpy(buff, "0x000000", 10);
+	r = round (color.r * 1);
+	g = round (color.g * 1);
+	b = round (color.b * 1);
+	buff[2] = "0123456789ABCDEF"[r / 16];
+	buff[3] = "0123456789ABCDEF"[r % 16];
+	buff[4] = "0123456789ABCDEF"[g / 16];
+	buff[5] = "0123456789ABCDEF"[g % 16];
+	buff[6] = "0123456789ABCDEF"[b / 16];
+	buff[7] = "0123456789ABCDEF"[b % 16];
 	gui_put_str(all, x, y, buff);
 }
 
