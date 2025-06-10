@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 20:08:43 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/08 18:12:41 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,36 @@ static int	set_quadratic(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	return (0);
 }
 
+int is_within_cap(t_obj *caps, t_ray *ray, float dist)
+{
+	if (v_magnitude(v_substract(v_add(ray->start, v_scale(ray->direction, dist)),
+					caps->pos)) <= caps->radius)
+		return (1);
+	return (0);
+}
+
 int	caps_collision(float *ret_dist, t_obj *cyl, t_ray *ray)
 {
-	float		dot;
-	float		dist[2];
-	t_vector	caps[2];
+	t_obj	caps;
+	float	dist[2];
+	int		r;
 
-	dot = v_dot(ray->direction, cyl->orientation);
-	if (!dot)
-		return (0);
-	caps[0] = v_add(cyl->pos, v_scale(cyl->orientation, (float)cyl->height / 2));
-	caps[1] = v_add(cyl->pos, v_scale(cyl->orientation, -(float)cyl->height / 2));
-	dist[0] = -v_dot(
-			v_substract(ray->start, caps[0]), cyl->orientation) / dot;
-	dist[1] = -v_dot(
-			v_substract(ray->start, caps[1]), cyl->orientation) / dot;
-	if (dist[0] < dist[1] && dist[0] > 0)
-	{
-		if (v_magnitude(v_substract(caps[0], v_add(ray->start, v_scale(
-			ray->direction, dist[0])))) <= (float)cyl->diameter / 2)
-			*ret_dist = dist[0];
-	}
-	else if (dist[1] > 0)
-		if (v_magnitude(v_substract(caps[1],v_add(ray->start, v_scale(
-			ray->direction, dist[1])))) <= (float)cyl->diameter / 2) 
-			*ret_dist = dist[1];
-	return (*ret_dist);
+	r = 0;
+	caps.radius = (float)cyl->diameter / 2.0;
+	caps.pos = v_substract(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
+	caps.orientation = cyl->orientation;
+	dist[0] = plane_colision_dist(&caps, ray);
+	if (dist[0] > 0 && !is_within_cap(&caps, ray, dist[0]))
+		dist[0] = -1;
+	caps.pos = v_substract(cyl->pos, v_scale(cyl->orientation, -cyl->height / 2.0));
+	dist[1] = plane_colision_dist(&caps, ray);
+	if (dist[1] > 0 && !is_within_cap(&caps, ray, dist[1]))
+		dist[1] = -1;
+	if (dist[0] > 0 && dist[0] < dist[1] && ++r)
+		*ret_dist = dist[0];
+	else if (dist[1] > 0 && ++r)
+		*ret_dist = dist[1];
+	return (r);
 }
 
 /*  -----	CHECK P is on the real cylinder surface
@@ -102,13 +106,10 @@ int	corps_collision(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	// p -> cp
 	p = v_substract(p, cyl->pos);
 	p_proj_cyl_axis = v_scale(cyl->orientation, v_dot(p, cyl->orientation));
-	if (v_magnitude(p_proj_cyl_axis) > (float)cyl->height / 2.0)
+	if (v_magnitude(p_proj_cyl_axis) < (float)cyl->height / 2.0)
 		return (0);
-	print_vector("cp", p);
-	print_vector("proj", p_proj_cyl_axis);
 	dist_from_axis = v_magnitude(v_substract(p, p_proj_cyl_axis));
-	printf("%f\n", dist_from_axis);
-	if (dist_from_axis > ((float) cyl->diameter / 2.0))
+	if (dist_from_axis < ((float) cyl->diameter / 2.0))
 		return (0);
 	return (1);
 }
@@ -119,12 +120,13 @@ int	caps_or_corp(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	int		err1;
 	int		err2;
 
-	dist_nearest_caps = 0;
+	dist_nearest_caps = -1;
 	err1 = caps_collision(&dist_nearest_caps, cyl, ray);
 	err2 = corps_collision(quad, cyl, ray);
 	if (!err1 && !err2)
 		return (0);
-	if (dist_nearest_caps > 0 && dist_nearest_caps < quad->solution_1)
+	if (dist_nearest_caps > 0 && quad->solution_1 > 0
+			&& dist_nearest_caps < quad->solution_1)
 		quad->solution_1 = dist_nearest_caps;
 	return (1);
 }
@@ -135,5 +137,6 @@ int	cylinder_collision(t_obj *cyl, t_ray *ray)
 	set_quadratic(&quad, cyl, ray);
 	if (!caps_or_corp(&quad, cyl, ray))
 		return (0);
+	ICI
 	return (bind_ray_if_nearest(&quad, ray, cyl));
 }

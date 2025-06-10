@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 15:00:54 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/08 16:51:27 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			send_rays(t_all *all);
 int			sphere_collision(t_obj *sphere, t_ray *ray);
 t_vector	sphere_normal(t_obj *sphere, t_ray *ray);
 int			plane_collision(t_obj *plane, t_ray *ray);
+float		plane_colision_dist(t_obj *plane, t_ray *ray);
 t_vector	plane_normal(t_obj *obj, t_ray *ray);
 float		ft_norm(t_vector *v);
 t_vector	v_substract(t_vector v1, t_vector v2);
