@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 14:24:09 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:22:46 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	valid_values(t_obj *cone)
 	if (!is_normalized(cone->orientation.x)
 		|| !is_normalized(cone->orientation.y)
 		|| !is_normalized(cone->orientation.z)
-		|| cone->diameter < 0
+		|| cone->radius < 0
 		|| cone->height < 0)
 		return (error3(CONE_WAITED_VALUES, 0, 0));
 	if (normalize(&cone->orientation))
@@ -59,9 +59,10 @@ int	parse_cone(char **param, t_scene *scene)
 		|| ft_atoi_double(&cone->orientation.x, param[4])
 		|| ft_atoi_double(&cone->orientation.y, param[5])
 		|| ft_atoi_double(&cone->orientation.z, param[6])
-		|| ft_atoi_double(&cone->diameter, param[7])
+		|| ft_atoi_double(&cone->radius, param[7])
 		|| ft_atoi_double(&cone->height, param[8]))
 		return (error3("Parse error : invalid number", 0, 0));
+	cone->radius /= 2.0;
 	if (ft_get_color(cone, &param[9]))
 		return (error3("Parse error: invalid color '", param[9], "'"));
 	if (BONUS && ft_get_map_name(&cone->map_name, param[12]))

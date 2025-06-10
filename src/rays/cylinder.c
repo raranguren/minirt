@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 15:06:06 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/10 20:32:34 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	set_quadratic(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	//oc_|_
 	r_c_p = v_substract(r_c,
 			v_scale(cyl->orientation, v_dot(r_c, cyl->orientation)));
-	rayon = (float)cyl->diameter / 2.0;
+	rayon = (float)cyl->radius;
 	quad->a = v_dot(r_dir_p, r_dir_p);
 	quad->b = 2 * v_dot(r_dir_p, r_c_p);
 	quad->c = v_dot(r_c_p, r_c_p) - rayon * rayon;
@@ -65,7 +65,7 @@ int	caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 	t_obj	caps;
 	float	dist[2];
 
-	caps.radius = (float)cyl->diameter / 2.0;
+	caps.radius = (float)cyl->radius;
 	caps.pos = v_substract(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
 	caps.orientation = cyl->orientation;
 	dist[0] = plane_colision_dist(&caps, ray);

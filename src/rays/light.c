@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 15:03:22 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:35:43 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	spotlight(t_light *light, t_ray *ray)
 					c_scale(c_normalize(light->color), light->brightness)),
 				pow(fmax(v_dot(ray->normal, ray->direction), 0), REFRACT)));
 	ray->color = c_add(
-			ray->color, 
+			ray->color,
 			c_multiply(
 				ray->impact_object->color_fn(ray->impact_object, &ray->normal),
 				ray->direct_light));

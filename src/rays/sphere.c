@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 14:56:00 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/10 20:18:50 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	sphere_collision(t_obj *sphere, t_ray *ray)
 	t_quadratic	quad;
 	t_vector	tmp;
 
-	sphere->radius = (float)sphere->diameter / 2.0;
 	tmp = v_substract(ray->start, sphere->pos);
 	quad.a = 1.0;
 	quad.b = 2.0 * v_dot(tmp, ray->direction);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 14:14:07 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:20:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	valid_sphere_line(char **param)
 
 static int	valid_values(t_obj *sphere)
 {
-	if (sphere->diameter < 0)
+	if (sphere->radius < 0)
 		return (error3(SPHERE_WAITED_VALUES, 0, 0));
 	return (0);
 }
@@ -52,8 +52,9 @@ int	parse_sphere(char **param, t_scene *scene)
 	if (ft_atoi_double(&sphere->pos.x, param[1])
 		|| ft_atoi_double(&sphere->pos.y, param[2])
 		|| ft_atoi_double(&sphere->pos.z, param[3])
-		|| ft_atoi_double(&sphere->diameter, param[4]))
+		|| ft_atoi_double(&sphere->radius, param[4]))
 		return (error3("Parse error : invalid number", 0, 0));
+	sphere->radius /= 2.0;
 	if (ft_get_color(sphere, &param[5]))
 		return (error3("Parse error: invalid color '", param[5], "'"));
 	if (BONUS && ft_get_map_name(&sphere->map_name, param[8]))

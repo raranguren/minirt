@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 09:54:48 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/06 11:18:33 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:20:33 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	tui_update(t_all *all)
 		printf("🧭(% 4.2f, % 4.2f, % 4.2f) ",
 			obj->orientation.x, obj->orientation.y, obj->orientation.z);
 	if (obj->type == SPHERE || obj->type == CYLINDER)
-		printf("📏(%6.2f) ", obj->diameter);
+		printf("📏(%6.2f) ", obj->radius);
 	if (obj->type == AMB_LIGHT)
 		printf("💡(%3.2f) ", obj->ratio);
 	if (obj->type == LIGHT)

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/08 15:50:23 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:11:29 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,12 @@ typedef struct s_obj
 	t_color			color;
 	union
 	{
-		float		diameter;
+		float		radius;
 		float		ratio;
 	};
 	union
 	{
 		float		height;
-		float		radius;
 		float		brightness;
 		float		fov;
 	};

@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/04 15:33:33 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:19:39 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	edit_transform(t_all *all, float change, char is_height)
 	if (is_height)
 		value = &obj->height;
 	else
-		value = &obj->diameter;
+		value = &obj->radius;
 	if (*value + change < 0)
 		return (1);
 	*value += change;
