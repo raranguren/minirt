@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 09:35:40 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:00:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			send_rays(t_all *all);
 int			sphere_collision(t_obj *sphere, t_ray *ray);
 t_vector	sphere_normal(t_obj *sphere, t_ray *ray);
 int			plane_collision(t_obj *plane, t_ray *ray);
+float		plane_colision_dist(t_obj *plane, t_ray *ray);
 t_vector	plane_normal(t_obj *obj, t_ray *ray);
 float		ft_norm(t_vector *v);
 t_vector	v_substract(t_vector v1, t_vector v2);
@@ -55,6 +56,11 @@ t_color		c_normalize(t_color a);
 t_color		c_set(float scale);
 t_color		c_scale(t_color c, float scale);
 t_color		c_add(t_color c, t_color c2);
+int			solve_quadratic(t_quadratic *quad);
+int			bind_ray_if_nearest(t_quadratic *res, t_ray *ray, t_obj *obj);
+int			cylinder_collision(t_obj *cyl, t_ray *ray);
+t_vector	cylinder_normal(t_obj *obj, t_ray *ray);
+int			get_positiv_min(float *f1, float *f2);
 
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);
