@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:52:34 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/09 15:07:50 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:11:20 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	set_mlx(t_all *all)
 			&all->img.bits_per_pix, &all->img.line_length, &all->img.endian);
 	set_mlx_events(all);
 	mlx_set_font(all->mlx_ptr, all->mlx_win, TEXT_FONT);
+	errno = 0;
 	return (0);
 }
 // loop starts in main.c

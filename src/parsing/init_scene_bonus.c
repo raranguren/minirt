@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/07 23:58:39 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:30:49 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int	set_bump_map(t_all *all, t_obj *obj)
 	return (0);
 }
 
+int	is_xpm_file(char *filename)
+{
+	if (ft_strcmp(filename + ft_strlen(filename) - 4, ".xpm") != 0)
+		return (!error3("'", filename, "' not a '.xpm' file"));
+	return (1);
+}
+
 int	init_scene_bonus(t_all *all)
 {
 	t_scene	*scene;
@@ -66,7 +73,7 @@ int	init_scene_bonus(t_all *all)
 				if (set_color_disruption(obj))
 					return (-1);
 			}
-			else if (set_bump_map(all, obj))
+			else if (!is_xpm_file(obj->map_name) || set_bump_map(all, obj))
 				return (-1);
 		}
 		obj = find_next_obj_in_scene(scene, obj);
