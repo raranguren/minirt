@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 20:11:29 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/11 17:17:13 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_obj
 	float			fov_scale;
 	union
 	{
+		float			double_cone;
 		float			aspect_ratio;
 		float			reflection;
 	};

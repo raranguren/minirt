@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/08 16:59:02 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/10 20:48:10 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	set_the_cam(t_cam *cam)
 	return (0);
 }
 
-int	set_ray(t_ray *ray, t_cam *cam, int x, int y)
+int	init_ray(t_ray *ray, t_cam *cam, int x, int y)
 {
 	t_vector	projection;
 
@@ -90,7 +90,7 @@ int	send_rays(t_all *all)
 		y = 0;
 		while (y < WIN_HEIGHT)
 		{
-			set_ray(&ray, all->scene.cam, x, y);
+			init_ray(&ray, all->scene.cam, x, y);
 			if (get_impact(&all->scene, &ray))
 			{
 				compute_light(&all->scene, &ray);

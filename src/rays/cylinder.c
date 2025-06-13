@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 20:32:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/11 18:11:43 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,7 @@ static int	set_quadratic(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	return (0);
 }
 
-int is_within_cap(t_obj *caps, t_ray *ray, float dist)
-{
-	if (v_magnitude(v_substract(v_add(ray->start, v_scale(ray->direction, dist)),
-					caps->pos)) <= caps->radius)
-		return (1);
-	return (0);
-}
-
-int	caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
+static int	cylinder_caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 {
 	t_obj	caps;
 	float	dist[2];
@@ -68,13 +60,9 @@ int	caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 	caps.radius = (float)cyl->radius;
 	caps.pos = v_substract(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
 	caps.orientation = cyl->orientation;
-	dist[0] = plane_colision_dist(&caps, ray);
-	if (!is_within_cap(&caps, ray, dist[0]))
-		dist[0] = -1;
+	dist[0] = caps_collision(&caps, ray);
 	caps.pos = v_add(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
-	dist[1] = plane_colision_dist(&caps, ray);
-	if (!is_within_cap(&caps, ray, dist[1]))
-		dist[1] = -1;
+	dist[1] = caps_collision(&caps, ray);
 	if (!get_positiv_min(&dist[0], &dist[1]))
 		return (0);
 	return (get_positiv_min(&quad->solution_1, &dist[0]));
@@ -104,7 +92,7 @@ int	cylinder_collision(t_obj *cyl, t_ray *ray)
 	p = v_substract(p, cyl->pos);
 	p_proj_cyl_axis = v_scale(cyl->orientation, v_dot(p, cyl->orientation));
 	if (v_magnitude(p_proj_cyl_axis) > cyl->height / 2.0 + 1e-4f)
-		if (!caps_collision(&quad, cyl, ray))
+		if (!cylinder_caps_collision(&quad, cyl, ray))
 			return (0);
 	return (bind_ray_if_nearest(&quad, ray, cyl));
 

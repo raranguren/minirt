@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/02 22:28:21 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/10 22:56:38 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	valid_cam_line(char **param)
 
 static int	check_valid_values(t_cam *cam)
 {
-	if (cam->orientation.x < 0 || cam->orientation.y < 0
-		|| cam->orientation.z < 0
+	if (cam->orientation.x < -1 || cam->orientation.y < -1
+		|| cam->orientation.z < -1
 		|| cam->orientation.x > 1 || cam->orientation.y > 1
 		|| cam->orientation.z > 1
 		|| cam->fov > 180 || cam->fov < 0)

@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:04:36 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/10 20:02:50 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/11 18:18:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_collision_fn	collision_fn(char type)
 		return (&plane_collision);
 	if (type == CYLINDER)
 		return (&cylinder_collision);
+	if (type == CONE)
+		return (&cone_collision);
 	else
 		return (&no_collision);
 }
@@ -47,6 +49,8 @@ t_normal_fn	normal_fn(char type)
 		return (&plane_normal);
 	if (type == CYLINDER)
 		return (&cylinder_normal);
+	if (type == CONE)
+		return (&cone_normal);
 	else
 		return (NULL);
 }
