@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/09 23:30:37 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:06:59 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 		return (free_everything(&all), 1);
 	if (edit_init(&all))
 		return (free_everything(&all), 1);
-	ui_update(&all);
+	gui_update(&all);
 	send_rays(&all);
 	start_mlx_loop(&all);
 	free_everything(&all);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/11 17:13:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/14 22:51:34 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # define TEXT_COLOR	0xaaaaaa
 # define UI_WIDTH		360
 # define MARGIN_LEFT	38
-# define MARGIN_TOP	355
+# define MARGIN_TOP	372
 # define COL_WIDTH	100
-# define ROW_HEIGHT	79
+# define ROW_HEIGHT	78
 
 
 // Background
