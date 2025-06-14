@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/13 21:06:12 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/14 18:47:13 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vector	cone_normal(t_obj *cone, t_ray *ray)
 
 	cp = v_substract(ray->start, cone->pos);
 	dist_on_axis = v_dot(cp, cone->orientation);
-	if (fabs(dist_on_axis - cone->height) < 1e-6)
+	if (dist_on_axis < cone->height - 1e-4)
 		normal = side_cone_normal(cone, ray);
 	else
 		normal = cone->orientation;
@@ -63,10 +63,13 @@ static int	check_caps(t_quadratic *quad, t_obj *cone, t_ray *ray)
 		caps.pos = v_substract(
 				cone->pos, v_scale(cone->orientation, cone->height));
 		dist[1] = caps_collision(&caps, ray);
-		if (!get_positiv_min(&dist[0], &dist[1]))
-			return (0);
 	}
-	return (get_positiv_min(&quad->solution_1, &dist[0]));
+	else
+		dist[1] = -1;
+	if (!get_positiv_min(&dist[0], &dist[1]))
+		return (0);
+	quad->solution_1 = dist[0];
+	return (1);
 }
 
 /*
@@ -120,10 +123,10 @@ int	cone_collision(t_obj *cone, t_ray *ray)
 	set_quadratic(&quad, cone, ray);
 	if (!solve_quadratic(&quad))
 		return (0);
-	check_caps(&quad, cone, ray);
 	dist_on_axis = v_dot(v_substract(
 				v_add(ray->start, v_scale(ray->direction, quad.solution_1)), cone->pos), cone->orientation);
-	if (dist_on_axis < 0 || dist_on_axis > cone->height)
-		return (0);
-	return (bind_ray_if_nearest(&quad, ray, cone));
+	if (check_caps(&quad, cone, ray)
+			|| (dist_on_axis >= 0 && dist_on_axis < cone->height))
+		return (bind_ray_if_nearest(&quad, ray, cone));
+	return (0);
 }

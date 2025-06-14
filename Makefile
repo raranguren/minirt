@@ -1,7 +1,7 @@
 NAME		= miniRT
 NAME_BONUS	= miniRT_bonus
 
-CC	 		= gcc-12
+CC	 		= cc
 CFLAGS		= -Wall -Werror -Wextra -g 
 
 CPPFLAGS	= -Iincludes/ -Ilibft/header/ -Imlx -I/usr/include/X11/
