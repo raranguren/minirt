@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:47:11 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/10 20:30:19 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/14 22:34:26 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,8 @@ void	gui_put_color(t_all *all, int x, int y, t_color color)
 	gui_put_str(all, x, y, buff);
 }
 
-int	gui_numbers(t_all *all, t_obj *obj)
+static int	gui_numbers2(t_all *all, t_obj *obj)
 {
-	if (obj->type == CAMERA)
-		gui_put_float(all, 0, 0, obj->fov);
-	else
-		gui_put_color(all, 0, 0, obj->color);
-	if (obj->type != AMB_LIGHT)
-	{
-		gui_put_float(all, 0, 1, obj->pos.x);
-		gui_put_float(all, 1, 1, obj->pos.y);
-		gui_put_float(all, 2, 1, obj->pos.z);
-	}
 	if (obj->type == CYLINDER || obj->type == SPHERE || obj->type == CONE)
 		gui_put_float(all, 0, 2, obj->radius * 2);
 	else if (obj->type == LIGHT)
@@ -93,4 +83,21 @@ int	gui_numbers(t_all *all, t_obj *obj)
 	if (obj->type == CYLINDER || obj->type == CONE)
 		gui_put_float(all, 0, 4, obj->height);
 	return (0);
+}
+
+int	gui_numbers(t_all *all, t_obj *obj)
+{
+	if (obj->type == CAMERA)
+		gui_put_float(all, 0, 0, obj->fov);
+	else
+		gui_put_color(all, 0, 0, obj->color);
+	if (obj->type != AMB_LIGHT)
+	{
+		gui_put_float(all, 0, 1, obj->pos.x);
+		gui_put_float(all, 1, 1, obj->pos.y);
+		gui_put_float(all, 2, 1, obj->pos.z);
+	}
+	else
+		gui_put_float(all, 0, 1, obj->brightness);
+	return (gui_numbers2(all, obj));
 }
