@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/14 19:17:45 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:09:17 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	edit2(t_all *all, int key)
 		return (edit_transform(all, -SIZE, 1));
 	if (key == XK_c)
 		return (edit_transform(all, SIZE, 1));
+	if (key == XK_p)
+		return (edit_select_previous(all));
 	return (1);
 }
 

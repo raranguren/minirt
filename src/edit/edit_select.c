@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:57:08 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/14 19:09:09 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:27:42 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,24 @@ int	edit_select_next(t_all *all)
 	all->scene.selected = find_next_obj_in_scene(
 			&all->scene, all->scene.selected);
 	if (all->scene.selected == NULL)
-		return (1);
+		return (error("[edit_select] Memory error in the list of objects"));
+	gui_update(all);
+	return (2);
+}
+
+int	edit_select_previous(t_all *all)
+{
+	t_obj	*obj;
+	t_obj	*previous;
+
+	previous = all->scene.selected;
+	obj = find_next_obj_in_scene(&all->scene, all->scene.selected);
+	while (obj != all->scene.selected)
+	{
+		previous = obj;
+		obj = find_next_obj_in_scene(&all->scene, obj);
+	}
+	all->scene.selected = previous;
 	gui_update(all);
 	return (2);
 }
