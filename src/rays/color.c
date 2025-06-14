@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:23:25 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 17:26:07 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/14 22:10:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_color	c_range(t_color c)
 
 t_color	c_normalize(t_color c)
 {
-	c.a /= 255;
-	c.r /= 255;
-	c.g /= 255;
-	c.b /= 255;
+	c.a = fmax(fmin(c.a / 255, 255), 0);
+	c.r = fmax(fmin(c.r / 255, 225), 0);
+	c.g = fmax(fmin(c.g / 255, 255), 0);
+	c.b = fmax(fmin(c.b / 255, 255), 0);
 	return (c);
 }
 

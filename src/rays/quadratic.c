@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:09:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 15:14:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/14 20:11:44 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int	get_positiv_min(float *f1, float *f2)
 		return (set_to_max(f1));
 	*f1 = fminf(*f1, *f2);
 	if (*f1 < 0)
+	{
+		*f2 = *f1;
 		*f1 = tmp;
+	}
 	return (1);
 }
 
