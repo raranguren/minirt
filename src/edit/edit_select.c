@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:57:08 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/04 21:09:18 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:09:09 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	edit_select(t_all *all, t_obj *target)
 	if (target == all->scene.selected)
 		return (1);
 	all->scene.selected = target;
-	ui_update(all);
+	gui_update(all);
 	return (0);
 }
 
@@ -48,6 +48,6 @@ int	edit_select_next(t_all *all)
 			&all->scene, all->scene.selected);
 	if (all->scene.selected == NULL)
 		return (1);
-	ui_update(all);
+	gui_update(all);
 	return (2);
 }
