@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/14 22:09:17 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/15 11:07:24 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	edit_rotate(t_all *all, float horizontal, float vertical)
 	obj = all->scene.selected;
 	if (!obj)
 		return (1);
-	if (obj->type != CAMERA && obj->type != CYLINDER && obj->type != PLANE)
+	if (obj->type != CAMERA && obj->type != CYLINDER && obj->type != PLANE
+		&& obj->type != CONE)
 		return (1);
 	rotate(&obj->orientation, horizontal, vertical);
 	gui_update(all);
@@ -39,7 +40,7 @@ int	edit_transform(t_all *all, float change, char is_height)
 		return (1);
 	if (is_height && obj->type == SPHERE)
 		return (1);
-	if (obj->type != SPHERE && obj->type != CYLINDER)
+	if (obj->type != SPHERE && obj->type != CYLINDER && obj->type != CONE)
 		return (1);
 	if (is_height)
 		value = &obj->height;
