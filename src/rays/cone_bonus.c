@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 12:23:43 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 20:45:17 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static int	check_caps(t_quadratic *quad, t_obj *cone, t_ray *ray)
 		dist[1] = -1;
 	if (!get_positiv_min(&dist[0], &dist[1]))
 		return (0);
-	quad->solution_1 = dist[0];
+	if (dist[0] < quad->solution_1)
+		quad->solution_1 = dist[0];
 	return (1);
 }
 
