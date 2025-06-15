@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 20:35:57 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 21:11:26 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ t_vector	cylinder_normal(t_obj *cyl, t_ray *ray)
 	if (dist < cyl->height / 2.0 - EPSLN)
 		normal = v_unit(v_substract(cp, v_scale(cyl->orientation, dist)));
 	else
+	{
 		normal = v_unit(v_scale(cyl->orientation, dist));
-	if (v_dot(ray->direction, normal) > 0)
-		normal = v_scale(normal, -1.0);
+		if (v_dot(ray->direction, normal) > 0)
+			normal = v_scale(normal, -1.0);
+	}
 	return (normal);
 }
 
