@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/14 20:30:52 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 12:23:43 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,10 @@ int	cone_collision(t_obj *cone, t_ray *ray)
 {
 	t_quadratic quad;
 	float		dist_on_axis;
-	int			interior;
 
-	interior = 0;
 	set_quadratic(&quad, cone, ray);
 	if (!solve_quadratic(&quad))
 		return (0);
-	if (quad.solution_2 < 0)
-		interior = 1;
 	dist_on_axis = v_dot(v_substract(
 				v_add(ray->start, v_scale(ray->direction, quad.solution_1)), cone->pos), cone->orientation);
 	if (check_caps(&quad, cone, ray)

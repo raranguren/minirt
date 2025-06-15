@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/14 22:38:49 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 14:33:22 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,22 @@ int	spotlight(t_light *light, t_ray *ray)
 {
 	static t_color	norm_light;
 	static float	fact_refract;
-	static t_ray	*prev_ray;
 
-	if (!prev_ray || prev_ray != ray)
-	{
-		norm_light = c_scale(c_normalize(light->color), light->brightness);
-		fact_refract = fmax(v_dot(ray->direction, ray->normal), 0);
-	}
+	norm_light = c_scale(c_normalize(light->color), light->brightness);
+	fact_refract = fmax(v_dot(ray->direction, ray->normal), 0);
 	ray->direct_light = c_add(ray->direct_light, c_scale(norm_light, fact_refract));
 	ray->specular_light = c_add(ray->specular_light,
 			c_scale(norm_light, pow(fact_refract, REFRACT)));
-	prev_ray = ray;
 	return (0);
 }
 
-int	starting_lights(t_light *light, t_ray *ray)
+int	starting_lights(t_light *amb_light, t_ray *ray)
 {
-	ray->direct_light = c_scale(c_normalize(light->color), light->brightness);
+	if (!amb_light)
+		return (0);
+	ray->direct_light = c_scale(
+			c_normalize(amb_light->color),
+			amb_light->brightness);
 	ray->specular_light = c_set(0);
 	return (0);
 }
@@ -68,11 +67,8 @@ int	reach_spotlight(t_scene *scene, t_light *light, t_ray *ray)
 	to_spotlight = v_substract(light->pos, ray->start);
 	ray->shortest_impact_dist = v_magnitude(to_spotlight);
 	ray->direction = v_unit(to_spotlight);
-	if (v_dot(ray->normal, ray->bump) >= 0
-		|| v_dot(ray->normal,
-			v_unit(v_substract(light->pos, ray->start))) < 0)
-		if (!get_impact(scene, ray))
-			return (1);
+	if (v_dot(ray->direction, ray->normal) >= 0 && !get_impact(scene, ray))
+		return (1);
 	return (0);
 }
 
@@ -82,8 +78,7 @@ int	compute_light(t_scene *scene, t_ray *ray)
 
 	starting_lights(scene->amb_light, ray);
 	light = scene->light;
-	if (set_ray_to_impact(ray))
-		light = NULL;
+	set_ray_to_impact(ray);
 	while (light && light->type == LIGHT)
 	{
 		if (reach_spotlight(scene, light, ray))
@@ -91,5 +86,7 @@ int	compute_light(t_scene *scene, t_ray *ray)
 		light = light->next;
 	}
 	ray->color = c_multiply(ray->impact_object->color, ray->direct_light);
+	ray->color = c_add(ray->color,
+			c_multiply(ray->impact_object->color, ray->specular_light));
 	return (0);
 }
