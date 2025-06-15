@@ -6,26 +6,36 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/11 18:11:43 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 20:35:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+static float	proj_on_axis(t_obj *cyl, t_point p)
+{
+	t_vector	p_proj_cyl_axis;
+	
+	// p -> cp
+	p = v_substract(p, cyl->pos);
+	p_proj_cyl_axis = v_scale(cyl->orientation, v_dot(p, cyl->orientation));
+	return (v_magnitude(p_proj_cyl_axis));
+}
+
 t_vector	cylinder_normal(t_obj *cyl, t_ray *ray)
 {
 	t_vector	normal;
 	t_vector	cp;
-	float		dist_on_cyl_axis;
+	float		dist;
 
 	cp = v_substract(ray->start, cyl->pos);
-	dist_on_cyl_axis = v_dot(cp, cyl->orientation);
-	if (fabs(dist_on_cyl_axis) <= (float)cyl->height / 2.0)
-		normal = v_unit(v_substract(cp, v_scale(cyl->orientation, dist_on_cyl_axis)));
+	dist = proj_on_axis(cyl, ray->start);
+	if (dist < cyl->height / 2.0 - EPSLN)
+		normal = v_unit(v_substract(cp, v_scale(cyl->orientation, dist)));
 	else
-		normal = v_unit(v_scale(cyl->orientation, dist_on_cyl_axis));
-	if (v_dot(normal, ray->bump) < 0)
-		normal = v_scale(normal, -1);
+		normal = v_unit(v_scale(cyl->orientation, dist));
+	if (v_dot(ray->direction, normal) > 0)
+		normal = v_scale(normal, -1.0);
 	return (normal);
 }
 
@@ -57,7 +67,7 @@ static int	cylinder_caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 	t_obj	caps;
 	float	dist[2];
 
-	caps.radius = (float)cyl->radius;
+	caps.radius = cyl->radius;
 	caps.pos = v_substract(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
 	caps.orientation = cyl->orientation;
 	dist[0] = caps_collision(&caps, ray);
@@ -65,7 +75,11 @@ static int	cylinder_caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 	dist[1] = caps_collision(&caps, ray);
 	if (!get_positiv_min(&dist[0], &dist[1]))
 		return (0);
-	return (get_positiv_min(&quad->solution_1, &dist[0]));
+	if (proj_on_axis(
+		cyl, v_add(ray->start, v_scale(ray->direction, quad->solution_1)))
+		> cyl->height / 2.0 || dist[0] < quad->solution_1)
+		quad->solution_1 = dist[0];
+	return (1);
 }
 
 /*  -----	CHECK P is on the real cylinder surface
@@ -80,20 +94,14 @@ static int	cylinder_caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 int	cylinder_collision(t_obj *cyl, t_ray *ray)
 {
 	t_quadratic	quad;
-	t_point 	p;
-	t_vector	p_proj_cyl_axis;
 
 	set_quadratic(&quad, cyl, ray);
-	if (!solve_quadratic(&quad))
+	solve_quadratic(&quad);
+	cylinder_caps_collision(&quad, cyl, ray);
+	if (proj_on_axis(
+		cyl, v_add(ray->start, v_scale(ray->direction, quad.solution_1))) 
+			> cyl->height / 2.0 + EPSLN)
 		return (0);
-	// p -> rp
-	p = v_add(ray->start, v_scale(ray->direction, quad.solution_1));
-	// p -> cp
-	p = v_substract(p, cyl->pos);
-	p_proj_cyl_axis = v_scale(cyl->orientation, v_dot(p, cyl->orientation));
-	if (v_magnitude(p_proj_cyl_axis) > cyl->height / 2.0 + 1e-4f)
-		if (!cylinder_caps_collision(&quad, cyl, ray))
-			return (0);
 	return (bind_ray_if_nearest(&quad, ray, cyl));
 
 }

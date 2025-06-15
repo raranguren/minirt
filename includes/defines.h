@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/11 17:13:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 20:41:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define COL_WIDTH	100
 # define ROW_HEIGHT	79
 
+// Error tolerance
+# define EPSLN	1e-3
 
 // Background
 # define COLOR_BG		0x00111111

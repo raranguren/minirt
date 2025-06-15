@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 14:44:02 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:32:16 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_vector	plane_normal(t_obj *obj, t_ray *ray)
 	t_vector	normal;
 
 	normal = v_unit(obj->orientation);
-	if (v_dot(ray->direction, normal) < 0)
+	if (v_dot(ray->direction, normal) > 0)
 		normal = v_scale(normal, -1);
 	return (normal);
 }
