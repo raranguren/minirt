@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/14 22:52:17 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:41:17 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ int			ui_update(t_all *all);
 int			gui_update(t_all *all);
 int			gui_numbers(t_all *all, t_obj *obj);
 int			gui_labels(t_all *all, t_obj *obj);
+int			save_scene(t_all *all, char *filename);
+void		put_obj_fd(t_obj *obj, int fd);
+void		ft_putfloat_fd(float n, int fd);
 
 			//error
 int			error(char *str);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/14 19:06:59 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:43:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int ac, char **av)
 	gui_update(&all);
 	send_rays(&all);
 	start_mlx_loop(&all);
+	save_scene(&all, "snapshot.rt");
 	free_everything(&all);
 	return (0);
 }

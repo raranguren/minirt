@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/11 17:17:13 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:32:22 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,10 @@ typedef struct s_obj
 	union
 	{
 		float		radius;
-		float		ratio;
-	};
-	union
-	{
-		float		height;
 		float		brightness;
 		float		fov;
 	};
+	float			height;
 	t_obj			*next;
 	t_collision_fn	collision_fn;
 	t_normal_fn		normal_fn;

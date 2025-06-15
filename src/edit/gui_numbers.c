@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:47:11 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/14 22:34:26 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:32:57 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	gui_numbers2(t_all *all, t_obj *obj)
 	if (obj->type == CYLINDER || obj->type == SPHERE || obj->type == CONE)
 		gui_put_float(all, 0, 2, obj->radius * 2);
 	else if (obj->type == LIGHT)
-		gui_put_float(all, 0, 2, obj->ratio);
+		gui_put_float(all, 0, 2, obj->brightness);
 	if (obj->type == CAMERA || obj->type == CYLINDER
 		|| obj->type == CONE || obj->type == PLANE)
 	{
