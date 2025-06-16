@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 21:11:26 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 08:59:45 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static float	proj_on_axis(t_obj *cyl, t_point p)
 {
-	t_vector	p_proj_cyl_axis;
+	float 		dist;
 	
 	// p -> cp
 	p = v_substract(p, cyl->pos);
-	p_proj_cyl_axis = v_scale(cyl->orientation, v_dot(p, cyl->orientation));
-	return (v_magnitude(p_proj_cyl_axis));
+	dist = v_dot(p, cyl->orientation);
+	return (dist);
 }
 
 t_vector	cylinder_normal(t_obj *cyl, t_ray *ray)
@@ -35,9 +35,9 @@ t_vector	cylinder_normal(t_obj *cyl, t_ray *ray)
 	else
 	{
 		normal = v_unit(v_scale(cyl->orientation, dist));
-		if (v_dot(ray->direction, normal) > 0)
-			normal = v_scale(normal, -1.0);
 	}
+	if (v_dot(ray->direction, normal) > 0)
+		normal = v_scale(normal, -1.0);
 	return (normal);
 }
 
@@ -77,8 +77,8 @@ static int	cylinder_caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
 	dist[1] = caps_collision(&caps, ray);
 	if (!get_positiv_min(&dist[0], &dist[1]))
 		return (0);
-	if (proj_on_axis(
-		cyl, v_add(ray->start, v_scale(ray->direction, quad->solution_1)))
+	if (fabs(proj_on_axis(
+		cyl, v_add(ray->start, v_scale(ray->direction, quad->solution_1))))
 		> cyl->height / 2.0 || dist[0] < quad->solution_1)
 		quad->solution_1 = dist[0];
 	return (1);
@@ -100,8 +100,8 @@ int	cylinder_collision(t_obj *cyl, t_ray *ray)
 	set_quadratic(&quad, cyl, ray);
 	solve_quadratic(&quad);
 	cylinder_caps_collision(&quad, cyl, ray);
-	if (proj_on_axis(
-		cyl, v_add(ray->start, v_scale(ray->direction, quad.solution_1))) 
+	if (fabs(proj_on_axis(
+		cyl, v_add(ray->start, v_scale(ray->direction, quad.solution_1))))
 			> cyl->height / 2.0 + EPSLN)
 		return (0);
 	return (bind_ray_if_nearest(&quad, ray, cyl));

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 20:45:17 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 09:12:35 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_vector	cone_normal(t_obj *cone, t_ray *ray)
 		normal = side_cone_normal(cone, ray);
 	else
 		normal = cone->orientation;
+	if (v_dot(ray->direction, normal) > 0)
+		normal = v_scale(normal, -1.0);
 	return (normal);
 }
 
