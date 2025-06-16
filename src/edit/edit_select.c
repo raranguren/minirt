@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:57:08 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/14 22:27:42 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:31:30 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	edit_select(t_all *all, t_obj *target)
 // but the lists of shapes (obj) and lights can be empty
 t_obj	*find_next_obj_in_scene(t_scene *scene, t_obj *this)
 {
+	if (!this && !scene->obj)
+		return (scene->obj2);
 	if (!this)
 		return (scene->obj);
 	if (this->next)
@@ -39,6 +41,8 @@ t_obj	*find_next_obj_in_scene(t_scene *scene, t_obj *this)
 	}
 	if (scene->light)
 		return (scene->light);
+	if (scene->obj)
+		return (scene->obj);
 	return (scene->obj2);
 }
 

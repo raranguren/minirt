@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 22:54:01 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:36:06 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,40 @@ static int	read_and_orient(char *path, t_all *all)
 	return (err);
 }
 
+static int	validate_scene(t_scene *scene)
+{
+	t_obj	*obj;
+	int		found_camera;
+	int		found_amb;
+
+	if (!scene->obj)
+		return (error("The scene has no shapes"));
+	found_camera = 0;
+	found_amb = 0;
+	obj = scene->obj2;
+	while (obj)
+	{
+		if (obj->type == CAMERA)
+			found_camera = 1;
+		if (obj->type == AMB_LIGHT)
+			found_amb = 1;
+		obj = obj->next;
+	}
+	if (!found_camera)
+		return (error("The scene has no camera"));
+	if (!found_amb)
+		return (error("The scene has no ambient light"));
+	return (0);
+}
+
 int	parse_map(int ac, char **av, t_all *all)
 {
 	if (ac != 2 || ft_strlen(av[1]) < 3
 		|| ft_strncmp(&av[1][ft_strlen(av[1]) - 3], ".rt", 3))
 		return (error3(ERROR_ARGUMENTS, 0, 0));
 	if (read_and_orient(av[1], all))
+		return (-1);
+	if (validate_scene(&all->scene))
 		return (-1);
 	if (init_scene(all))
 		return (-1);
