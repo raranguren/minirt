@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 14:22:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:34:20 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	parse_plane(char **param, t_scene *scene)
 	if (valid_plane_line(param))
 		return (1);
 	plane = ft_calloc(1, sizeof(t_obj));
+	if (!plane)
+		return (error("Out of memory"));
 	plane->type = PLANE;
 	if (ft_atoi_double(&plane->pos.x, param[1])
 		|| ft_atoi_double(&plane->pos.y, param[2])

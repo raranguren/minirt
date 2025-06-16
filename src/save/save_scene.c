@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:58 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/15 17:46:39 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:59:06 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	save_scene(t_all *all, char *filename)
 	t_obj	*old_selected;
 	int		count;
 
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		return (error3("Can't open file '", filename, "' to save the scene"));
 	old_selected = all->scene.selected;

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 13:36:06 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:26:43 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ static int	validate_scene(t_scene *scene)
 		obj = obj->next;
 	}
 	if (!found_camera)
-		return (error("The scene has no camera"));
+		return (error3("No camera", "\n", CAM_WAITED_VALUES));
 	if (!found_amb)
-		return (error("The scene has no ambient light"));
+		return (error3("No ambient light", "\n", AMB_LIGHT_WAITED_VALUES));
 	return (0);
 }
 
@@ -102,12 +102,12 @@ int	parse_map(int ac, char **av, t_all *all)
 {
 	if (ac != 2 || ft_strlen(av[1]) < 3
 		|| ft_strncmp(&av[1][ft_strlen(av[1]) - 3], ".rt", 3))
-		return (error3(ERROR_ARGUMENTS, 0, 0));
+		return (error(ERROR_ARGUMENTS));
 	if (read_and_orient(av[1], all))
-		return (-1);
+		return (1);
 	if (validate_scene(&all->scene))
-		return (-1);
+		return (1);
 	if (init_scene(all))
-		return (-1);
+		return (1);
 	return (0);
 }
