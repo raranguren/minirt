@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:47:11 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/10 20:30:19 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:32:57 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,24 @@ void	gui_put_color(t_all *all, int x, int y, t_color color)
 	gui_put_str(all, x, y, buff);
 }
 
+static int	gui_numbers2(t_all *all, t_obj *obj)
+{
+	if (obj->type == CYLINDER || obj->type == SPHERE || obj->type == CONE)
+		gui_put_float(all, 0, 2, obj->radius * 2);
+	else if (obj->type == LIGHT)
+		gui_put_float(all, 0, 2, obj->brightness);
+	if (obj->type == CAMERA || obj->type == CYLINDER
+		|| obj->type == CONE || obj->type == PLANE)
+	{
+		gui_put_float(all, 0, 3, obj->orientation.x);
+		gui_put_float(all, 1, 3, obj->orientation.y);
+		gui_put_float(all, 2, 3, obj->orientation.z);
+	}
+	if (obj->type == CYLINDER || obj->type == CONE)
+		gui_put_float(all, 0, 4, obj->height);
+	return (0);
+}
+
 int	gui_numbers(t_all *all, t_obj *obj)
 {
 	if (obj->type == CAMERA)
@@ -79,18 +97,7 @@ int	gui_numbers(t_all *all, t_obj *obj)
 		gui_put_float(all, 1, 1, obj->pos.y);
 		gui_put_float(all, 2, 1, obj->pos.z);
 	}
-	if (obj->type == CYLINDER || obj->type == SPHERE || obj->type == CONE)
-		gui_put_float(all, 0, 2, obj->radius * 2);
-	else if (obj->type == LIGHT)
-		gui_put_float(all, 0, 2, obj->ratio);
-	if (obj->type == CAMERA || obj->type == CYLINDER
-		|| obj->type == CONE || obj->type == PLANE)
-	{
-		gui_put_float(all, 0, 3, obj->orientation.x);
-		gui_put_float(all, 1, 3, obj->orientation.y);
-		gui_put_float(all, 2, 3, obj->orientation.z);
-	}
-	if (obj->type == CYLINDER || obj->type == CONE)
-		gui_put_float(all, 0, 4, obj->height);
-	return (0);
+	else
+		gui_put_float(all, 0, 1, obj->brightness);
+	return (gui_numbers2(all, obj));
 }

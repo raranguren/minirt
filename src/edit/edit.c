@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/10 20:19:39 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/15 11:07:24 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int	edit_rotate(t_all *all, float horizontal, float vertical)
 	obj = all->scene.selected;
 	if (!obj)
 		return (1);
-	if (obj->type != CAMERA && obj->type != CYLINDER && obj->type != PLANE)
+	if (obj->type != CAMERA && obj->type != CYLINDER && obj->type != PLANE
+		&& obj->type != CONE)
 		return (1);
 	rotate(&obj->orientation, horizontal, vertical);
-	ui_update(all);
+	gui_update(all);
 	return (0);
 }
 
@@ -39,7 +40,7 @@ int	edit_transform(t_all *all, float change, char is_height)
 		return (1);
 	if (is_height && obj->type == SPHERE)
 		return (1);
-	if (obj->type != SPHERE && obj->type != CYLINDER)
+	if (obj->type != SPHERE && obj->type != CYLINDER && obj->type != CONE)
 		return (1);
 	if (is_height)
 		value = &obj->height;
@@ -48,7 +49,7 @@ int	edit_transform(t_all *all, float change, char is_height)
 	if (*value + change < 0)
 		return (1);
 	*value += change;
-	ui_update(all);
+	gui_update(all);
 	return (0);
 }
 
@@ -62,7 +63,7 @@ int	edit_move(t_all *all, t_vector v)
 	obj->pos.x += v.x;
 	obj->pos.y += v.y;
 	obj->pos.z += v.z;
-	ui_update(all);
+	gui_update(all);
 	return (0);
 }
 
@@ -76,6 +77,8 @@ int	edit2(t_all *all, int key)
 		return (edit_transform(all, -SIZE, 1));
 	if (key == XK_c)
 		return (edit_transform(all, SIZE, 1));
+	if (key == XK_p)
+		return (edit_select_previous(all));
 	return (1);
 }
 
