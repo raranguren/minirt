@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 09:12:35 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:58:38 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ t_vector	side_cone_normal(t_obj *cone, t_ray *ray)
 		 			v_scale(cone->orientation, sinf(theta)))));
 }
 
-t_vector	cone_normal(t_obj *cone, t_ray *ray)
+t_vector	cone_normal(t_ray *ray)
 {
 	t_vector	cp;
 	t_vector	normal;
 	float		dist_on_axis;
+	t_obj		*cone;
 
+	cone = ray->impact_object;
 	cp = v_substract(ray->start, cone->pos);
 	dist_on_axis = v_dot(cp, cone->orientation);
 	if (dist_on_axis < cone->height - 1e-4)

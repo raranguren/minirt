@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 17:36:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:59:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	set_ray_to_impact(t_ray *ray)
 	ray->start = v_add(
 			ray->start,
 			v_scale(ray->direction, ray->shortest_impact_dist));
-	ray->normal = ray->impact_object->normal_fn(ray->impact_object, ray);
-	if (BONUS && ray->impact_object->map)
-		ray->impact_object->bump_fn(ray);
+	ray->normal = ray->impact_object->normal_fn(ray);
 	ray->bump = v_unit(v_substract(
 				ray->direction,
 				v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal))));

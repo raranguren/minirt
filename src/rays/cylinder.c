@@ -6,13 +6,13 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 17:55:49 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:04:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	cyl_proj_on_axis(t_obj *cyl, t_point p)
+float	proj_on_axis(t_obj *cyl, t_point p)
 {
 	float 		dist;
 	
@@ -22,15 +22,17 @@ float	cyl_proj_on_axis(t_obj *cyl, t_point p)
 	return (dist);
 }
 
-t_vector	cylinder_normal(t_obj *cyl, t_ray *ray)
+t_vector	cylinder_normal(t_ray *ray)
 {
 	t_vector	normal;
 	t_vector	cp;
 	float		dist;
+	t_obj		*cyl;
 
+	cyl = ray->impact_object;
 	cp = v_substract(ray->start, cyl->pos);
 	dist = proj_on_axis(cyl, ray->start);
-	if (dist < cyl->height / 2.0 - EPSLN)
+	if (fabs(dist) < cyl->height / 2.0 - EPSLN)
 		normal = v_unit(v_substract(cp, v_scale(cyl->orientation, dist)));
 	else
 	{

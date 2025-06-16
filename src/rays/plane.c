@@ -6,16 +6,18 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 12:07:19 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:58:06 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	plane_normal(t_obj *obj, t_ray *ray)
+t_vector	plane_normal(t_ray *ray)
 {
 	t_vector	normal;
+	t_obj		*obj;
 
+	obj = ray->impact_object;
 	normal = v_unit(obj->orientation);
 	if (v_dot(ray->direction, normal) > 0)
 		normal = v_scale(normal, -1);

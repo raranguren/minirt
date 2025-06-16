@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 18:46:00 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:00:43 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_vector	get_non_linear(t_vector v)
 	return (res);
 }
 /*Return local coordinates of p depending on z unit vector bind to z axis*/
-t_vector get_local_cordinates(t_point p, t_vector z)
+t_vector get_local_cordinates(t_point p, t_vector z, t_point o)
 {
 	t_vector	u;
 	t_vector	v;
@@ -39,7 +39,7 @@ t_vector get_local_cordinates(t_point p, t_vector z)
 	u = get_non_linear(z);
 	u = v_unit(v_multiply(u, z));
 	v = v_unit(v_multiply(u, z));
-	cp = v_substract(p, cyl->pos);
+	cp = v_substract(p, o);
 	p.x = v_dot(cp, u);
 	p.y = v_dot(cp, v);
 	p.z = v_dot(cp, z);
@@ -72,19 +72,21 @@ t_vector	get_world_coordinates(t_point p, t_vector z)
 	return (w_p);
 }
 
-int	cylinder_bump(t_ray *ray)
+t_vector	cylinder_bump(t_ray *ray)
 {
 	t_point	p;
 	float	u;
 	float	v;
 	t_vector	modifyer;
 
-	p = get_local_cordinates(ray->start, ray->impact_object->orientation);
-	if (p.z > cyl->height / 2.0 - EPSLN)
+	ray->normal = cylinder_normal(ray);
+	p = get_local_cordinates(ray->start, ray->impact_object->orientation, 
+			ray->impact_object->pos);
+	if (p.z > ray->impact_object->height / 2.0 - EPSLN)
 	{
-		u = 0.5 + (arctanf2(p.y, p.x) / 2 * M_PI);
-		v = (p.z + ray->impact_object->height / 2.0) ray->impact_object->height;
-		modifyer = get_bump_vector(ray->impact_object->img, u, v);
+		u = 0.5 + (atan2f(p.y, p.x) / 2 * M_PI);
+		v = (p.z + ray->impact_object->height / 2.0) / ray->impact_object->height;
+		modifyer = get_bump_vector(&ray->impact_object->map, u, v);
 		modifyer = get_world_coordinates(modifyer, ray->normal);
 		ray->normal = v_unit(v_add(ray->normal, modifyer));
 	}
@@ -92,5 +94,5 @@ int	cylinder_bump(t_ray *ray)
 	{
 		//caps
 	}
-	return (0);
+	return (ray->normal);
 }

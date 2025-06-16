@@ -6,17 +6,19 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:14:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 12:08:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 19:57:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	sphere_normal(t_obj *obj, t_ray *ray)
+t_vector	sphere_normal(t_ray *ray)
 {
 	t_vector	normal;
 	t_point		p;
+	t_obj		*obj;
 
+	obj = ray->impact_object;
 	p = ray->start;
 	normal = v_unit(v_substract(p, obj->pos));
 	if (v_dot(ray->direction, normal) > 0)
