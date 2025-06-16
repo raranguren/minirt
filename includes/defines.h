@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 08:25:21 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 10:59:04 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define MARGIN_TOP	372
 # define COL_WIDTH	100
 # define ROW_HEIGHT	78
+
+// Refraction indice for specular light
+#define REFRACT	10000
 
 // Error tolerance
 # define EPSLN	1e-3

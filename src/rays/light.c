@@ -6,12 +6,11 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 20:52:28 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 11:03:48 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#define REFRACT	30
 
 // Set the ray start to the impacted object
 // Compute the normal of the surface
