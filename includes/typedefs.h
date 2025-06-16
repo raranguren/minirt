@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 19:58:57 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:33:49 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_image
 	int		bits_per_pix;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_image;
 
 typedef int				(*t_collision_fn)(t_obj *, t_ray *);
