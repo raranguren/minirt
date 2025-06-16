@@ -1,1 +1,0 @@
-- [ ] infinite loop  with no light L in bonus

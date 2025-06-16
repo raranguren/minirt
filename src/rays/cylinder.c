@@ -6,13 +6,13 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 08:59:45 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 17:55:49 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static float	proj_on_axis(t_obj *cyl, t_point p)
+float	cyl_proj_on_axis(t_obj *cyl, t_point p)
 {
 	float 		dist;
 	
