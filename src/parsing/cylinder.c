@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 20:33:18 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/17 19:42:28 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	usage(char *a, char *b, char *c)
 {
 	error3(a, b, c);
 	ft_putendl_fd(CYLINDER_WAITED_VALUES, 2);
+	if (BONUS)
+		ft_putendl_fd(BONUS_WAITED_VALUES, 2);
 	return (1);
 }
 

@@ -6,18 +6,22 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/14 22:51:34 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/17 19:41:50 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define ERROR(msg) error(msg)
-# define PERROR(msg) print_error(msg, __FILE__, __LINE__, __func__)
-# define PERROR2(msg1, msg2) print_error2(msg1, msg2,  __FILE__, __LINE__)
+//# define ERROR(msg) error(msg)
+//# define PERROR(msg) print_error(msg, __FILE__, __LINE__, __func__)
+//# define PERROR2(msg1, msg2) print_error2(msg1, msg2,  __FILE__, __LINE__)
 
-# define ICI	printf("ICI\n");
+//# define ICI	printf("ICI\n");
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 // Screen dimensions
 # define WIN_WIDTH		720
@@ -31,7 +35,6 @@
 # define MARGIN_TOP	372
 # define COL_WIDTH	100
 # define ROW_HEIGHT	78
-
 
 // Background
 # define COLOR_BG		0x00111111
@@ -56,41 +59,83 @@
 # define CYLINDER_BG	"ui_textures/ui_cylinder.xpm"
 # define CONE_BG		"ui_textures/ui_cone.xpm"
 
+//Welcome messages
+
+# define WELCOME_MESSAGE "\
+miniRT by bduval & rarangur - mandatory version\n\
+"
+
+# define BONUS_WELCOME_MESSAGE "\
+miniRT by bduval & rarangur - BONUS version\n\
+  - full Phong reflection\n\
+  - color disruption: checkerboard pattern ('#' after the color of shapes)\n\
+  - colored multi-spot lights (can have more than one 'C' in the .rt file)\n\
+  - bump maps textures (add the .xpm file name after the color of a shape)\n\
+"
+
 //Error messages
 # define ERROR_ARGUMENTS	"\
 You must provide only a scene description \
 file with .rt extension as argument"
 
 # define AMB_LIGHT_WAITED_VALUES	"\
-Format for ambiance light parameter is the following :\n\
-(A) (lighting ratio [0->1]) (r,g,b color [0->255])"
+Syntax for ambient light :\n\
+(A) (brightness ratio [0->1]) (r,g,b color [0->255])\n\
+\n\
+Example :\n\
+A   0.2 255,255,255"
 
 # define LIGHT_WAITED_VALUES	"\
-Format for light parameter is the following :\n\
-(L) (x,y,z coorinates) (normalized brightness [0->1]) (r,g,b color [0->255])"
+Syntax for light :\n\
+(L) (x,y,z coordinates) (rightness ratio [0->1]) (r,g,b color [0->255])\n\
+\n\
+Example :\n\
+L   134.59,75.13,41.62  0.7 255,255,255"
 
 # define CAM_WAITED_VALUES	"\
-Format for camera parameter is the following :\n\
-(C) (x,y,z coorinates) (x,y,z normalized orientation [-1->1]) (FOV [0 -> 180])"
+Syntax for camera :\n\
+(C) (x,y,z coordinates) (x,y,z normalized orientation [-1->1]) \
+(FOV [0 -> 180])\n\
+(FOV values between 60 and 75 recommended)\n\
+\n\
+Example :\n\
+C   87.94,0,-3.93   -0.99,0,0.17    70"
 
 # define PLANE_WAITED_VALUES	"\
-Format for plane parameter is the following :\n\
-(pl) (x,y,z point of plan coorinates) (x,y,z orientation [-1->1]) \
-(r,g,b color [0->255])"
+Syntax for plane :\n\
+(pl) (x,y,z point of plane coordinates) (x,y,z orientation [-1->1]) \
+(r,g,b color [0->255])\n\
+\n\
+Example :\n\
+pl  0,-60,0 0,1,0   255,0,225"
 
 # define CYLINDER_WAITED_VALUES	"\
-Format for cylinder parameter is the following :\n\
+Syntax for cylinder :\n\
 (cy) (x,y,z center coords.) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
-(r,g,b color [0->255])"
+(r,g,b color [0->255])\n\
+\n\
+Example :\n\
+cy  -0.42,0,28.2    0,0,1   14.2    21.42   10,0,255"
 
 # define CONE_WAITED_VALUES	"\
-Format for cone parameter is the following :\n\
-(cy) (x,y,z center coords.) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
-(r,g,b color [0->255])"
+Syntax for cone :\n\
+(co) (x,y,z center coords.) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
+(r,g,b color [0->255])\n\
+\n\
+Example :\n\
+co  -0.42,0,28.2   0,0,1  14.2    21.42   10,255,40"
 
 # define SPHERE_WAITED_VALUES	"\
-Format for sphere parameter is the following :\n\
-(sp) (x,y,z center coorinates) (diameter) (r,g,b color [0->255])"
+Syntax for sphere :\n\
+(sp) (x,y,z center coords.) (diameter) (r,g,b color [0->255])\n\
+\n\
+Example :\n\
+sp  6,0,7.19    20  255,0,0"
+
+# define BONUS_WAITED_VALUES	"\n\
+Optional parameters :\n\
+Add # after the color to use color disruption (checkered)\n\
+Or add the path to a .xpm file to use as bump map\n"
 
 //SETS
 # define SPLIT						" \t\n,"

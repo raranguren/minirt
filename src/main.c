@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 16:43:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/17 19:35:43 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	main(int ac, char **av)
 	static t_all	all;
 
 	if (BONUS)
-		printf("Bonus: ON\n");
+		ft_putendl_fd(BONUS_WELCOME_MESSAGE, 1);
 	else
-		printf("Bonus: OFF\n");
+		ft_putendl_fd(WELCOME_MESSAGE, 1);
 	if (ac != 2)
 	{
 		printf("%s\n", ERROR_ARGUMENTS);
