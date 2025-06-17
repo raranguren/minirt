@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/17 19:41:50 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/17 23:45:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ miniRT by bduval & rarangur - BONUS version\n\
 
 //Error messages
 # define ERROR_ARGUMENTS	"\
-You must provide only a scene description \
-file with .rt extension as argument"
+Usage : ./miniRT[_bonus] <filename.rt>\n\
+        ./miniRT[_bonus] -h"
 
 # define AMB_LIGHT_WAITED_VALUES	"\
 Syntax for ambient light :\n\
@@ -118,7 +118,7 @@ Example :\n\
 cy  -0.42,0,28.2    0,0,1   14.2    21.42   10,0,255"
 
 # define CONE_WAITED_VALUES	"\
-Syntax for cone :\n\
+Syntax for cone (_bonus only):\n\
 (co) (x,y,z center coords.) (x,y,z orientation [-1->1]) (w,h dimensions [>0]) \
 (r,g,b color [0->255])\n\
 \n\
@@ -133,8 +133,8 @@ Example :\n\
 sp  6,0,7.19    20  255,0,0"
 
 # define BONUS_WAITED_VALUES	"\n\
-Optional parameters :\n\
-Add # after the color to use color disruption (checkered)\n\
+Optional parameters (_bonus only):\n\
+Add # after the shape color (r,g,b) to use color disruption (checkered)\n\
 Or add the path to a .xpm file to use as bump map\n"
 
 //SETS
