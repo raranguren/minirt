@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:19:18 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/05 12:39:13 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/18 00:18:09 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int	ft_is_char(const char *str)
 	{
 		if (!ft_isdigit(str[i]))
 			return (0);
-		if (len == 3 && str[i] > STR_CHAR_MAX[i])
-			return (0);
 		i++;
 	}
+	if (len == 3 && ft_strncmp(str, "255", 3) > 0)
+		return (0);
 	return (1);
 }

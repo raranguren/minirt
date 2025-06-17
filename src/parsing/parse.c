@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 20:26:43 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/18 00:16:52 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,10 @@ static int	validate_scene(t_scene *scene)
 
 int	parse_map(int ac, char **av, t_all *all)
 {
-	if (ac != 2 || ft_strlen(av[1]) < 3
+	(void)ac;
+	if (ft_strlen(av[1]) < 3
 		|| ft_strncmp(&av[1][ft_strlen(av[1]) - 3], ".rt", 3))
-		return (error(ERROR_ARGUMENTS));
+		return (error("File path does not end in .rt"));
 	if (read_and_orient(av[1], all))
 		return (1);
 	if (validate_scene(&all->scene))

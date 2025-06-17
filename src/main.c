@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:51:12 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/17 23:50:39 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/17 23:53:57 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (usage());
 	welcome();
-	if (ft_strcmp("-h", av[1]) == 0 || ft_strcmp("--help", av[1]))
+	if (ft_strcmp("-h", av[1]) == 0 || ft_strcmp("--help", av[1]) == 0)
 		return (help());
 	if (parse_map(ac, av, &all))
 		return (free_everything(&all), 1);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/17 23:45:19 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/18 00:15:31 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,5 @@ Or add the path to a .xpm file to use as bump map\n"
 
 //SETS
 # define SPLIT						" \t\n,"
-# define STR_CHAR_MAX				"255"
-# define STR_DOUBLE_MAX_20_FIRST	"17976931348623157000"
 
 #endif
