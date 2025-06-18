@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:59:13 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 09:30:18 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:51:38 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static int	key_press_hook(int keycode, void *param)
 	return (0);
 }
 
-static int	mouse_hook(int button, int x, int y, void *param)
+static int	mouse_hook(int button, int x, int y, void *all)
 {
-	(void)button;
-	(void)x;
-	(void)y;
-	(void)param;
+	if (x > WIN_WIDTH || y > WIN_HEIGHT)
+	   return (0);	
+	if (button == Button1)
+		left_click(all, x, y);
 	return (0);
 }
 
