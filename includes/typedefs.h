@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 16:32:22 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 04:08:50 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_all
 	t_image	img;
 	t_scene	scene;
 	t_img	*ui_bg[7];
+	t_img	*ui_color_box;
 }	t_all;
 
 #endif

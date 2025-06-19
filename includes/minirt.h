@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/15 16:41:17 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 04:17:29 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int			set_mlx(t_all *mlx);
 int			free_mlx(t_all *mlx);
 int			set_mlx_events(t_all *mlx);
 int			start_mlx_loop(t_all *all);
-int			quit_hook(void *param);
 
 			//ray
 int			send_rays(t_all *all);
@@ -100,14 +99,13 @@ int			ui_update(t_all *all);
 int			gui_update(t_all *all);
 int			gui_numbers(t_all *all, t_obj *obj);
 int			gui_labels(t_all *all, t_obj *obj);
+int			gui_color(t_all *all, t_obj *obj);
 int			save_scene(t_all *all, char *filename);
 void		put_obj_fd(t_obj *obj, int fd);
 void		ft_putfloat_fd(float n, int fd);
 
 			//error
 int			error(char *str);
-int			print_error2(char *err1, char *err2, const char *f, int l);
-int			print_error(char *err, const char *fle, int lne, const char *func);
 int			error3(char *a, char *b, char *c);
 
 			//utils

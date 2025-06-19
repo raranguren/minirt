@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 11:01:57 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/10 09:34:46 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 04:28:46 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	gui_update(t_all *all)
 	if (obj->type != type)
 		err = set_layout(all, obj->type);
 	err |= gui_numbers(all, obj);
+	if (obj->type != CAMERA)
+		err |= gui_color(all, obj);
 	err |= gui_labels(all, obj);
 	return (err);
 }
