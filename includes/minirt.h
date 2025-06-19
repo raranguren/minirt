@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 04:17:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 08:37:21 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int			start_mlx_loop(t_all *all);
 
 			//ray
 int			send_rays(t_all *all);
+int			init_ray(t_ray *ray, t_cam *cam, int x, int y);
 int			sphere_collision(t_obj *sphere, t_ray *ray);
 t_vector	sphere_normal(t_obj *sphere, t_ray *ray);
 int			plane_collision(t_obj *plane, t_ray *ray);
@@ -103,6 +104,8 @@ int			gui_color(t_all *all, t_obj *obj);
 int			save_scene(t_all *all, char *filename);
 void		put_obj_fd(t_obj *obj, int fd);
 void		ft_putfloat_fd(float n, int fd);
+void		mouse_left_click(t_all *all, int x, int y);
+void		mouse_left_move(t_all *all, int x, int y);
 
 			//error
 int			error(char *str);
