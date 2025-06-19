@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:59:13 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 08:48:12 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:10:50 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,18 @@ static int	mouse_hook(int button, int x, int y, void *all)
 		mouse_left_click(all, x, y);
 		send_rays(all);
 	}
+	else if (button == Button3)
+	{
+		mouse_right_click(all, x, y);
+		send_rays(all);
+	}
 	return (0);
 }
 
 static int	motion1_hook(int x, int y, t_all *all)
 {
+	if (x > WIN_WIDTH || y > WIN_HEIGHT)
+		return (0);
 	if (all->scene.selected->type | SHAPE)
 	{
 		mouse_left_move(all, x, y);
