@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 10:03:38 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:46:59 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int			start_mlx_loop(t_all *all);
 int			send_rays(t_all *all);
 int			init_ray(t_ray *ray, t_cam *cam, int x, int y);
 int			sphere_collision(t_obj *sphere, t_ray *ray);
-t_vector	sphere_normal(t_obj *sphere, t_ray *ray);
+t_vector	sphere_normal(t_ray *ray);
 int			plane_collision(t_obj *plane, t_ray *ray);
 float		plane_colision_dist(t_obj *plane, t_ray *ray);
-t_vector	plane_normal(t_obj *obj, t_ray *ray);
+t_vector	plane_normal(t_ray *ray);
 float		ft_norm(t_vector *v);
 t_vector	v_substract(t_vector v1, t_vector v2);
 t_vector	v_multiply(t_vector v1, t_vector v2);
@@ -59,12 +59,17 @@ t_color		c_add(t_color c, t_color c2);
 int			solve_quadratic(t_quadratic *quad);
 int			bind_ray_if_nearest(t_quadratic *res, t_ray *ray, t_obj *obj);
 int			cylinder_collision(t_obj *cyl, t_ray *ray);
-t_vector	cylinder_normal(t_obj *obj, t_ray *ray);
+t_vector	cylinder_normal(t_ray *ray);
 int			get_positiv_min(float *f1, float *f2);
 float		caps_collision(t_obj *caps, t_ray *ray);
 int			is_within_cap(t_obj *caps, t_ray *ray, float dist);
 int			cone_collision(t_obj *cone, t_ray *ray);
-t_vector	cone_normal(t_obj *obj, t_ray *ray);
+t_vector	cone_normal(t_ray *ray);
+float		proj_on_axis(t_obj *obj, t_point p);
+
+			//bump
+t_vector	get_bump_vector(t_bump *bump, float u, float v);
+t_vector	cylinder_bump(t_ray *ray);
 
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);

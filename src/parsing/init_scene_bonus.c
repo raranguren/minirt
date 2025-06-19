@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/10 09:30:49 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:20:52 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@ int	set_color_disruption(t_obj *obj)
 int	set_bump_map(t_all *all, t_obj *obj)
 {
 	t_img	*img;
-	int		tmp;
 
 	if (obj->type == SPHERE)
 		obj->normal_fn = obj->normal_fn;
 	else if (obj->type == PLANE)
-		return (error3("Unsupported '", obj->map_name, "' for PLANE"));
+		return (error3("Unsupported '", obj->bump.map_name, "' for PLANE"));
 	else if (obj->type == CYLINDER)
-		return (error3("Unsupported '", obj->map_name, "' for CYLINDER"));
+		obj->normal_fn = cylinder_bump;
 	else if (obj->type == CONE)
-		return (error3("Unsupported '", obj->map_name, "' for CONE"));
-	img = mlx_xpm_file_to_image(all->mlx_ptr, obj->map_name, &tmp, &tmp);
+		return (error3("Unsupported '", obj->bump.map_name, "' for CONE"));
+	img = mlx_xpm_file_to_image(all->mlx_ptr, obj->bump.map_name,
+			&obj->bump.width, &obj->bump.height);
 	if (!img)
 		return (error3("Could not load xpm texture from file '",
-				obj->map_name, "'"));
-	obj->map.id = img;
-	mlx_get_data_addr(img, &obj->map.bits_per_pix,
-		&obj->map.line_length, &obj->map.endian);
+				obj->bump.map_name, "'"));
+	obj->bump.map.id = img;
+	mlx_get_data_addr(img, &obj->bump.map.bits_per_pix,
+		&obj->bump.map.line_length, &obj->bump.map.endian);
 	return (0);
 }
 
@@ -66,14 +66,14 @@ int	init_scene_bonus(t_all *all)
 	{
 		if (!obj)
 			obj = scene->obj;
-		if (obj->map_name)
+		if (obj->bump.map_name)
 		{
-			if (ft_strcmp(obj->map_name, "#") == 0)
+			if (ft_strcmp(obj->bump.map_name, "#") == 0)
 			{
 				if (set_color_disruption(obj))
 					return (-1);
 			}
-			else if (!is_xpm_file(obj->map_name) || set_bump_map(all, obj))
+			else if (!is_xpm_file(obj->bump.map_name) || set_bump_map(all, obj))
 				return (-1);
 		}
 		obj = find_next_obj_in_scene(scene, obj);

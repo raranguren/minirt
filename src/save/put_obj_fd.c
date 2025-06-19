@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:39:30 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/19 08:52:57 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:52:03 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	put_obj_fd(t_obj *obj, int fd)
 		put_shape_fd(obj, fd);
 	if (obj->type != CAMERA)
 		put3(obj->color.r * 1, obj->color.g * 1, obj->color.b * 1, fd);
-	if (obj->map_name)
-		ft_putstr_fd(obj->map_name, fd);
+	if (obj->bump.map_name)
+		ft_putstr_fd(obj->bump.map_name, fd);
 	write(fd, "\n", 1);
 }

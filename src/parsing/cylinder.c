@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/17 19:42:28 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:50:46 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	parse_cylinder(char **param, t_scene *scene)
 	cylinder->radius /= 2.0;
 	if (ft_get_color(cylinder, &param[9]))
 		return (usage("Parse error: invalid color '", param[9], "'"));
-	if (BONUS && ft_get_map_name(&cylinder->map_name, param[12]))
+	if (BONUS && ft_get_map_name(&cylinder->bump.map_name, param[12]))
 		return (usage("Parse error: invalid texture name '", param[12], "'"));
 	if (valid_values(cylinder))
 		return (1);

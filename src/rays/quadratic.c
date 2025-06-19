@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 14:09:22 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 15:14:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/16 12:04:23 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	bind_ray_if_nearest(t_quadratic *res, t_ray *ray, t_obj *obj)
 {
-	if (res->solution_1 < ray->shortest_impact_dist)
+	if (res->solution_1 < ray->shortest_impact_dist - EPSLN)
 	{
 		if (ray->from_cam)
 		{
@@ -36,14 +36,22 @@ int	get_positiv_min(float *f1, float *f2)
 {
 	float	tmp;
 	tmp = fmaxf(*f1, *f2);
-	if (tmp < 0)
+	if (tmp < EPSLN)
 		return (set_to_max(f1));
 	*f1 = fminf(*f1, *f2);
-	if (*f1 < 0)
+	if (*f1 < EPSLN)
+	{
+		*f2 = *f1;
 		*f1 = tmp;
+	}
 	return (1);
 }
 
+/*
+ *	Solve Quadratic equation,
+ *	return 0 if no solution or both solution are < 0
+ *	store the lowest positive solution in solution_1
+ * */
 int	solve_quadratic(t_quadratic *quad)
 {
 	quad->delta = quad->b * quad->b - 4.0 * quad->a * quad->c;
@@ -55,9 +63,3 @@ int	solve_quadratic(t_quadratic *quad)
 	quad->solution_2 = (-quad->b + quad->delta) / (2.0 * quad->a);
 	return (get_positiv_min(&quad->solution_1, &quad->solution_2));
 }
-
-/*
- *	Solve Quadratic equation,
- *	return 0 if no solution or both solution are < 0
- *	store the lowest positive solution in solution_1
- * */

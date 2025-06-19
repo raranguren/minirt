@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/14 18:47:13 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:46:19 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,20 @@ t_vector	side_cone_normal(t_obj *cone, t_ray *ray)
 		 			v_scale(cone->orientation, sinf(theta)))));
 }
 
-t_vector	cone_normal(t_obj *cone, t_ray *ray)
+t_vector	cone_normal(t_ray *ray)
 {
-	t_vector	cp;
 	t_vector	normal;
 	float		dist_on_axis;
+	t_obj		*cone;
 
-	cp = v_substract(ray->start, cone->pos);
-	dist_on_axis = v_dot(cp, cone->orientation);
+	cone = ray->impact_object;
+	dist_on_axis = proj_on_axis(cone, ray->start);
 	if (dist_on_axis < cone->height - 1e-4)
 		normal = side_cone_normal(cone, ray);
 	else
 		normal = cone->orientation;
+	if (v_dot(ray->direction, normal) > 0)
+		normal = v_scale(normal, -1.0);
 	return (normal);
 }
 
@@ -56,7 +58,7 @@ static int	check_caps(t_quadratic *quad, t_obj *cone, t_ray *ray)
 
 	caps.pos = v_add(cone->pos, v_scale(cone->orientation, cone->height));
 	caps.radius = cone->radius;
-	caps.orientation = v_scale(cone->orientation, -1.0);
+	caps.orientation = cone->orientation;
 	dist[0] = caps_collision(&caps, ray);
 	if (cone->double_cone)
 	{
@@ -68,7 +70,8 @@ static int	check_caps(t_quadratic *quad, t_obj *cone, t_ray *ray)
 		dist[1] = -1;
 	if (!get_positiv_min(&dist[0], &dist[1]))
 		return (0);
-	quad->solution_1 = dist[0];
+	if (dist[0] < quad->solution_1)
+		quad->solution_1 = dist[0];
 	return (1);
 }
 
@@ -123,8 +126,8 @@ int	cone_collision(t_obj *cone, t_ray *ray)
 	set_quadratic(&quad, cone, ray);
 	if (!solve_quadratic(&quad))
 		return (0);
-	dist_on_axis = v_dot(v_substract(
-				v_add(ray->start, v_scale(ray->direction, quad.solution_1)), cone->pos), cone->orientation);
+	dist_on_axis = proj_on_axis(cone, 
+			v_add(ray->start, v_scale(ray->direction, quad.solution_1)));
 	if (check_caps(&quad, cone, ray)
 			|| (dist_on_axis >= 0 && dist_on_axis < cone->height))
 		return (bind_ray_if_nearest(&quad, ray, cone));
