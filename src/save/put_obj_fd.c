@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:39:30 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/15 21:22:38 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 08:52:57 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	put_obj_fd(t_obj *obj, int fd)
 	else
 		put_shape_fd(obj, fd);
 	if (obj->type != CAMERA)
-		// TODO colors * 255
 		put3(obj->color.r * 1, obj->color.g * 1, obj->color.b * 1, fd);
 	if (obj->map_name)
 		ft_putstr_fd(obj->map_name, fd);

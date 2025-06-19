@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:59:13 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/18 16:03:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 08:48:12 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	key_press_hook(int keycode, void *all)
 static int	mouse_hook(int button, int x, int y, void *all)
 {
 	if (x > WIN_WIDTH || y > WIN_HEIGHT)
-	   return (0);	
+		return (0);
 	if (button == Button1)
 	{
 		mouse_left_click(all, x, y);

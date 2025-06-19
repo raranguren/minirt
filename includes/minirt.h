@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 08:37:21 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 08:48:53 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			cylinder_collision(t_obj *cyl, t_ray *ray);
 t_vector	cylinder_normal(t_obj *obj, t_ray *ray);
 int			get_positiv_min(float *f1, float *f2);
 float		caps_collision(t_obj *caps, t_ray *ray);
-int 		is_within_cap(t_obj *caps, t_ray *ray, float dist);
+int			is_within_cap(t_obj *caps, t_ray *ray, float dist);
 int			cone_collision(t_obj *cone, t_ray *ray);
 t_vector	cone_normal(t_obj *obj, t_ray *ray);
 

@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 04:02:42 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/19 05:00:12 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/19 08:52:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	fill(t_img *img, t_color c)
 int	gui_color(t_all *all, t_obj *obj)
 {
 	static t_img	*img;
-	int				err;
 
 	if (!img)
 	{
@@ -70,10 +69,8 @@ int	gui_color(t_all *all, t_obj *obj)
 	}
 	fill(img, obj->color);
 	border(img);
-	err = mlx_put_image_to_window(all->mlx_ptr, all->mlx_win, img,
-			WIN_WIDTH + MARGIN_LEFT,
-			MARGIN_TOP - 15 + 1);
-	if (err)
-		return (error("[gui_color] mlx_put_image_to_window()"));
+	mlx_put_image_to_window(all->mlx_ptr, all->mlx_win, img,
+		WIN_WIDTH + MARGIN_LEFT,
+		MARGIN_TOP - 15 + 1);
 	return (0);
 }
