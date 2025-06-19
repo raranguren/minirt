@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/10 20:22:46 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:12:33 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	parse_cone(char **param, t_scene *scene)
 	cone->radius /= 2.0;
 	if (ft_get_color(cone, &param[9]))
 		return (error3("Parse error: invalid color '", param[9], "'"));
-	if (BONUS && ft_get_map_name(&cone->map_name, param[12]))
+	if (BONUS && ft_get_map_name(&cone->bump.map_name, param[12]))
 		return (error3("Parse error: invalid texture name '", param[12], "'"));
 	if (valid_values(cone))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 20:00:15 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:46:05 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ float		caps_collision(t_obj *caps, t_ray *ray);
 int 		is_within_cap(t_obj *caps, t_ray *ray, float dist);
 int			cone_collision(t_obj *cone, t_ray *ray);
 t_vector	cone_normal(t_ray *ray);
+float		proj_on_axis(t_obj *obj, t_point p);
 
 			//bump
-t_vector	get_bump_vector(t_image *img, float u, float v);
+t_vector	get_bump_vector(t_bump *bump, float u, float v);
 t_vector	cylinder_bump(t_ray *ray);
 
 			//parsing

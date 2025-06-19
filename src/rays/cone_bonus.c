@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 19:58:38 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:46:19 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ t_vector	side_cone_normal(t_obj *cone, t_ray *ray)
 
 t_vector	cone_normal(t_ray *ray)
 {
-	t_vector	cp;
 	t_vector	normal;
 	float		dist_on_axis;
 	t_obj		*cone;
 
 	cone = ray->impact_object;
-	cp = v_substract(ray->start, cone->pos);
-	dist_on_axis = v_dot(cp, cone->orientation);
+	dist_on_axis = proj_on_axis(cone, ray->start);
 	if (dist_on_axis < cone->height - 1e-4)
 		normal = side_cone_normal(cone, ray);
 	else
@@ -128,8 +126,8 @@ int	cone_collision(t_obj *cone, t_ray *ray)
 	set_quadratic(&quad, cone, ray);
 	if (!solve_quadratic(&quad))
 		return (0);
-	dist_on_axis = v_dot(v_substract(
-				v_add(ray->start, v_scale(ray->direction, quad.solution_1)), cone->pos), cone->orientation);
+	dist_on_axis = proj_on_axis(cone, 
+			v_add(ray->start, v_scale(ray->direction, quad.solution_1)));
 	if (check_caps(&quad, cone, ray)
 			|| (dist_on_axis >= 0 && dist_on_axis < cone->height))
 		return (bind_ray_if_nearest(&quad, ray, cone));

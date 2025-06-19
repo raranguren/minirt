@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/07 14:22:08 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:11:28 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parse_plane(char **param, t_scene *scene)
 		return (error3("Parse error : invalid number", 0, 0));
 	if (ft_get_color(plane, &param[7]))
 		return (error3("Parse error: invalid color '", param[7], "'"));
-	if (BONUS && ft_get_map_name(&plane->map_name, param[10]))
+	if (BONUS && ft_get_map_name(&plane->bump.map_name, param[10]))
 		return (error3("Parse error: invalid texture name '", param[10], "'"));
 	if (valid_values(plane))
 		return (1);

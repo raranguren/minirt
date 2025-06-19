@@ -6,19 +6,19 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 20:04:57 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:42:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	proj_on_axis(t_obj *cyl, t_point p)
+float	proj_on_axis(t_obj *obj, t_point p)
 {
 	float 		dist;
 	
 	// p -> cp
-	p = v_substract(p, cyl->pos);
-	dist = v_dot(p, cyl->orientation);
+	p = v_substract(p, obj->pos);
+	dist = v_dot(p, obj->orientation);
 	return (dist);
 }
 
