@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/20 08:09:30 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/20 10:52:34 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int			is_within_cap(t_obj *caps, t_ray *ray, float dist);
 int			cone_collision(t_obj *cone, t_ray *ray);
 t_vector	cone_normal(t_ray *ray);
 float		proj_on_axis(t_obj *obj, t_point p);
+t_vector	add_in_tbn(t_vector normal, t_vector modifyer);
+t_vector	get_local_cordinates(t_point p, t_vector z, t_point o);
 
 			//bump
 t_vector	get_bump_vector(t_bump *bump, t_point p);
