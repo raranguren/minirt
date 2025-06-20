@@ -6,14 +6,11 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/15 11:07:24 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:18:36 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#define STEP 10
-#define ANGLE 10
-#define SIZE 2
 
 int	edit_rotate(t_all *all, float horizontal, float vertical)
 {
@@ -70,15 +67,17 @@ int	edit_move(t_all *all, t_vector v)
 int	edit2(t_all *all, int key)
 {
 	if (key == XK_v)
-		return (edit_transform(all, -SIZE, 0));
+		return (edit_transform(all, -STEP_SIZE, 0));
 	if (key == XK_b)
-		return (edit_transform(all, SIZE, 0));
+		return (edit_transform(all, STEP_SIZE, 0));
 	if (key == XK_x)
-		return (edit_transform(all, -SIZE, 1));
+		return (edit_transform(all, -STEP_SIZE, 1));
 	if (key == XK_c)
-		return (edit_transform(all, SIZE, 1));
+		return (edit_transform(all, STEP_SIZE, 1));
 	if (key == XK_p)
 		return (edit_select_previous(all));
+	if (key == XK_space)
+		return (snap_obj(all->scene.selected));
 	return (1);
 }
 
@@ -87,24 +86,24 @@ int	edit(t_all *all, int key)
 	if (key == XK_n)
 		return (edit_select_next(all));
 	if (key == XK_i)
-		return (edit_move(all, v_scale(all->scene.cam->forward, STEP)));
+		return (edit_move(all, v_scale(all->scene.cam->forward, STEP_GRID)));
 	if (key == XK_j)
-		return (edit_move(all, v_scale(all->scene.cam->right, -STEP)));
+		return (edit_move(all, v_scale(all->scene.cam->right, -STEP_GRID)));
 	if (key == XK_k)
-		return (edit_move(all, v_scale(all->scene.cam->forward, -STEP)));
+		return (edit_move(all, v_scale(all->scene.cam->forward, -STEP_GRID)));
 	if (key == XK_l)
-		return (edit_move(all, v_scale(all->scene.cam->right, STEP)));
+		return (edit_move(all, v_scale(all->scene.cam->right, STEP_GRID)));
 	if (key == XK_u)
-		return (edit_move(all, v_scale(all->scene.cam->up, STEP)));
+		return (edit_move(all, v_scale(all->scene.cam->up, STEP_GRID)));
 	if (key == XK_h)
-		return (edit_move(all, v_scale(all->scene.cam->up, -STEP)));
+		return (edit_move(all, v_scale(all->scene.cam->up, -STEP_GRID)));
 	if (key == XK_Up)
-		return (edit_rotate(all, 0, -ANGLE));
+		return (edit_rotate(all, 0, -STEP_ANGLE));
 	if (key == XK_Down)
-		return (edit_rotate(all, 0, ANGLE));
+		return (edit_rotate(all, 0, STEP_ANGLE));
 	if (key == XK_Left)
-		return (edit_rotate(all, ANGLE, 0));
+		return (edit_rotate(all, STEP_ANGLE, 0));
 	if (key == XK_Right)
-		return (edit_rotate(all, -ANGLE, 0));
+		return (edit_rotate(all, -STEP_ANGLE, 0));
 	return (edit2(all, key));
 }

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 15:46:59 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/20 14:09:25 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void		ft_putfloat_fd(float n, int fd);
 void		mouse_left_click(t_all *all, int x, int y);
 void		mouse_left_move(t_all *all, int x, int y);
 void		mouse_right_click(t_all *all, int x, int y);
+int			snap_obj(t_obj *obj);
 
 			//error
 int			error(char *str);
