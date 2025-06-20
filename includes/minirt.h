@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 15:46:59 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/20 08:09:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_vector	cone_normal(t_ray *ray);
 float		proj_on_axis(t_obj *obj, t_point p);
 
 			//bump
-t_vector	get_bump_vector(t_bump *bump, float u, float v);
+t_vector	get_bump_vector(t_bump *bump, t_point p);
 t_vector	cylinder_bump(t_ray *ray);
 
 			//parsing

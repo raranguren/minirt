@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 16:03:12 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/20 10:23:55 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 
 // Refraction indice for specular light
 #define REFRACT	10000
+#define BUMP_STRENGTH	1e-4
 
 // Error tolerance
 # define EPSLN	2e-2

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/18 14:46:19 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/20 10:36:47 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_vector	side_cone_normal(t_obj *cone, t_ray *ray)
 	radial_proj = v_substract(w, v_scale(cone->orientation, axial_proj));
 	theta = atanf(cone->radius / cone->height);
 	return (v_unit(v_substract(
-					v_scale(v_unit(radial_proj), cosf(theta)),
-		 			v_scale(cone->orientation, sinf(theta)))));
+			v_scale(v_unit(radial_proj), cosf(theta)),
+			v_scale(cone->orientation, sinf(theta)))));
 }
 
 t_vector	cone_normal(t_ray *ray)
@@ -120,16 +120,16 @@ static int	set_quadratic(t_quadratic *quad, t_obj *cone, t_ray *ray)
 
 int	cone_collision(t_obj *cone, t_ray *ray)
 {
-	t_quadratic quad;
+	t_quadratic	quad;
 	float		dist_on_axis;
 
 	set_quadratic(&quad, cone, ray);
 	if (!solve_quadratic(&quad))
 		return (0);
-	dist_on_axis = proj_on_axis(cone, 
+	dist_on_axis = proj_on_axis(cone,
 			v_add(ray->start, v_scale(ray->direction, quad.solution_1)));
 	if (check_caps(&quad, cone, ray)
-			|| (dist_on_axis >= 0 && dist_on_axis < cone->height))
+		|| (dist_on_axis >= 0 && dist_on_axis < cone->height))
 		return (bind_ray_if_nearest(&quad, ray, cone));
 	return (0);
 }

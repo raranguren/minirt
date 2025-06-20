@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/18 14:20:52 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/19 16:31:17 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	set_bump_map(t_all *all, t_obj *obj)
 		return (error3("Could not load xpm texture from file '",
 				obj->bump.map_name, "'"));
 	obj->bump.map.id = img;
-	mlx_get_data_addr(img, &obj->bump.map.bits_per_pix,
+	obj->bump.map.data = mlx_get_data_addr(img, &obj->bump.map.bits_per_pix,
 		&obj->bump.map.line_length, &obj->bump.map.endian);
 	return (0);
 }

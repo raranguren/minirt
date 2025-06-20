@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/18 14:42:30 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/20 10:35:34 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 float	proj_on_axis(t_obj *obj, t_point p)
 {
-	float 		dist;
-	
-	// p -> cp
+	float	dist;
+
 	p = v_substract(p, obj->pos);
 	dist = v_dot(p, obj->orientation);
 	return (dist);
@@ -50,13 +49,10 @@ static int	set_quadratic(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	t_vector	r_c_p;
 	float		rayon;
 
-	//d_|_
 	r_dir_p = v_substract(
 			ray->direction,
 			v_scale(cyl->orientation, v_dot(ray->direction, cyl->orientation)));
-	//oc
 	r_c = v_substract(ray->start, cyl->pos);
-	//oc_|_
 	r_c_p = v_substract(r_c,
 			v_scale(cyl->orientation, v_dot(r_c, cyl->orientation)));
 	rayon = (float)cyl->radius;
@@ -66,7 +62,7 @@ static int	set_quadratic(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	return (0);
 }
 
-static int	cylinder_caps_collision(t_quadratic  *quad, t_obj *cyl, t_ray *ray)
+static int	cylinder_caps_collision(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 {
 	t_obj	caps;
 	float	dist[2];
