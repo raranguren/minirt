@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/20 12:27:15 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/20 22:31:19 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@
 # define COLOR_BG		0x00111111
 
 // Steps for editing values (position, angle in degrees, diameters and heights)
-# define STEP_GRID 10
+# define STEP_GRID 2
 # define STEP_ANGLE 10
-# define STEP_SIZE 2
+# define STEP_SIZE 1
 
 //Objects types
 # define CAMERA		0b00000001
