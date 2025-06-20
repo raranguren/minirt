@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:04:26 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/20 14:07:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:03:12 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,16 @@ int	snap_obj(t_obj *obj)
 	if (obj->type == CAMERA || obj->type == PLANE || obj->type == CYLINDER
 		|| obj->type == CONE)
 		round_angles(&obj->orientation);
+	return (0);
+}
+
+int	edit_snap(t_all *all)
+{
+	int	invalid;
+
+	invalid = snap_obj(all->scene.selected);
+	if (invalid)
+		return (1);
+	gui_update(all);
 	return (0);
 }

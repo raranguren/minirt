@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:59:43 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/20 14:18:36 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:38:38 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	edit2(t_all *all, int key)
 	if (key == XK_p)
 		return (edit_select_previous(all));
 	if (key == XK_space)
-		return (snap_obj(all->scene.selected));
-	return (1);
+		return (edit_snap(all));
+	return (edit_color(all, key));
 }
 
 int	edit(t_all *all, int key)
