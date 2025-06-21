@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/20 12:23:57 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/21 09:43:32 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ static t_vector	get_non_linear(t_vector v)
 }
 
 /*Return local coordinates of p depending on z unit vector bind to z axis*/
-t_vector get_local_cordinates(t_point p, t_vector z, t_point o)
+t_vector get_local_cordinates(t_point p, t_vector k, t_point o)
 {
-	t_vector	u;
-	t_vector	v;
+	t_vector	i;
+	t_vector	j;
 	t_vector	cp;
 
-	u = get_non_linear(z);
-	u = v_unit(v_cross(u, z));
-	v = v_unit(v_cross(u, z));
+	i = get_non_linear(k);
+	i = v_unit(v_cross(i, k));
+	j = v_unit(v_cross(i, k));
 	cp = v_substract(p, o);
-	p.x = v_dot(cp, u);
-	p.y = v_dot(cp, v);
-	p.z = v_dot(cp, z);
+	p.x = v_dot(cp, i);
+	p.y = v_dot(cp, j);
+	p.z = v_dot(cp, k);
 	return (p);
 }
 
@@ -70,8 +70,8 @@ t_vector	add_in_tbn(t_vector normal, t_vector modifyer)
 	tangeant = get_non_linear(normal);
 	tangeant = v_unit(v_cross(tangeant, normal));
 	bitangeant = v_unit(v_cross(tangeant, normal));
-	normal = v_add(normal, v_scale(tangeant, modifyer.x));
-	normal = v_add(normal, v_scale(bitangeant, modifyer.y));
+	normal = v_add(normal, v_scale(bitangeant, modifyer.x));
+	normal = v_add(normal, v_scale(tangeant, modifyer.y));
 	return (v_unit(normal));
 }
 
@@ -96,21 +96,17 @@ t_vector	get_bump_vector(t_bump *bump, t_point p)
 	float	height_y;
 	float	step;
 
-	p.x = p.x * bump->width;
-	p.y = p.y * bump->height;
-	step = 8e-3 * bump->width;
-	if (p.x - step < 0)
-		height_x = p.x + step;
-	else
-		height_x = p.x - step;
-	step = 8e-3 * bump->height;
-	if (p.y - step < 0)
-		height_y = p.y + step;
-	else
-		height_y = p.y - step;
+	step = 1;
+	p.x = (int)p.x % bump->width;
+	p.y = (int)p.y % bump->height;
+	
+	height_x = p.x + step;
+	height_y = p.y + step;
+
 	height = get_pixel_value(bump->map.id, p.x, p.y);
 	height_x = get_pixel_value(bump->map.id, height_x, p.y);
 	height_y = get_pixel_value(bump->map.id, p.x, height_y);
+	
 	p.x = ((float)height - height_x) / step;
 	p.y = ((float)height - height_y) / step;
 	p = v_scale(p, BUMP_STRENGTH);
