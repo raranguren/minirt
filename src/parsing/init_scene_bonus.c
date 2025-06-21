@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/19 16:31:17 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/21 10:24:45 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	set_bump_map(t_all *all, t_obj *obj)
 	t_img	*img;
 
 	if (obj->type == SPHERE)
-		obj->normal_fn = obj->normal_fn;
+		obj->normal_fn = sphere_bump;
 	else if (obj->type == PLANE)
-		return (error3("Unsupported '", obj->bump.map_name, "' for PLANE"));
+		obj->normal_fn = plane_bump;
 	else if (obj->type == CYLINDER)
 		obj->normal_fn = cylinder_bump;
 	else if (obj->type == CONE)

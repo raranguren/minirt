@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/21 09:43:32 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/21 09:54:11 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ t_vector	get_bump_vector(t_bump *bump, t_point p)
 	step = 1;
 	p.x = (int)p.x % bump->width;
 	p.y = (int)p.y % bump->height;
-	
+	if (p.x >= 2 && p.y >= 2)
+	{
+		p.x -= 2;
+		p.y -= 2;
+		step = 4;
+	}
 	height_x = p.x + step;
 	height_y = p.y + step;
 
