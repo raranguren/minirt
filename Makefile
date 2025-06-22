@@ -97,6 +97,18 @@ mlx :
 	git clone -q https://github.com/42paris/minilibx-linux.git mlx
 	$(MAKE) -C mlx/ CC=$(CC) 2>/dev/null >/dev/null
 
+demo : all bonus
+	@clear
+	@echo "Looping through all scenes in folder demo . . ."
+	@for scene in demo/*.rt; do \
+		if [ -f "$$scene" ]; then \
+			echo "Showing scene: $$scene" ; \
+			echo "(Close the window to open the next scene)" ; \
+			echo ; \
+			./$(NAME) $$scene > /dev/null ; \
+		fi ; \
+	done
+
 #<--------------	DEV_TOOLS	------------->
 
 .PHONY : vi dev watch prof ui
