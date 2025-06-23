@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/21 09:54:11 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 07:22:10 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static char	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
  Return the tangeant and bitangeant of the normal factors
  p :  x, y coordinates [-1:1]
  */
-t_vector	get_bump_vector(t_bump *bump, t_point p)
+t_vector	get_bump_vector(t_img *bump, t_point p)
 {
 	float	height;
 	float	height_x;
@@ -108,9 +108,9 @@ t_vector	get_bump_vector(t_bump *bump, t_point p)
 	height_x = p.x + step;
 	height_y = p.y + step;
 
-	height = get_pixel_value(bump->map.id, p.x, p.y);
-	height_x = get_pixel_value(bump->map.id, height_x, p.y);
-	height_y = get_pixel_value(bump->map.id, p.x, height_y);
+	height = get_pixel_value(bump, p.x, p.y);
+	height_x = get_pixel_value(bump, height_x, p.y);
+	height_y = get_pixel_value(bump, p.x, height_y);
 	
 	p.x = ((float)height - height_x) / step;
 	p.y = ((float)height - height_y) / step;

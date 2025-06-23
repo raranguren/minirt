@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/21 10:24:54 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 07:15:41 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_vector	add_in_tbn(t_vector normal, t_vector modifyer);
 t_vector	get_local_cordinates(t_point p, t_vector z, t_point o);
 
 			//bump
-t_vector	get_bump_vector(t_bump *bump, t_point p);
+t_vector	get_bump_vector(t_img *bump, t_point p);
 t_vector	cylinder_bump(t_ray *ray);
 t_vector	plane_bump(t_ray *ray);
 t_vector	sphere_bump(t_ray *ray);

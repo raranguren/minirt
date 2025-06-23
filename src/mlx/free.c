@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:56:50 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 05:03:31 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/23 07:18:44 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	free_ui(t_all *all)
 int	free_mlx(t_all *all)
 {
 	free_ui(all);
-	if (all->img.id)
-		mlx_destroy_image(all->mlx_ptr, all->img.id);
+	if (all->img)
+		mlx_destroy_image(all->mlx_ptr, all->img);
 	if (all->mlx_win)
 		mlx_destroy_window(all->mlx_ptr, all->mlx_win);
 	if (all->mlx_ptr)

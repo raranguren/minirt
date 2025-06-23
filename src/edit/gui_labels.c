@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:35:58 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/18 14:09:51 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 07:20:13 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	gui_labels(t_all *all, t_obj *obj)
 {
 	if (obj->type == LIGHT && !is_boring(obj->color))
 		return (gui_label_color_light_spot(all, obj));
-	if (!obj->bump.map_name)
+	if (!obj->bump_name)
 		return (0);
-	if (!obj->bump.map.id)
+	if (!obj->bump)
 		return (gui_label_checkers(all, obj));
 	else
 		return (gui_label_bumpmap(all, obj));

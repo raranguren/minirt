@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 15:54:45 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 07:27:49 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	parse_sphere(char **param, t_scene *scene)
 	sphere->radius /= 2.0;
 	if (ft_get_color(sphere, &param[5]))
 		return (usage("Parse error: invalid color '", param[5], "'"));
-	if (BONUS && ft_get_map_name(&sphere->bump.map_name, param[8]))
+	if (BONUS && ft_get_map_name(&sphere->bump_name, param[8]))
 		return (usage("Parse error: invalid texture name '", param[8], "'"));
 	if (valid_values(sphere))
 		return (1);

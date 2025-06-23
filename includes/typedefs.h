@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/19 15:47:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 07:20:40 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_ray
 	t_obj		*impact_object;
 	int			from_cam;
 }	t_ray;
-
+/*
 typedef struct s_image
 {
 	t_img	*id;
@@ -68,19 +68,18 @@ typedef struct s_image
 	int		line_length;
 	int		endian;
 }	t_image;
-
+*/
 typedef int				(*t_collision_fn)(t_obj *, t_ray *);
 typedef t_vector		(*t_normal_fn)(t_ray *);
 typedef t_color			(*t_color_fn)(t_obj *, t_vector *normal);
-
+/*
 typedef struct  s_bump
 {
 	t_image	map;
-	char	*map_name;
 	int		width;
 	int		height;
 }	t_bump;
-
+*/
 typedef struct s_obj
 {
 	char			type;
@@ -102,7 +101,8 @@ typedef struct s_obj
 	t_collision_fn	collision_fn;
 	t_normal_fn		normal_fn;
 	t_color_fn		color_fn;
-	t_bump			bump;
+	t_img			*bump;
+	char			*bump_name;
 	float			fov_scale;
 	union
 	{
@@ -128,7 +128,7 @@ typedef struct s_all
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
-	t_image	img;
+	t_img	*img;
 	t_scene	scene;
 	t_img	*ui_bg[7];
 	t_img	*ui_color_box;

@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/21 10:24:45 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 07:53:01 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	set_color_disruption(t_obj *obj)
 int	set_bump_map(t_all *all, t_obj *obj)
 {
 	t_img	*img;
+	int		tmp;
 
 	if (obj->type == SPHERE)
 		obj->normal_fn = sphere_bump;
@@ -36,15 +37,13 @@ int	set_bump_map(t_all *all, t_obj *obj)
 	else if (obj->type == CYLINDER)
 		obj->normal_fn = cylinder_bump;
 	else if (obj->type == CONE)
-		return (error3("Unsupported '", obj->bump.map_name, "' for CONE"));
-	img = mlx_xpm_file_to_image(all->mlx_ptr, obj->bump.map_name,
-			&obj->bump.width, &obj->bump.height);
+		return (error3("Unsupported '", obj->bump_name, "' for CONE"));
+	img = mlx_xpm_file_to_image(all->mlx_ptr, obj->bump_name,
+			&tmp, &tmp);
 	if (!img)
 		return (error3("Could not load xpm texture from file '",
-				obj->bump.map_name, "'"));
-	obj->bump.map.id = img;
-	obj->bump.map.data = mlx_get_data_addr(img, &obj->bump.map.bits_per_pix,
-		&obj->bump.map.line_length, &obj->bump.map.endian);
+				obj->bump_name, "'"));
+	obj->bump = img;
 	return (0);
 }
 
@@ -66,14 +65,14 @@ int	init_scene_bonus(t_all *all)
 	{
 		if (!obj)
 			obj = scene->obj;
-		if (obj->bump.map_name)
+		if (obj->bump_name)
 		{
-			if (ft_strcmp(obj->bump.map_name, "#") == 0)
+			if (ft_strcmp(obj->bump_name, "#") == 0)
 			{
 				if (set_color_disruption(obj))
 					return (-1);
 			}
-			else if (!is_xpm_file(obj->bump.map_name) || set_bump_map(all, obj))
+			else if (!is_xpm_file(obj->bump_name) || set_bump_map(all, obj))
 				return (-1);
 		}
 		obj = find_next_obj_in_scene(scene, obj);
