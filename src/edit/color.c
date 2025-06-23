@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:02:25 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/20 16:32:00 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:55:55 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	set_color(t_all *all, int r, int g, int b)
 int	edit_color(t_all *all, int key)
 {
 	if (key == XK_0)
-		return (set_color(all, 0, 0, 0));
+		return (set_color(all, 40, 40, 40));
 	else if (key == XK_1)
 		return (set_color(all, 115, 38, 56));
 	else if (key == XK_2)
