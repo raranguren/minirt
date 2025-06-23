@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 07:19:18 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/18 00:18:09 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:37:31 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_get_color(t_obj *obj, char **param)
 {
 	obj->color.a = 1;
-	if (!BONUS && (obj->type == LIGHT || obj->type == AMB_LIGHT))
+	if (!BONUS && (obj->type == LIGHT))
 	{
 		obj->color.r = 255;
 		obj->color.g = 255;
