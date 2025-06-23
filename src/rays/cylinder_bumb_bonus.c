@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:21:35 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 14:27:40 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,7 @@ static t_vector	get_cyl_radial_coordinates(t_point p, t_obj *obj)
 	uv.y = obj->radius * theta + M_PI * obj->radius;
 	return (uv);
 }
-/*
-static t_vector	get_cyl_radial_coordinates(t_point p, t_obj *obj)
-{
-	t_vector uv;
 
-	uv.x = 0.5 + atan2f(p.y, p.x) / (2.0 * M_PI);
-	uv.y = (p.z + obj->height / 2.0) / obj->height;
-	uv.z = 0;
-	return (uv);
-}
-*/
 t_vector	get_disc_coordinates(t_point p_loc, t_obj *obj)
 {
 	t_vector	uv;
@@ -40,6 +30,7 @@ t_vector	get_disc_coordinates(t_point p_loc, t_obj *obj)
 	uv.x = p_loc.x + obj->radius;
 	uv.y = p_loc.y + obj->radius;
 	uv.z = 0;
+	print_vector("disc", uv);
 	return (uv);
 }
 t_vector	cylinder_bump(t_ray *ray)

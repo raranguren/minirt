@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/23 07:53:01 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 08:34:18 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	set_bump_map(t_all *all, t_obj *obj)
 	else if (obj->type == CYLINDER)
 		obj->normal_fn = cylinder_bump;
 	else if (obj->type == CONE)
-		return (error3("Unsupported '", obj->bump_name, "' for CONE"));
+		obj->normal_fn = cone_bump;
 	img = mlx_xpm_file_to_image(all->mlx_ptr, obj->bump_name,
 			&tmp, &tmp);
 	if (!img)

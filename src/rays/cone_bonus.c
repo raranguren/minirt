@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/20 10:36:47 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:44:42 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vector	cone_normal(t_ray *ray)
 
 	cone = ray->impact_object;
 	dist_on_axis = proj_on_axis(cone, ray->start);
-	if (dist_on_axis < cone->height - 1e-4)
+	if (dist_on_axis < cone->height - EPSLN)
 		normal = side_cone_normal(cone, ray);
 	else
 		normal = cone->orientation;

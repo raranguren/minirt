@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:15:41 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 11:53:28 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ int			cone_collision(t_obj *cone, t_ray *ray);
 t_vector	cone_normal(t_ray *ray);
 float		proj_on_axis(t_obj *obj, t_point p);
 t_vector	add_in_tbn(t_vector normal, t_vector modifyer);
-t_vector	get_local_cordinates(t_point p, t_vector z, t_point o);
 
 			//bump
+t_vector	get_local_cordinates(t_point p, t_vector z, t_point o);
 t_vector	get_bump_vector(t_img *bump, t_point p);
 t_vector	cylinder_bump(t_ray *ray);
 t_vector	plane_bump(t_ray *ray);
 t_vector	sphere_bump(t_ray *ray);
-
+t_vector	cone_bump(t_ray *ray);
+t_vector	get_disc_coordinates(t_point p_loc, t_obj *obj);
+	//
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);
 int			split_set(char ***dest, const char *line, const char *set);

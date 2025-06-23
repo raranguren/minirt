@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:22:10 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/23 14:29:08 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_vector	get_non_linear(t_vector v)
 		res.y = 0;
 		res.z = 0;
 	}
-	return (v_cross(res, v));
+	return (res);
 }
 
 /*Return local coordinates of p depending on z unit vector bind to z axis*/
@@ -79,9 +79,7 @@ static char	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
 {
 	char	*p;
 
-	p = img->data +
-		(y * img->size_line + x * (img->bpp / 8));
-	
+	p = img->data + (y * img->size_line + x * (img->bpp / 8));
 	return (*p);
 }
 
