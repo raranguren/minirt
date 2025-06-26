@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:48:26 by bduval            #+#    #+#             */
-/*   Updated: 2024/12/02 17:49:14 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 12:45:07 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_copyto(char *res, char *old_res, char *buffer, size_t len)
 	res[len] = '\0';
 	ft_shift(buffer, len - i);
 	return ;
-}	
+}
 
 int	ft_process_buffer(char	**res, char *buffer, int *on)
 {

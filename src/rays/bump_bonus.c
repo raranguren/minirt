@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 06:49:31 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 10:03:39 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static char	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
 {
 	char	*p;
 
+	printf("x=%u y=%u\n", x, y);
 	p = img->data + (y * img->size_line + x * (img->bpp / 8));
 	return (*p);
 }
@@ -95,8 +96,8 @@ t_vector	get_bump_vector(t_img *bump, t_point p)
 	float	step;
 
 	step = 1;
-	p.x = (int)p.x % bump->width;
-	p.y = (int)p.y % bump->height;
+	p.x = (unsigned int)p.x % bump->width;
+	p.y = (unsigned int)p.y % bump->height;
 	if (p.x >= 2 && p.y >= 2)
 	{
 		p.x -= 2;
