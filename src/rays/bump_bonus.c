@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 10:03:39 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:43:04 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static char	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
 {
 	char	*p;
 
-	printf("x=%u y=%u\n", x, y);
 	p = img->data + (y * img->size_line + x * (img->bpp / 8));
 	return (*p);
 }
