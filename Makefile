@@ -23,26 +23,67 @@ HEADERS = \
 	includes/minirt.h \
 	includes/typedefs.h \
 
-FILES	!= find src -type f -name "*.c" | grep -v parsing | sed 's/src\///g' | sed 's/\.c//g'
+FILES = \
+	save/ft_putfloat_fd.c \
+	save/put_obj_fd.c \
+	save/save_scene.c \
+	mlx/free.c \
+	mlx/init.c \
+	mlx/event.c \
+	mlx/put_pixel.c \
+	mlx/loop.c \
+	utils/free.c \
+	main.c \
+	edit/gui_labels.c \
+	edit/edit.c \
+	edit/gui_numbers.c \
+	edit/mouse.c \
+	edit/gui.c \
+	edit/edit_select.c \
+	edit/edit_init.c \
+	edit/snap_obj.c \
+	edit/color.c \
+	edit/gui_color.c \
+	error/error.c \
+	math/normalize.c \
+	math/rotate.c \
+	rays/caps.c \
+	rays/utils.c \
+	rays/sphere_bump_bonus.c \
+	rays/vector2.c \
+	rays/bump_bonus.c \
+	rays/color2.c \
+	rays/cone_bump_bonus.c \
+	rays/quadratic.c \
+	rays/plane_bump_bonus.c \
+	rays/rays.c \
+	rays/cone_bonus.c \
+	rays/sphere.c \
+	rays/light.c \
+	rays/plane.c \
+	rays/cylinder_bumb_bonus.c \
+	rays/color.c \
+	rays/cylinder.c \
+	rays/sphere_checkered_bonus.c \
+	rays/vector.c \
+	debug/print.c \
+	parsing/init_scene.c \
+	parsing/object.c \
+	parsing/utils.c \
+	parsing/atoi_double.c \
+	parsing/split_set.c \
+	parsing/cam.c \
+	parsing/amb_light.c \
+	parsing/light.c \
+	parsing/plane.c \
+	parsing/sphere.c \
+	parsing/cylinder.c \
+	parsing/parse.c \
 
-SRC_COMMON = $(FILES:%=$(SRC_DIR)%.c) \
-	$(SRC_DIR)parsing/init_scene.c \
-	$(SRC_DIR)parsing/object.c \
-	$(SRC_DIR)parsing/utils.c \
-	$(SRC_DIR)parsing/atoi_double.c \
-	$(SRC_DIR)parsing/split_set.c \
-	$(SRC_DIR)parsing/cam.c \
-	$(SRC_DIR)parsing/amb_light.c \
-	$(SRC_DIR)parsing/light.c \
-	$(SRC_DIR)parsing/plane.c \
-	$(SRC_DIR)parsing/sphere.c \
-	$(SRC_DIR)parsing/cylinder.c \
-	$(SRC_DIR)parsing/parse.c \
-
-SRC = $(SRC_COMMON) \
+SRC = $(addprefix $(SRC_DIR), $(FILES)) \
 	$(SRC_DIR)parsing/unique.c \
 
-SRC_BONUS = $(SRC_COMMON) \
+SRC_BONUS = $(addprefix $(SRC_DIR), $(FILES)) \
 	$(SRC_DIR)parsing/unique_bonus.c \
 	$(SRC_DIR)parsing/cone_bonus.c \
 	$(SRC_DIR)parsing/init_scene_bonus.c \
@@ -124,10 +165,6 @@ demo_bonus : bonus
 #<--------------	DEV_TOOLS	------------->
 
 .PHONY : vi dev watch prof ui
-
-watch :
-	source ~/42/42_venv/bin/activate
-	watch -n1 "norminette | grep -v 'OK'; make"
 
 vi vim :
 	find . -name "*.c" -exec ctags {} +

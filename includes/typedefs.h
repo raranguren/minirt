@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 14:21:09 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:20:40 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 23:08:43 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_all
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
+	char	*title;
 	t_img	*img;
 	t_scene	scene;
 	t_img	*ui_bg[7];

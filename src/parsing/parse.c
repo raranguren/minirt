@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/18 00:16:52 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/26 23:13:16 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,11 @@ int	parse_map(int ac, char **av, t_all *all)
 		return (1);
 	if (init_scene(all))
 		return (1);
+	if (BONUS)
+		all->title = ft_strjoin("miniRT_bonus ", av[1]);
+	else
+		all->title = ft_strjoin("miniRT ", av[1]);
+	if (!all->title)
+		all->title = "";
 	return (0);
 }

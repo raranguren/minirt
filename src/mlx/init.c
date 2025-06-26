@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:52:34 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:53:22 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 23:08:56 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	set_mlx(t_all *all)
 	if (!all->mlx_ptr)
 		return (error("mlx_init()"));
 	all->mlx_win = mlx_new_window(all->mlx_ptr, WIN_WIDTH + UI_WIDTH,
-			WIN_HEIGHT, "SCREEN_1");
+			WIN_HEIGHT, all->title);
 	if (!all->mlx_win)
 		return (error("mlx_new_window()"));
 	all->img = mlx_new_image(all->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
