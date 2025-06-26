@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 21:43:55 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/23 08:34:18 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 21:12:14 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	set_color_disruption(t_obj *obj)
 {
 	if (obj->type == SPHERE)
-		obj->color_fn = obj->color_fn;
+		obj->color_fn = sphere_checkered;
 	else if (obj->type == PLANE)
 		return (error3("Unsupported color disruption '#' for PLANE", 0, 0));
 	else if (obj->type == CYLINDER)

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 07:23:44 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 20:40:51 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ t_vector	plane_bump(t_ray *ray);
 t_vector	sphere_bump(t_ray *ray);
 t_vector	cone_bump(t_ray *ray);
 t_vector	get_disc_coordinates(t_point p_loc, t_obj *obj);
-	//
+
+			//checkerboard color disruption
+t_color		sphere_checkered(t_obj *obj, t_vector *normal);
+
 			//parsing
 int			parse_map(int ac, char **av, t_all *all);
 int			split_set(char ***dest, const char *line, const char *set);

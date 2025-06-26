@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 19:59:30 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 21:19:59 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	reach_spotlight(t_scene *scene, t_light *light, t_ray *ray)
 int	compute_light(t_scene *scene, t_ray *ray)
 {
 	t_light	*light;
+	t_color	surface_color;
 
 	starting_lights(scene->amb_light, ray);
 	light = scene->light;
@@ -85,7 +86,9 @@ int	compute_light(t_scene *scene, t_ray *ray)
 			spotlight(light, ray);
 		light = light->next;
 	}
-	ray->color = c_multiply(ray->impact_object->color, ray->direct_light);
+	surface_color = ray->impact_object->color_fn(ray->impact_object,
+		&ray->normal);
+	ray->color = c_multiply(surface_color, ray->direct_light);
 	ray->color = c_add(ray->color,
 			c_multiply(ray->impact_object->color, ray->specular_light));
 	return (0);
