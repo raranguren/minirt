@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:37:59 by bduval            #+#    #+#             */
-/*   Updated: 2024/11/16 13:25:44 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 12:45:26 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 			dst[i] = src[i];
 			i++;
 		}
-			dst[i] = 0;
+		dst[i] = 0;
 	}
 	return (src_len);
 }
