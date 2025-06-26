@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 07:23:30 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 09:53:30 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 
 // Background
 # define COLOR_BG		0x00111111
+# define COLOR_RED		0x00ff0000
 
 // Steps for editing values (position, angle in degrees, diameters and heights)
 # define STEP_GRID 2

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 10:44:42 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:33:29 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_vector	cone_normal(t_ray *ray)
 		normal = side_cone_normal(cone, ray);
 	else
 		normal = cone->orientation;
-	if (v_dot(ray->direction, normal) > 0)
+	if (v_dot(ray->direction, normal) > EPSLN)
 		normal = v_scale(normal, -1.0);
 	return (normal);
 }
@@ -60,18 +60,9 @@ static int	check_caps(t_quadratic *quad, t_obj *cone, t_ray *ray)
 	caps.radius = cone->radius;
 	caps.orientation = cone->orientation;
 	dist[0] = caps_collision(&caps, ray);
-	if (cone->double_cone)
-	{
-		caps.pos = v_substract(
-				cone->pos, v_scale(cone->orientation, cone->height));
-		dist[1] = caps_collision(&caps, ray);
-	}
-	else
-		dist[1] = -1;
-	if (!get_positiv_min(&dist[0], &dist[1]))
+	if (dist[0] < EPSLN || dist[0] > quad->solution_1)
 		return (0);
-	if (dist[0] < quad->solution_1)
-		quad->solution_1 = dist[0];
+	quad->solution_1 = dist[0];
 	return (1);
 }
 
@@ -128,8 +119,15 @@ int	cone_collision(t_obj *cone, t_ray *ray)
 		return (0);
 	dist_on_axis = proj_on_axis(cone,
 			v_add(ray->start, v_scale(ray->direction, quad.solution_1)));
-	if (check_caps(&quad, cone, ray)
-		|| (dist_on_axis >= 0 && dist_on_axis < cone->height))
-		return (bind_ray_if_nearest(&quad, ray, cone));
-	return (0);
+	if (dist_on_axis < EPSLN && quad.solution_2 > EPSLN)
+	{
+		dist_on_axis = proj_on_axis(cone,
+				v_add(ray->start, v_scale(ray->direction, quad.solution_2)));
+		quad.solution_1 = quad.solution_2;
+	}
+	if (dist_on_axis < EPSLN || dist_on_axis > cone->height)
+		quad.solution_1 = FLT_MAX;
+	if (!check_caps(&quad, cone, ray) && quad.solution_1 == FLT_MAX)
+		return (0);
+	return (bind_ray_if_nearest(&quad, ray, cone));
 }
