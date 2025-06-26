@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 14:29:08 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 06:49:31 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_vector	get_non_linear(t_vector v)
 }
 
 /*Return local coordinates of p depending on z unit vector bind to z axis*/
-t_vector get_local_cordinates(t_point p, t_vector k, t_point o)
+t_vector	get_local_cordinates(t_point p, t_vector k, t_point o)
 {
 	t_vector	i;
 	t_vector	j;
@@ -105,11 +105,9 @@ t_vector	get_bump_vector(t_img *bump, t_point p)
 	}
 	height_x = p.x + step;
 	height_y = p.y + step;
-
 	height = get_pixel_value(bump, p.x, p.y);
 	height_x = get_pixel_value(bump, height_x, p.y);
 	height_y = get_pixel_value(bump, p.x, height_y);
-	
 	p.x = ((float)height - height_x) / step;
 	p.y = ((float)height - height_y) / step;
 	p = v_scale(p, BUMP_STRENGTH);

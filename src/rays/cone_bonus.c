@@ -30,8 +30,8 @@ t_vector	side_cone_normal(t_obj *cone, t_ray *ray)
 	radial_proj = v_substract(w, v_scale(cone->orientation, axial_proj));
 	theta = atanf(cone->radius / cone->height);
 	return (v_unit(v_substract(
-			v_scale(v_unit(radial_proj), cosf(theta)),
-			v_scale(cone->orientation, sinf(theta)))));
+				v_scale(v_unit(radial_proj), cosf(theta)),
+				v_scale(cone->orientation, sinf(theta)))));
 }
 
 t_vector	cone_normal(t_ray *ray)

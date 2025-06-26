@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:42:27 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 07:17:27 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,6 @@ int	init_ray(t_ray *ray, t_cam *cam, int x, int y)
 	return (0);
 }
 
-void	put_pixelto(t_img *img, int x, int y, int color)
-{
-	char	*pix;
-
-	pix = img->data + (y * img->size_line + x * (img->bpp / 8));
-	*(int *)pix = color;
-}
-
-int	set_pixel_to_ray_color(t_all *all, t_color *c, int x, int y)
-{
-	int	color;
-
-	if (all->img->image->byte_order == LSBFirst)
-		color = (int)c->a << 24 | (int)c->r << 16 | (int)c->g << 8 | (int)c->b;
-	else
-		color = (int)c->r << 24 | (int)c->g << 16 | (int)c->b << 8 | (int)c->a;
-	put_pixelto(all->img, x, y, color);
-	return (0);
-}
-
 int	get_impact(t_scene *scene, t_ray *ray)
 {
 	int		impact;
@@ -78,6 +58,18 @@ int	get_impact(t_scene *scene, t_ray *ray)
 	return (impact);
 }
 
+int	send_ray(t_all *all, t_ray *ray, int x, int y)
+{
+	init_ray(ray, all->scene.cam, x, y);
+	if (get_impact(&all->scene, ray))
+	{
+		compute_light(&all->scene, ray);
+		set_pixel_to_ray_color(all, &ray->color, x, y);
+	}
+	else
+		put_pixelto(all->img, x, y, COLOR_BG);
+	return (0);
+}
 int	send_rays(t_all *all)
 {
 	t_ray	ray;
@@ -92,14 +84,7 @@ int	send_rays(t_all *all)
 		y = 0;
 		while (y < WIN_HEIGHT)
 		{
-			init_ray(&ray, all->scene.cam, x, y);
-			if (get_impact(&all->scene, &ray))
-			{
-				compute_light(&all->scene, &ray);
-				set_pixel_to_ray_color(all, &ray.color, x, y);
-			}
-			else
-				put_pixelto(all->img, x, y, COLOR_BG);
+			send_ray(all, &ray, x, y);
 			y++;
 		}
 		x++;

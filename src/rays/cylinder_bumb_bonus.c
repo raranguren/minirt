@@ -26,22 +26,24 @@ static t_vector	get_cyl_radial_coordinates(t_point p, t_obj *obj)
 t_vector	get_disc_coordinates(t_point p_loc, t_obj *obj)
 {
 	t_vector	uv;
-	
+
 	uv.x = p_loc.x + obj->radius;
 	uv.y = p_loc.y + obj->radius;
 	uv.z = 0;
 	print_vector("disc", uv);
 	return (uv);
 }
+
 t_vector	cylinder_bump(t_ray *ray)
 {
-	t_point	p_loc;
+	t_point		p_loc;
 	t_vector	modifyer;
 
 	ray->normal = cylinder_normal(ray);
 	p_loc = get_local_cordinates(ray->start, ray->impact_object->orientation,
 			ray->impact_object->pos);
-	if (fabs(proj_on_axis(ray->impact_object, ray->start)) < ray->impact_object->height / 2.0 - EPSLN)
+	if (fabs(proj_on_axis(ray->impact_object, ray->start))
+		< ray->impact_object->height / 2.0 - EPSLN)
 		p_loc = get_cyl_radial_coordinates(p_loc, ray->impact_object);
 	else
 		p_loc = get_disc_coordinates(p_loc, ray->impact_object);

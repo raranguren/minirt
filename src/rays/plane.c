@@ -31,8 +31,8 @@ float	plane_colision_dist(t_obj *plane, t_ray *ray)
 	dot = v_dot(ray->direction, plane->orientation);
 	if (!dot)
 		return (-1);
-	return  (-v_dot(
-			v_substract(ray->start, plane->pos), plane->orientation) / dot);
+	return (-v_dot(v_substract(ray->start, plane->pos),
+			plane->orientation) / dot);
 }
 
 int	plane_collision(t_obj *plane, t_ray *ray)

@@ -16,8 +16,8 @@ static t_vector	get_sphere_coordinates(t_point p, t_obj *obj)
 {
 	t_vector		uv;
 	static t_img	*last_bump;
-	static t_vector		scaler;
-	
+	static t_vector	scaler;
+
 	if (!last_bump || last_bump != obj->bump)
 	{
 		last_bump = obj->bump;
@@ -33,7 +33,7 @@ static t_vector	get_sphere_coordinates(t_point p, t_obj *obj)
 
 t_vector	sphere_bump(t_ray *ray)
 {
-	t_point	p_loc;
+	t_point		p_loc;
 	t_vector	modifyer;
 	t_vector	up;
 

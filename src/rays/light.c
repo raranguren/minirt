@@ -42,7 +42,8 @@ int	spotlight(t_light *light, t_ray *ray)
 
 	norm_light = c_scale(c_normalize(light->color), light->brightness);
 	fact_refract = fmax(v_dot(ray->direction, ray->normal), 0);
-	ray->direct_light = c_add(ray->direct_light, c_scale(norm_light, fact_refract));
+	ray->direct_light = c_add(ray->direct_light, c_scale(norm_light,
+				fact_refract));
 	ray->specular_light = c_add(ray->specular_light,
 			c_scale(norm_light, pow(fact_refract, REFRACT)));
 	return (0);

@@ -31,6 +31,8 @@ int			set_mlx(t_all *mlx);
 int			free_mlx(t_all *mlx);
 int			set_mlx_events(t_all *mlx);
 int			start_mlx_loop(t_all *all);
+int			set_pixel_to_ray_color(t_all *all, t_color *c, int x, int y);
+void		put_pixelto(t_img *img, int x, int y, int color);
 
 			//ray
 int			send_rays(t_all *all);

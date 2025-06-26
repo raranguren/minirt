@@ -68,15 +68,16 @@ static int	cylinder_caps_collision(t_quadratic *quad, t_obj *cyl, t_ray *ray)
 	float	dist[2];
 
 	caps.radius = cyl->radius;
-	caps.pos = v_substract(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
+	caps.pos = v_substract(cyl->pos, v_scale(
+				cyl->orientation, cyl->height / 2.0));
 	caps.orientation = cyl->orientation;
 	dist[0] = caps_collision(&caps, ray);
 	caps.pos = v_add(cyl->pos, v_scale(cyl->orientation, cyl->height / 2.0));
 	dist[1] = caps_collision(&caps, ray);
 	if (!get_positiv_min(&dist[0], &dist[1]))
 		return (0);
-	if (fabs(proj_on_axis(
-		cyl, v_add(ray->start, v_scale(ray->direction, quad->solution_1))))
+	if (fabs(proj_on_axis(cyl, v_add(ray->start, v_scale(
+						ray->direction, quad->solution_1))))
 		> cyl->height / 2.0 || dist[0] < quad->solution_1)
 		quad->solution_1 = dist[0];
 	return (1);
@@ -98,10 +99,9 @@ int	cylinder_collision(t_obj *cyl, t_ray *ray)
 	set_quadratic(&quad, cyl, ray);
 	solve_quadratic(&quad);
 	cylinder_caps_collision(&quad, cyl, ray);
-	if (fabs(proj_on_axis(
-		cyl, v_add(ray->start, v_scale(ray->direction, quad.solution_1))))
-			> cyl->height / 2.0 + EPSLN)
+	if (fabs(proj_on_axis(cyl, v_add(ray->start, v_scale(
+						ray->direction, quad.solution_1))))
+		> cyl->height / 2.0 + EPSLN)
 		return (0);
 	return (bind_ray_if_nearest(&quad, ray, cyl));
-
 }

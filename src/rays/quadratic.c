@@ -35,6 +35,7 @@ static int	set_to_max(float *f)
 int	get_positiv_min(float *f1, float *f2)
 {
 	float	tmp;
+
 	tmp = fmaxf(*f1, *f2);
 	if (tmp < EPSLN)
 		return (set_to_max(f1));
