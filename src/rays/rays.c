@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 13:33:49 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:38:35 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	send_rays(t_all *all)
 		}
 		x++;
 	}
-	put_pixelto(all->img, WIN_WIDTH / 2, WIN_HEIGHT / 2, COLOR_RED);
 	mlx_put_image_to_window(all->mlx_ptr, all->mlx_win, all->img, 0, 0);
 	return (0);
 }
