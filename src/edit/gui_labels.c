@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:35:58 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/23 07:20:13 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 07:23:57 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	gui_label_color_light_spot(t_all *all, t_obj *obj)
 
 static int	is_boring(t_color color)
 {
-	if (color.r - color.g > 0.1)
+	if (color.r - color.g > 1 || color.r - color.g < -1)
 		return (0);
-	if (color.r - color.b > 0.1)
+	if (color.r - color.b > 1 || color.r - color.b < -1)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:51:44 by rarangur          #+#    #+#             */
-/*   Updated: 2025/06/19 10:15:06 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:12:20 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	mouse_left_move(t_all *all, int x, int y)
 	rel_pos = v_substract(all->scene.selected->pos, all->scene.cam->pos);
 	distance = v_magnitude(rel_pos);
 	init_ray(&ray, all->scene.cam, x, y);
+	normalize(&ray.direction);
 	rel_pos = v_scale(ray.direction, distance);
 	all->scene.selected->pos = v_add(all->scene.cam->pos, rel_pos);
+	snap_obj(all->scene.selected);
 }
 
 void	mouse_right_click(t_all *all, int x, int y)
@@ -41,6 +43,8 @@ void	mouse_right_click(t_all *all, int x, int y)
 	t_ray	ray;
 
 	init_ray(&ray, all->scene.cam, x, y);
+	normalize(&ray.direction);
 	all->scene.cam->orientation = ray.direction;
+	snap_obj(all->scene.cam);
 	gui_update(all);
 }

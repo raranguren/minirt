@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 11:53:28 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 07:23:44 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ void		ft_putfloat_fd(float n, int fd);
 void		mouse_left_click(t_all *all, int x, int y);
 void		mouse_left_move(t_all *all, int x, int y);
 void		mouse_right_click(t_all *all, int x, int y);
+int			snap_obj(t_obj *obj);
+int			edit_snap(t_all *all);
+int			edit_color(t_all *all, int keycode);
 
 			//error
 int			error(char *str);
