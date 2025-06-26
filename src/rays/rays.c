@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 07:17:27 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 07:22:02 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	send_ray(t_all *all, t_ray *ray, int x, int y)
 		put_pixelto(all->img, x, y, COLOR_BG);
 	return (0);
 }
+
 int	send_rays(t_all *all)
 {
 	t_ray	ray;

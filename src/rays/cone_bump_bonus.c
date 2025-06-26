@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 14:34:42 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 07:21:08 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_vector	get_cone_coordinates(t_point p, t_obj *obj)
 		theta += 2.0 * M_PI;
 	uv.x = v_magnitude(p);
 	uv.y = theta * obj->radius;
-	print_vector("sides", uv);
 	return (uv);
 }
 

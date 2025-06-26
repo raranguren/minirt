@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 14:27:40 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/26 07:21:29 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_vector	get_disc_coordinates(t_point p_loc, t_obj *obj)
 	uv.x = p_loc.x + obj->radius;
 	uv.y = p_loc.y + obj->radius;
 	uv.z = 0;
-	print_vector("disc", uv);
 	return (uv);
 }
 
