@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:45:17 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 23:13:16 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/26 23:25:38 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ int	parse_map(int ac, char **av, t_all *all)
 	else
 		all->title = ft_strjoin("miniRT ", av[1]);
 	if (!all->title)
-		all->title = "";
+		return (error("Cannot allocate win title"));
 	return (0);
 }
