@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:45:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:27:36 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 19:20:45 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	valid_values(t_obj *plane)
 	if (!is_normalized(plane->orientation.x)
 		|| !is_normalized(plane->orientation.y)
 		|| !is_normalized(plane->orientation.z))
-		return (error(PLANE_WAITED_VALUES));
+		return (usage("Invalid orientation", 0, 0));
 	return (0);
 }
 

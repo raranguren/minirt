@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:28:10 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 19:19:26 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static int	valid_values(t_obj *cylinder)
 		|| !is_normalized(cylinder->orientation.z)
 		|| cylinder->radius < 0
 		|| cylinder->height < 0)
-		return (usage(CYLINDER_WAITED_VALUES, 0, 0));
+		return (usage("Invalid orientation, radius or height", 0, 0));
 	if (normalize(&cylinder->orientation))
-		return (usage(CYLINDER_WAITED_VALUES, 0, 0));
+		return (usage("Orientation not normalized", 0, 0));
 	return (0);
 }
 

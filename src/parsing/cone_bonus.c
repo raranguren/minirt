@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:28:19 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 19:20:08 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	valid_values(t_obj *cone)
 		|| !is_normalized(cone->orientation.z)
 		|| cone->radius < 0
 		|| cone->height < 0)
-		return (usage(CONE_WAITED_VALUES, 0, 0));
+		return (usage("Invalid orientation, radius or height", 0, 0));
 	if (normalize(&cone->orientation))
-		return (usage(CONE_WAITED_VALUES, 0, 0));
+		return (usage("Invalid orientation", 0, 0));
 	return (0);
 }
 

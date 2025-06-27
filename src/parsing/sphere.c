@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:57:47 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:27:49 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 19:18:24 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	valid_sphere_line(char **param)
 static int	valid_values(t_obj *sphere)
 {
 	if (sphere->radius < 0)
-		return (usage(SPHERE_WAITED_VALUES, 0, 0));
+		return (usage("Negative radius", 0, 0));
 	return (0);
 }
 
