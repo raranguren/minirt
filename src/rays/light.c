@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 21:46:12 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:53:02 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	spotlight(t_light *light, t_ray *ray)
 	fact_refract = fmax(v_dot(ray->direction, ray->normal), 0);
 	ray->direct_light = c_add(ray->direct_light, c_scale(norm_light,
 				fact_refract));
-	ray->specular_light = c_add(ray->specular_light,
-			c_scale(norm_light, pow(fact_refract, REFRACT)));
+	if (BONUS)
+		ray->specular_light = c_add(ray->specular_light,
+				c_scale(norm_light, pow(fact_refract, REFRACT)));
 	return (0);
 }
 
@@ -89,7 +90,8 @@ int	compute_light(t_scene *scene, t_ray *ray)
 	surface_color = ray->impact_object->color_fn(ray->impact_object,
 			&ray->normal);
 	ray->color = c_multiply(surface_color, ray->direct_light);
-	ray->color = c_add(ray->color,
-			c_multiply(ray->impact_object->color, ray->specular_light));
+	if (BONUS)
+		ray->color = c_add(ray->color,
+				c_multiply(ray->impact_object->color, ray->specular_light));
 	return (0);
 }

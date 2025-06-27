@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 16:43:04 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:21:52 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,68 +48,49 @@ t_vector	get_local_cordinates(t_point p, t_vector k, t_point o)
 	return (p);
 }
 
-/*
-TBN = | u.x  v.x  z.x |
-      | u.y  v.y  z.y |
-      | u.z  v.z  z.z |
-
-where:
-
-    t is the tangent vector (in world space).
-    b is the bitangent vector (in world space).
-    n is the normal vector (in world space).
-
-return :
-	the addition of 
-*/
 t_vector	add_in_tbn(t_vector normal, t_vector modifyer)
 {
 	t_vector	tangeant;
 	t_vector	bitangeant;
 
 	tangeant = get_non_linear(normal);
-	tangeant = v_unit(v_cross(tangeant, normal));
+	tangeant = v_unit(v_cross(normal, tangeant));
 	bitangeant = v_unit(v_cross(tangeant, normal));
 	normal = v_add(normal, v_scale(bitangeant, modifyer.x));
 	normal = v_add(normal, v_scale(tangeant, modifyer.y));
 	return (v_unit(normal));
 }
 
-static char	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
+static int	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
 {
 	char	*p;
 
+	x = x % img->width;
+	y = y % img->height;
 	p = img->data + (y * img->size_line + x * (img->bpp / 8));
-	return (*p);
+	return ((unsigned char)*p);
 }
 
 /*
  Return the tangeant and bitangeant of the normal factors
  p :  x, y coordinates [-1:1]
- */
+*/
 t_vector	get_bump_vector(t_img *bump, t_point p)
 {
-	float	height;
-	float	height_x;
-	float	height_y;
-	float	step;
+	int	height;
+	int	height_x;
+	int	height_y;
 
-	step = 1;
-	p.x = (unsigned int)p.x % bump->width;
-	p.y = (unsigned int)p.y % bump->height;
-	if (p.x >= 2 && p.y >= 2)
-	{
-		p.x -= 2;
-		p.y -= 2;
-		step = 4;
-	}
-	height_x = p.x + step;
-	height_y = p.y + step;
+	p = v_scale(p, STEP_GRID);
+	p.x *= bump->width;
+	p.y *= bump->height;
+	height_x = p.x - 1;
+	height_y = p.y - 1;
 	height = get_pixel_value(bump, p.x, p.y);
 	height_x = get_pixel_value(bump, height_x, p.y);
 	height_y = get_pixel_value(bump, p.x, height_y);
-	p.x = ((float)height - height_x) / step;
-	p.y = ((float)height - height_y) / step;
+	p.x = height - height_x;
+	p.y = height - height_y;
 	p = v_scale(p, BUMP_STRENGTH);
 	return (p);
 }
