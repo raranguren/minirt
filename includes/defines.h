@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/27 16:45:01 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 18:36:10 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define ROW_HEIGHT	78
 
 // Refraction indice for specular light
-# define REFRACT	10000
+# define REFRACT	400
 
 //
 # define BUMP_STRENGTH	1e-2
