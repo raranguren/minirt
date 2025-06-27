@@ -166,6 +166,7 @@ demo_bonus : bonus
 vi vim :
 	find . -name "*.c" -exec ctags {} +
 	vim $(SRC) $(SRC_BONUS) includes/* Makefile
+	rm -fr tags
 
 gdb : all
 	gdb --args ./$(NAME) snapshot.rt

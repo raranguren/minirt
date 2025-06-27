@@ -19,7 +19,7 @@ int	set_the_cam(t_cam *cam)
 	cam->right = v_unit(v_cross(cam->up, cam->forward));
 	cam->up = v_cross(cam->forward, cam->right);
 	cam->aspect_ratio = (float)WIN_WIDTH / WIN_HEIGHT;
-	cam->fov_scale = tan(cam->fov * 0.5 * M_PI / 180);
+	cam->fov_scale = tanf(cam->fov * 0.5 * M_PI / 180);
 	return (0);
 }
 

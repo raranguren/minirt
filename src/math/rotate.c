@@ -22,8 +22,8 @@ void	rotate_yaw(t_vector *v, float angle_radians)
 
 	x = v->x;
 	z = v->z;
-	cos_ = cos(angle_radians);
-	sin_ = sin(angle_radians);
+	cos_ = cosf(angle_radians);
+	sin_ = sinf(angle_radians);
 	v->x = x * cos_ - z * sin_;
 	v->z = x * sin_ + z * cos_;
 }
@@ -38,8 +38,8 @@ void	rodrigues(t_vector *v, t_vector *axis, float angle_radian)
 	t_vector	cross;
 	float		dot;
 
-	cos_ = cos(angle_radian);
-	sin_ = sin(angle_radian);
+	cos_ = cosf(angle_radian);
+	sin_ = sinf(angle_radian);
 	cross.x = v->y * axis->z - v->z * axis->y;
 	cross.y = v->z * axis->x - v->x * axis->z;
 	cross.z = v->x * axis->y - v->y * axis->x;
