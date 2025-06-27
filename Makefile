@@ -49,24 +49,16 @@ FILES = \
 	math/rotate.c \
 	rays/caps.c \
 	rays/utils.c \
-	rays/sphere_bump_bonus.c \
 	rays/vector2.c \
-	rays/bump_bonus.c \
 	rays/color2.c \
-	rays/cone_bump_bonus.c \
 	rays/quadratic.c \
-	rays/plane_bump_bonus.c \
 	rays/rays.c \
-	rays/cone_bonus.c \
 	rays/sphere.c \
 	rays/light.c \
 	rays/plane.c \
-	rays/cylinder_bumb_bonus.c \
 	rays/color.c \
 	rays/cylinder.c \
-	rays/sphere_checkered_bonus.c \
 	rays/vector.c \
-	debug/print.c \
 	parsing/init_scene.c \
 	parsing/object.c \
 	parsing/utils.c \
@@ -88,6 +80,13 @@ SRC_BONUS = $(addprefix $(SRC_DIR), $(FILES)) \
 	$(SRC_DIR)parsing/cone_bonus.c \
 	$(SRC_DIR)parsing/init_scene_bonus.c \
 	$(SRC_DIR)parsing/utils_bonus.c \
+	$(SRC_DIR)rays/sphere_bump_bonus.c \
+	$(SRC_DIR)rays/bump_bonus.c \
+	$(SRC_DIR)rays/sphere_checkered_bonus.c \
+	$(SRC_DIR)rays/cylinder_bumb_bonus.c \
+	$(SRC_DIR)rays/plane_bump_bonus.c \
+	$(SRC_DIR)rays/cone_bonus.c \
+	$(SRC_DIR)rays/cone_bump_bonus.c \
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(TMP_DIR)%.o)
 OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)%.c=$(TMP_DIR_BONUS)%.o)
@@ -140,8 +139,8 @@ mlx :
 
 demo : all
 	@clear
-	@echo "Looping through all scenes in folder demo . . ."
-	@for scene in demo/*.rt; do \
+	@echo "Looping through example scenes . . ."
+	@for scene in scenes/a_*.rt; do \
 		if [ -f "$$scene" ]; then \
 			echo "Showing scene: $$scene" ; \
 			echo "(Close the window to open the next scene)" ; \
@@ -152,8 +151,8 @@ demo : all
 
 demo_bonus : bonus
 	@clear
-	@echo "Looping through all scenes in folder demo_bonus . . ."
-	@for scene in demo_bonus/*.rt; do \
+	@echo "Looping through bonus scenes . . ."
+	@for scene in scenes/b_*.rt; do \
 		if [ -f "$$scene" ]; then \
 			echo "Showing scene: $$scene" ; \
 			echo "(Close the window to open the next scene)" ; \
@@ -162,8 +161,6 @@ demo_bonus : bonus
 		fi ; \
 	done
 
-#<--------------	DEV_TOOLS	------------->
-
 .PHONY : vi dev watch prof ui
 
 vi vim :
@@ -171,16 +168,16 @@ vi vim :
 	vim $(SRC) $(SRC_BONUS) includes/* Makefile
 
 gdb : all
-	gdb --args ./$(NAME) scene_files/scene1.rt
+	gdb --args ./$(NAME) snapshot.rt
 
 dev : all
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) scene_files/scene1.rt
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) snapshot.rt
 
 prof : CFLAGS += -pg
 prof : LDFLAGS += -pg
-prof : re
-	./$(NAME) scene_files/scene1.rt
-	gprof $(NAME) -p
+prof : fclean bonus
+	./$(NAME_BONUS) snapshot.rt
+	gprof $(NAME_BONUS) -p
 	$(MAKE) fclean
 	rm -f gmon.out
 

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 20:40:51 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/27 11:05:30 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,11 +136,5 @@ int			free_strs(char **strs);
 int			free_scene(t_all *all);
 int			free_everything(t_all *all);
 t_obj		*find_next_obj_in_scene(t_scene *scene, t_obj *current);
-
-			//debug
-int			print_vector(char *s, t_vector v);
-int			print_ray(t_ray r);
-int			print_scene(t_all *all);
-int			print_color(char *s, t_color c);
 
 #endif
