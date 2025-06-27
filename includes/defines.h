@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:47:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/27 14:39:10 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 16:45:01 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define REFRACT	10000
 
 //
-# define BUMP_STRENGTH	4e-3
+# define BUMP_STRENGTH	1e-2
 
 // Error tolerance
 # define EPSLN	1e-2

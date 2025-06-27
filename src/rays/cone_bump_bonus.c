@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 07:21:08 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 16:44:04 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static t_vector	get_cone_coordinates(t_point p, t_obj *obj)
 	theta = atan2f(p.y, p.x);
 	if (theta < 0)
 		theta += 2.0 * M_PI;
-	uv.x = v_magnitude(p);
-	uv.y = theta * obj->radius;
+	uv.x = v_magnitude(p) / sqrt(obj->height * obj->height 
+			+ obj->radius * obj->radius);
+	uv.y = 0.5 + theta / (2.0 * M_PI);
 	return (uv);
 }
 

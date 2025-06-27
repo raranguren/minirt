@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/27 14:53:03 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 16:22:04 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static t_vector	get_sphere_coordinates(t_point p, t_obj *obj)
 
 	uv.x = 0.5 + atan2f(p.z, p.x) / (2 * M_PI);
 	uv.y = acosf(p.y / obj->radius) / M_PI;
-	uv.x *= obj->bump->width;
-	uv.y *= obj->bump->height;
 	return (uv);
 }
 

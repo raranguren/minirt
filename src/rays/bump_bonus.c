@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/27 14:59:36 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 16:21:52 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,21 @@ t_vector	add_in_tbn(t_vector normal, t_vector modifyer)
 	t_vector	bitangeant;
 
 	tangeant = get_non_linear(normal);
-	tangeant = v_unit(v_cross(tangeant, normal));
+	tangeant = v_unit(v_cross(normal, tangeant));
 	bitangeant = v_unit(v_cross(tangeant, normal));
 	normal = v_add(normal, v_scale(bitangeant, modifyer.x));
 	normal = v_add(normal, v_scale(tangeant, modifyer.y));
 	return (v_unit(normal));
 }
 
-static char	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
+static int	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
 {
 	char	*p;
 
 	x = x % img->width;
 	y = y % img->height;
 	p = img->data + (y * img->size_line + x * (img->bpp / 8));
-	return (*p);
+	return ((unsigned char)*p);
 }
 
 /*
@@ -81,6 +81,9 @@ t_vector	get_bump_vector(t_img *bump, t_point p)
 	int	height_x;
 	int	height_y;
 
+	p = v_scale(p, STEP_GRID);
+	p.x *= bump->width;
+	p.y *= bump->height;
 	height_x = p.x - 1;
 	height_y = p.y - 1;
 	height = get_pixel_value(bump, p.x, p.y);
@@ -88,6 +91,6 @@ t_vector	get_bump_vector(t_img *bump, t_point p)
 	height_y = get_pixel_value(bump, p.x, height_y);
 	p.x = height - height_x;
 	p.y = height - height_y;
-	p = v_scale(p,BUMP_STRENGTH);
+	p = v_scale(p, BUMP_STRENGTH);
 	return (p);
 }
