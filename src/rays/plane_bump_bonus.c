@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 11:52:06 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/27 13:57:12 by bduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ t_vector	plane_bump(t_ray *ray)
 	ray->normal = plane_normal(ray);
 	p_loc = get_local_cordinates(ray->start, ray->impact_object->orientation,
 			ray->impact_object->pos);
-	p_loc.x = fabs(p_loc.x);
-	p_loc.y = fabs(p_loc.y);
 	modifyer = get_bump_vector(ray->impact_object->bump, p_loc);
 	ray->normal = add_in_tbn(ray->normal, modifyer);
 	return (ray->normal);
