@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 16:31:55 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/28 16:15:49 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:09:06 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ int	spotlight(t_light *light, t_ray *ray, t_vector view_dir)
 				fact_diffuse));
 	if (BONUS)
 	{
-		reflection_dir = v_unit(v_substract(
-				v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal)),
-				ray->direction));
+		reflection_dir = v_unit(v_substract(v_scale(ray->normal, 2 * v_dot(
+							ray->direction, ray->normal)), ray->direction));
 		spec_angle = fmaxf(v_dot(v_unit(v_neg(view_dir)), reflection_dir), 0);
 		ray->specular_light = c_add(ray->specular_light,
 				c_scale(norm_light, powf(spec_angle, REFRACT)));
