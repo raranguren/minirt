@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:48:32 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/04 08:58:29 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/28 16:14:16 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vector	v_substract(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector v_neg(t_vector v)
+t_vector	v_neg(t_vector v)
 {
 	v.x = -v.x;
 	v.y = -v.y;
