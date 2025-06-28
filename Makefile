@@ -111,7 +111,6 @@ clean :
 
 fclean : clean
 	rm -f $(NAME) $(NAME_BONUS)
-	rm -f snapshot.rt
 
 re : fclean all
 
@@ -166,7 +165,8 @@ gdb : all
 	gdb --args ./$(NAME) snapshot.rt
 
 dev : all
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME) snapshot.rt
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all \
+		./$(NAME_BONUS) snapshot.rt
 
 prof : CFLAGS += -pg
 prof : LDFLAGS += -pg
