@@ -41,3 +41,11 @@ t_vector	v_substract(t_vector v1, t_vector v2)
 	result.z = v1.z - v2.z;
 	return (result);
 }
+
+t_vector v_neg(t_vector v)
+{
+	v.x = -v.x;
+	v.y = -v.y;
+	v.z = -v.z;
+	return (v);
+}

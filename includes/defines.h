@@ -13,12 +13,6 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-//# define ERROR(msg) error(msg)
-//# define PERROR(msg) print_error(msg, __FILE__, __LINE__, __func__)
-//# define PERROR2(msg1, msg2) print_error2(msg1, msg2,  __FILE__, __LINE__)
-
-//# define ICI	printf("ICI\n");
-
 # ifndef BONUS
 #  define BONUS 0
 # endif

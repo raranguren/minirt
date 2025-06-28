@@ -35,18 +35,26 @@ int	set_ray_to_impact(t_ray *ray)
 	return (0);
 }
 
-int	spotlight(t_light *light, t_ray *ray)
+int	spotlight(t_light *light, t_ray *ray, t_vector view_dir)
 {
-	static t_color	norm_light;
-	static float	fact_refract;
+	t_color		norm_light;
+	float		fact_diffuse;
+	t_vector	reflection_dir;
+	float		spec_angle;
 
 	norm_light = c_scale(c_normalize(light->color), light->brightness);
-	fact_refract = fmax(v_dot(ray->direction, ray->normal), 0);
+	fact_diffuse = fmaxf(v_dot(ray->direction, ray->normal), 0);
 	ray->direct_light = c_add(ray->direct_light, c_scale(norm_light,
-				fact_refract));
+				fact_diffuse));
 	if (BONUS)
+	{
+		reflection_dir = v_unit(v_substract(
+			v_scale(ray->normal, 2 * v_dot(ray->direction, ray->normal)),
+			ray->direction));
+		spec_angle = fmaxf(v_dot(v_unit(v_neg(view_dir)), reflection_dir), 0);
 		ray->specular_light = c_add(ray->specular_light,
-				c_scale(norm_light, pow(fact_refract, REFRACT)));
+				c_scale(norm_light, powf(spec_angle, REFRACT)));
+	}
 	return (0);
 }
 
@@ -75,16 +83,18 @@ int	reach_spotlight(t_scene *scene, t_light *light, t_ray *ray)
 
 int	compute_light(t_scene *scene, t_ray *ray)
 {
-	t_light	*light;
-	t_color	surface_color;
+	t_light		*light;
+	t_color		surface_color;
+	t_vector	view_dir;
 
 	starting_lights(scene->amb_light, ray);
 	light = scene->light;
+	view_dir = ray->direction;
 	set_ray_to_impact(ray);
 	while (light && light->type == LIGHT)
 	{
 		if (reach_spotlight(scene, light, ray))
-			spotlight(light, ray);
+			spotlight(light, ray, view_dir);
 		light = light->next;
 	}
 	surface_color = ray->impact_object->color_fn(ray->impact_object,

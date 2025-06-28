@@ -50,6 +50,7 @@ t_vector	v_scale(t_vector v, float scalar);
 float		v_dot(t_vector v1, t_vector v2);
 t_vector	v_add(t_vector v1, t_vector v2);
 t_vector	v_unit(t_vector v1);
+t_vector	v_neg(t_vector v);
 float		v_magnitude(t_vector v1);
 int			get_impact(t_scene *scene, t_ray *ray);
 int			compute_light(t_scene *scene, t_ray *ray);
