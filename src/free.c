@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:44:53 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/16 20:27:29 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:39:51 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	free_strs(char **strs)
 
 int	free_scene(t_all *all)
 {
-	ft_objclear(&all->scene.obj);
-	ft_objclear(&all->scene.obj2);
-	ft_objclear(&all->scene.light);
+	ft_objclear(&all->scene.obj, all);
+	ft_objclear(&all->scene.obj2, all);
+	ft_objclear(&all->scene.light, all);
 	return (0);
 }
 

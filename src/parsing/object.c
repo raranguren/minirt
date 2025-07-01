@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:29:29 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/23 07:27:15 by bduval           ###   ########.fr       */
+/*   Updated: 2025/07/01 13:38:55 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_objadd_back(t_obj **lst, t_obj *new)
 	return (0);
 }
 
-int	ft_objclear(t_obj **lst)
+int	ft_objclear(t_obj **lst, t_all *all)
 {
 	t_obj	*temp;
 
@@ -39,7 +39,7 @@ int	ft_objclear(t_obj **lst)
 		temp = *lst;
 		*lst = (*lst)->next;
 		if (temp->bump)
-			free(temp->bump);
+			mlx_destroy_image(all->mlx_ptr, temp->bump);
 		if (temp->bump_name)
 			free(temp->bump_name);
 		free(temp);

@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:21:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/07/01 12:11:48 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:38:38 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			ft_is_double(const char *str);
 int			ft_get_color(t_obj *obj, char **param);
 int			ft_atoi_double(float *dest, char *str);
 int			is_normalized(float n);
-int			ft_objclear(t_obj **lst);
+int			ft_objclear(t_obj **lst, t_all *all);
 int			ft_objadd_back(t_obj **lst, t_obj *new);
 int			unique(char obj_type, int parse_err);
 int			normalize(t_vector *vector);
