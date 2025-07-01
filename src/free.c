@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:44:53 by bduval            #+#    #+#             */
-/*   Updated: 2025/07/01 13:39:51 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:46:32 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	free_scene(t_all *all)
 
 int	free_everything(t_all *all)
 {
-	free_mlx(all);
 	free_scene(all);
+	free_mlx(all);
 	return (0);
 }
