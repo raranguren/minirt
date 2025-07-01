@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/27 16:21:52 by bduval           ###   ########.fr       */
+/*   Updated: 2025/07/01 12:12:50 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,16 @@ static int	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
 
 /*
  Return the tangeant and bitangeant of the normal factors
+ p input; x, y coords  [ 0:1]
  p :  x, y coordinates [-1:1]
 */
-t_vector	get_bump_vector(t_img *bump, t_point p)
+t_vector	get_bump_vector(t_img *bump, t_point p, float scale)
 {
 	int	height;
 	int	height_x;
 	int	height_y;
 
-	p = v_scale(p, STEP_GRID);
+	p = v_scale(p, scale);
 	p.x *= bump->width;
 	p.y *= bump->height;
 	height_x = p.x - 1;

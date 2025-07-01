@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 17:08:52 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/27 16:55:05 by bduval           ###   ########.fr       */
+/*   Updated: 2025/07/01 12:19:43 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_vector	cylinder_bump(t_ray *ray)
 		p_loc = get_cyl_radial_coordinates(p_loc, ray->impact_object);
 	else
 		p_loc = get_disc_coordinates(p_loc, ray->impact_object);
-	modifyer = get_bump_vector(ray->impact_object->bump, p_loc);
+	modifyer = get_bump_vector(ray->impact_object->bump, p_loc, STEP_GRID);
 	ray->normal = add_in_tbn(ray->normal, modifyer);
 	return (ray->normal);
 }
