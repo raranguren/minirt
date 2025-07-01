@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:03:43 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/18 00:21:31 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:20:26 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ static int	check_valid_values(t_cam *cam)
 		return (usage("Invalid orientation", 0, 0));
 	if (cam->fov > 180 || cam->fov < 0)
 		return (usage("Parse error: FOV is not between 0 and 180", 0, 0));
-	if (cam->fov == 0)
-		return (usage("FOV is exactly zero", 0, 0));
 	if (cam->fov == 180)
-		return (usage("FOV is exactly 180", 0, 0));
+		cam->fov = 179.99;
 	if (normalize(&cam->orientation))
 		return (usage("Unable to normalize orientation", 0, 0));
 	return (0);
