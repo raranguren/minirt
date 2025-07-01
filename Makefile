@@ -91,7 +91,7 @@ MAKEFLAGS += --no-print-directory
 
 all: $(NAME)
 
-.PHONY : clean fclean re bonus demo
+.PHONY : clean fclean re bonus demo demo_bonus
 
 $(NAME) :  $(LIB) $(TMP_DIRS) $(OBJ)
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $@
@@ -133,7 +133,7 @@ mlx :
 	git clone -q https://github.com/42paris/minilibx-linux.git mlx
 	$(MAKE) -C mlx/ CC=$(CC) 2>/dev/null >/dev/null
 
-demo : $(NAME) $(NAME_BONUS)
+demo : $(NAME)
 	@clear
 	@echo "Looping through example scenes . . ."
 	@for scene in scenes/a_*.rt; do \
@@ -144,6 +144,8 @@ demo : $(NAME) $(NAME_BONUS)
 			./$(NAME) $$scene > /dev/null ; \
 		fi ; \
 	done
+
+demo_bonus : $(NAME_BONUS)
 	@echo "Looping through BONUS scenes . . ."
 	@for scene in scenes/b_*.rt; do \
 		if [ -f "$$scene" ]; then \
