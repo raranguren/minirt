@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:34:06 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 13:33:29 by bduval           ###   ########.fr       */
+/*   Updated: 2025/07/01 13:10:05 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_vector	cone_normal(t_ray *ray)
 	else
 		normal = cone->orientation;
 	if (v_dot(ray->direction, normal) > EPSLN)
-		normal = v_scale(normal, -1.0);
+		normal = v_neg(normal);
 	return (normal);
 }
 

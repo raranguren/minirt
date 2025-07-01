@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rarangur <rarangur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:56:14 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/20 10:35:34 by bduval           ###   ########.fr       */
+/*   Updated: 2025/07/01 13:10:26 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vector	cylinder_normal(t_ray *ray)
 		normal = v_unit(v_scale(cyl->orientation, dist));
 	}
 	if (v_dot(ray->direction, normal) > 0)
-		normal = v_scale(normal, -1.0);
+		normal = v_neg(normal);
 	return (normal);
 }
 
