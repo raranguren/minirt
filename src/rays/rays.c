@@ -6,7 +6,7 @@
 /*   By: bduval <bduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 17:08:03 by bduval            #+#    #+#             */
-/*   Updated: 2025/06/26 13:38:35 by bduval           ###   ########.fr       */
+/*   Updated: 2025/06/30 14:42:15 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	set_the_cam(t_cam *cam)
 {
-	cam->up.y = 1;
 	cam->forward = v_unit(cam->forward);
+	if (fabs(cam->forward.y) > 1 - EPSLN)
+		cam->up.x = 1;
+	else
+		cam->up.y = 1;
 	cam->right = v_unit(v_cross(cam->up, cam->forward));
 	cam->up = v_cross(cam->forward, cam->right);
 	cam->aspect_ratio = (float)WIN_WIDTH / WIN_HEIGHT;
