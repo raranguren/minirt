@@ -6,7 +6,7 @@
 /*   By: bduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:29:20 by bduval            #+#    #+#             */
-/*   Updated: 2025/07/01 12:12:50 by rarangur         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:07:25 by rarangur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,16 @@ t_vector	add_in_tbn(t_vector normal, t_vector modifyer)
 {
 	t_vector	tangeant;
 	t_vector	bitangeant;
+	t_vector	change;
 
 	tangeant = get_non_linear(normal);
 	tangeant = v_unit(v_cross(normal, tangeant));
 	bitangeant = v_unit(v_cross(tangeant, normal));
-	normal = v_add(normal, v_scale(bitangeant, modifyer.x));
-	normal = v_add(normal, v_scale(tangeant, modifyer.y));
-	return (v_unit(normal));
+	if (tangeant.y > 0)
+		modifyer = v_neg(modifyer);
+	change = v_add(normal, v_scale(bitangeant, modifyer.x));
+	change = v_add(change, v_scale(tangeant, modifyer.y));
+	return (v_unit(change));
 }
 
 static int	get_pixel_value(t_img *img, unsigned int x, unsigned int y)
